@@ -734,6 +734,7 @@
 
 - condition:
     - place = locality
+    - only_node
   action:
     - action: write_poi
       type: 0x2800

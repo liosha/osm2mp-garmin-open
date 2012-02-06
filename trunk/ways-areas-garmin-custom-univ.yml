@@ -2,8 +2,8 @@
 ---
 
 - condition:
-    - landuse = farmland|vineyard
+    - landuse = farmland|farm
   action:
     - action: write_polygon
-      type: 0x010f00
+      type: 0x011006
       level_h: 2

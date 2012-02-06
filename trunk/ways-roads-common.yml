@@ -175,10 +175,18 @@
 ## Tracks
 
 - condition:
-    - highway = track|road
+    - highway = track
   action:
     - action: load_road
       type: 0x0a
+      level_h: 1
+      routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
+
+- condition:
+    - highway = road
+  action:
+    - action: load_road
+      type: 0x0e
       level_h: 1
       routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
 
@@ -246,7 +254,7 @@
     - surface = unpaved|ground|earth|mud|grass|sand|dirt
   action:
     - action: modify_road
-      type: 0x0a
+      type: 0x10
 
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
 

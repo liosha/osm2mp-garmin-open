@@ -56,31 +56,7 @@
       type: 0x17
       level_h: 3
 
-- condition:
-    - or:
-        - landuse = farm|grass|meadow
-        - leisure = common
-        - natural = fell
-  action:
-    - action: write_polygon
-      type: 0x18
-      level_h: 2
-
-- condition:
-    - natural = heath
-  action:
-    - action: write_polygon
-      type: 0x18
-      level_h: 2
-
 # Natural
-
-- condition:
-    - leisure = ice_rink
-  action:
-    - action: write_polygon
-      type: 0x4d
-
 - condition:
     - natural = glacier
   action:
@@ -89,7 +65,7 @@
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
 - condition:
-    - landuse = allotments|orchard
+    - landuse = allotments|orchard|vineyard
   action:
     - action: write_polygon
       type: 0x4e
