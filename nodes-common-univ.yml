@@ -70,6 +70,7 @@
 
 - condition:
     - landuse = quarry
+    - only_node
   action:
     - action: write_poi
       type: 0x640C
@@ -122,7 +123,7 @@
     - named
   action:
     - action: write_poi
-      type: 0x650C
+      type: 0x2800
 
 - condition:
     - natural = water
@@ -150,6 +151,7 @@
 
 - condition:
     - natural = beach
+    - only_node
   action:
     - action: write_poi
       type: 0x6604

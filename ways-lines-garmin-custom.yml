@@ -45,9 +45,6 @@
     - railway = narrow_gauge|light_rail
   action:
     - action: write_line
-      type: 0x14
-    - action: write_line
-      type: 0x010f13
-      level_l: 1
+      type: 0x010f11
       level_h: 1
 

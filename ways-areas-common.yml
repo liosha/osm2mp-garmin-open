@@ -115,13 +115,13 @@
   action:
     - action: write_polygon
       type: 0x17
-      level_h: 3
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
 - condition:
     - leisure = stadium|pitch
   action:
     - action: write_polygon
-      type: 0x19
+      type: 0x18
       level_h: 1
 
 - condition:
@@ -136,6 +136,14 @@
   action:
     - action: write_polygon
       type: 0x1a
+      level_h: 1
+
+- condition:
+    - place = locality
+    - only_node
+  action:
+    - action: write_polygon
+      type: 0x1d
       level_h: 1
 
 

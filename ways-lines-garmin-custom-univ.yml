@@ -14,7 +14,7 @@
 
 - condition:
     - or:
-        - barrier = fence|hedge|wall
+        - barrier = fence|hedge
         - fenced = yes
   action:
     - action: write_line
@@ -27,3 +27,9 @@
     - action: write_line
       type: 0x010f11
       level_h: 1
+
+- condition:
+    - barrier = wall
+  action:
+    - action: write_line
+      type: 0x010f10

@@ -7,3 +7,81 @@
     - action: write_polygon
       type: 0x010f01
       level_h: 1
+
+- condition:
+    - landuse = grass|meadow
+  action:
+    - action: write_polygon
+      type: 0x011001
+      level_h: 2
+
+- condition:
+    - natural = grassland|fell
+  action:
+    - action: write_polygon
+      type: 0x011002
+      level_h: 2
+
+- condition:
+    - natural = heath
+  action:
+    - action: write_polygon
+      type: 0x011003
+      level_h: 2
+
+- condition:
+    - or:
+        - landuse = grass
+        - leisure = common
+    - inside_city
+  action:
+    - action: write_polygon
+      type: 0x011004
+      level_h: 2
+
+- condition:
+    - landuse = quarry
+    - resource != peat
+    - quarry:type != peat_cutting
+  action:
+    - action: write_polygon
+      type: 0x011005
+      level_h: 2
+
+- condition:
+    - landuse = landfill
+  action:
+    - action: write_polygon
+      type: 0x011007
+      level_h: 1
+
+- condition:
+    - landuse = quarry
+    - or:
+        - resource = peat
+        - quarry:type = peat_cutting
+  action:
+    - action: write_polygon
+      type: 0x011008
+      level_h: 2
+
+- condition:
+    - landuse = peat_cutting
+  action:
+    - action: write_polygon
+      type: 0x011008
+      level_h: 2
+
+- condition:
+    - leisure = ice_rink
+  action:
+    - action: write_polygon
+      type: 0x011009
+      level_h: 2
+
+- condition:
+    - natural = sand
+  action:
+    - action: write_polygon
+      type: 0x01100d
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
