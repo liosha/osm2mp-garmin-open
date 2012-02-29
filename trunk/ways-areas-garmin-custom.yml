@@ -10,6 +10,7 @@
 
 - condition:
     - landuse = grass|meadow
+    - ~inside_city
   action:
     - action: write_polygon
       type: 0x011001

@@ -36,6 +36,17 @@
 
 - condition:
     - man_made = cut_line|cutline
+    - boundary !=forestry_compartment
+    - highway != *
+  action:
+    - action: write_line
+      type: 0x0F
+      level_h: 1
+#      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
+
+- condition:
+    - man_made = cut_line|cutline
+    - boundary=forestry_compartment
     - highway != *
   action:
     - action: write_line
