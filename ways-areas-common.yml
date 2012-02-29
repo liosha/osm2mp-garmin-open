@@ -140,7 +140,6 @@
 
 - condition:
     - place = locality
-    - only_node
   action:
     - action: write_polygon
       type: 0x1d

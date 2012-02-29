@@ -252,9 +252,20 @@
 - condition:
     - highway = unclassified|residential|road
     - surface = unpaved|ground|earth|mud|grass|sand|dirt
+    - inside_city
   action:
     - action: modify_road
       type: 0x10
+      routeparams: '1,0,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
+    - highway = unclassified|residential|road
+    - surface = unpaved|ground|earth|mud|grass|sand|dirt
+    - ~inside_city
+  action:
+    - action: modify_road
+      type: 0x10
+      routeparams: '2,0,0,0,0,0,0,0,0,0,0,0'
 
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
 
