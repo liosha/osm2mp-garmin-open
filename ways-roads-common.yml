@@ -118,6 +118,7 @@
 
 - condition:
     - highway = unclassified
+    - ~inside_city
   action:
     - action: load_road
       type: 0x03
@@ -190,12 +191,12 @@
       level_h: 1
       routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
 
-- condition:
-    - highway = track
-    - tracktype = grade4|grade5
-  action:
-    - action: modify_road
-      type: 0x16
+##- condition:
+##    - highway = track
+##    - tracktype = grade4|grade5
+##  action:
+##    - action: modify_road
+##      type: 0x16
 
 - condition:
     - highway = track
@@ -251,21 +252,41 @@
 # unpaved roads
 - condition:
     - highway = unclassified|residential|road
-    - surface = unpaved|ground|earth|mud|grass|sand|dirt
+    - surface = unpaved|ground|earth|mud|grass|dirt
     - inside_city
   action:
     - action: modify_road
-      type: 0x10
+      type: 0x0a
       routeparams: '1,0,0,0,0,0,0,0,0,0,0,0'
 
 - condition:
     - highway = unclassified|residential|road
-    - surface = unpaved|ground|earth|mud|grass|sand|dirt
-    - ~inside_city
+    - surface = sand|gravel|pebblestone|compacted
+    - inside_city
   action:
     - action: modify_road
       type: 0x10
       routeparams: '2,0,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
+    - highway = unclassified|road
+    - surface = unpaved|mud|grass|dirt
+    - ~inside_city
+  action:
+    - action: modify_road
+      type: 0x10
+      level_h: 2
+      routeparams: '2,0,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
+    - highway = unclassified|road
+    - surface = ground|earth|sand|gravel|pebblestone|compacted
+    - ~inside_city
+  action:
+    - action: modify_road
+      type: 0x10
+      level_h: 2
+      routeparams: '3,1,0,0,0,0,0,0,0,0,0,0'
 
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
 
