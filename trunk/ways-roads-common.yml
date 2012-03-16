@@ -107,6 +107,14 @@
       routeparams: '4,1,0,0,0,0,0,0,0,0,0,0'
 
 - condition:
+    - highway = tertiary_link
+  action:
+    - action: load_road
+      type: 0x03
+      level_h: 1
+      routeparams: '2,1,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
     - highway = tertiary
     - inside_city
   action:
@@ -170,6 +178,15 @@
       type: 0x07
       level_h: 0
       routeparams: '0,0,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
+    - highway = *
+    - or:
+        - abandoned=yes
+        - disused=yes
+  action:
+    - action: modify_road
+      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
 
 
 
