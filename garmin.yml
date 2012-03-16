@@ -88,6 +88,7 @@ created_by:         1
 --- comment
 ---
 
+abandoned           1
 access:             1
 aerialway:          1
 aeroway:            1
@@ -99,6 +100,7 @@ boundary:           1
 bridge:             1
 building:           1
 capital:            1
+disused             1
 highway:            1
 historic:           1
 junction:           1
