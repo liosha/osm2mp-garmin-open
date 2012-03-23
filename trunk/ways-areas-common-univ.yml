@@ -87,6 +87,7 @@
 
 - condition:
     - natural = marsh|wetland
+    - wetland != reedbed|swamp
   action:
     - action: write_polygon
       type: 0x51
