@@ -82,7 +82,6 @@
       type: 0x011008
       level_h: 2
 
-
 - condition:
     - leisure = ice_rink
   action:
@@ -112,4 +111,3 @@
     - action: write_polygon
       type: 0x01100d
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
