@@ -90,22 +90,6 @@
       level_h: 2
 
 - condition:
-    - natural = wetland
-    - wetland = reedbed
-  action:
-    - action: write_polygon
-      type: 0x01100a
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
-- condition:
-    - natural = wetland
-    - wetland = swamp
-  action:
-    - action: write_polygon
-      type: 0x01100b
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
-- condition:
     - natural = sand
   action:
     - action: write_polygon
