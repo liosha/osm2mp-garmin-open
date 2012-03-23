@@ -33,3 +33,9 @@
   action:
     - action: write_line
       type: 0x010f10
+
+- condition:
+    - natural = cliff
+  action:
+    - action: write_line
+      type: 0x010f0c

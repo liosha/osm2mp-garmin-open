@@ -110,7 +110,7 @@
     - highway = tertiary_link
   action:
     - action: load_road
-      type: 0x03
+      type: 0x08
       level_h: 1
       routeparams: '2,1,0,0,0,0,0,0,0,0,0,0'
 
