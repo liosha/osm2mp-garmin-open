@@ -46,8 +46,9 @@
 
 - condition:
     - man_made = cut_line|cutline
-    - boundary=forestry_compartment
-    - highway != *
+    - or:
+       - boundary = forestry_compartment
+       - cutline = border|section|firebreak
   action:
     - action: write_line
       type: 0x0F
