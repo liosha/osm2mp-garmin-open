@@ -182,8 +182,8 @@
 - condition:
     - highway = *
     - or:
-        - abandoned=yes
-        - disused=yes
+        - abandoned = yes
+        - disused = yes
   action:
     - action: modify_road
       routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
