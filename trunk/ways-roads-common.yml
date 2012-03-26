@@ -152,7 +152,6 @@
       level_h: 1
       routeparams: '2,0,0,0,0,0,0,0,0,0,0,0'
 
-
 - condition:
     - highway = living_street
   action:
@@ -178,17 +177,6 @@
       type: 0x07
       level_h: 0
       routeparams: '0,0,0,0,0,0,0,0,0,0,0,0'
-
-- condition:
-    - highway = *
-    - or:
-        - abandoned = yes
-        - disused = yes
-  action:
-    - action: modify_road
-      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
-
-
 
 ## Tracks
 
@@ -222,8 +210,6 @@
   action:
     - action: modify_road
       level_h: 2
-
-
 
 ## Modifiers
 
@@ -265,7 +251,6 @@
     - action: modify_road
       routeparams: '.,.,.,1,.,.,.,.,.,.,.,.'
 
-
 # unpaved roads
 - condition:
     - highway = unclassified|residential|road
@@ -305,6 +290,22 @@
       level_h: 2
       routeparams: '3,1,0,0,0,0,0,0,0,0,0,0'
 
-# RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
+- condition:
+    - highway = *
+    - or:
+        - abandoned = yes
+        - disused = yes
+  action:
+    - action: modify_road
+      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
 
+- condition:
+    - highway = road|track
+    - or:
+       - boundary = forestry_compartment
+       - cutline = border|section
+  action:
+    - action: modify_road
+      level_h: 2
+# RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
 
