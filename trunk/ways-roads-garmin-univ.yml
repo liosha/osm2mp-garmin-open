@@ -16,6 +16,7 @@
     - highway != *
     - boundary != forestry_compartment
     - cutline != border|section|firebreak
+    - power != *
   action:
     - action: write_line
       type: 0x0F
@@ -30,9 +31,23 @@
        - cutline = border|section|firebreak
   action:
     - action: write_line
+      type: 0x0F
       level_h: 2
 
-## Transport platforms
+- condition:
+    - highway = bridleway|cycleway|footway|path
+    - layer != -[2-5]
+    - area != *
+    - or:
+       - boundary = forestry_compartment
+       - cutline = border|section
+  action:
+    - action: write_line
+      type: 0x0F
+      level_l: 2
+
+
+  ## Transport platforms
 
 - condition:
     - or:

@@ -23,17 +23,7 @@
       level_h: 1
       routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
 
-- condition:
-    - highway = bridleway|cycleway|footway|path
-    - layer != -[2-5]
-    - area != *
-    - ~inside_city
-    - or:
-       - boundary = forestry_compartment
-       - cutline = border|section
-  action:
-    - action: modify_road
-      level_h: 2
+
 #- condition:
 #    - highway = footway|path
 #    - layer != -[2-5]
