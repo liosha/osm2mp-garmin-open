@@ -212,6 +212,15 @@
       contacts: yes
 
 - condition:
+    - or:
+        - tourism = resort
+        - leisure = resort
+  action:
+    - action: write_poi
+      type: 0x2B04
+      contacts: yes
+
+- condition:
     - tourism = camp_site|caravan_site
   action:
     - action: write_poi
@@ -513,6 +522,7 @@
 
 - condition:
     - place = airport
+    - only_node
   action:
     - action: write_poi
       type: 0x2F04
@@ -522,6 +532,7 @@
 - condition:
     - aeroway = aerodrome
     - place != airport
+    - only_node
   action:
     - action: write_poi
       type: 0x2F04

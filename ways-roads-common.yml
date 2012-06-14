@@ -19,7 +19,6 @@
       level_h: 2
       routeparams: '3,4,1,0,0,0,0,0,0,0,0,0'
 
-
 - condition:
     - highway = trunk
   action:
@@ -44,7 +43,6 @@
       type: 0x09
       level_h: 2
       routeparams: '3,4,0,0,0,0,0,0,0,0,0,0'
-
 
 - condition:
     - highway = primary
@@ -71,7 +69,6 @@
       level_h: 1
       routeparams: '2,3,0,0,0,0,0,0,0,0,0,0'
 
-
 - condition:
     - highway = secondary
   action:
@@ -97,7 +94,6 @@
       level_h: 1
       routeparams: '2,2,0,0,0,0,0,0,0,0,0,0'
 
-
 - condition:
     - highway = tertiary
   action:
@@ -117,10 +113,16 @@
 - condition:
     - highway = tertiary
     - inside_city
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x05
-      level_h: 1
+      level_h: 2
       routeparams: '3,1,0,0,0,0,0,0,0,0,0,0'
 
 
@@ -130,13 +132,19 @@
   action:
     - action: load_road
       type: 0x03
-      level_h: 1
+      level_h: 2
       routeparams: '3,1,0,0,0,0,0,0,0,0,0,0'
 
 
 - condition:
     - highway = unclassified
     - inside_city
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x06
@@ -146,6 +154,12 @@
 
 - condition:
     - highway = residential
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x06
@@ -154,6 +168,12 @@
 
 - condition:
     - highway = living_street
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x06
@@ -163,6 +183,7 @@
 - condition:
     - highway = pedestrian
     - area != *
+    - ~inside_city
   action:
     - action: load_road
       type: 0x06
@@ -172,6 +193,12 @@
 - condition:
     - highway = service
     - area != *
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x07
@@ -182,6 +209,22 @@
 
 - condition:
     - highway = track
+    - ~inside_city
+  action:
+    - action: load_road
+      type: 0x0a
+      level_h: 1
+      routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
+
+- condition:
+    - highway = track
+    - inside_city
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
   action:
     - action: load_road
       type: 0x0a
@@ -190,12 +233,27 @@
 
 - condition:
     - highway = road
+    - ~inside_city
   action:
     - action: load_road
       type: 0x0e
       level_h: 1
       routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
 
+- condition:
+    - highway = road
+    - inside_city
+    - and:
+        - access != no
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
+  action:
+    - action: load_road
+      type: 0x0e
+      level_h: 1
+      routeparams: '1,0,0,0,0,0,0,1,0,0,0,0'
 ##- condition:
 ##    - highway = track
 ##    - tracktype = grade4|grade5
@@ -292,9 +350,11 @@
 
 - condition:
     - highway = *
+    - ~inside_city
     - or:
         - abandoned = yes
         - disused = yes
+        - motorcar = no
   action:
     - action: modify_road
       routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
@@ -308,4 +368,73 @@
     - action: modify_road
       level_h: 2
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
+
+#No routable roads
+
+- condition:
+    - highway = tertiary
+    - inside_city
+    - or:
+        - access = no
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x05
+      level_h: 1
+
+- condition:
+    - inside_city
+    - highway = unclassified|residential|living_street
+    - or:
+        - access = no
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x06
+      level_h: 1
+
+- condition:
+    - highway = pedestrian
+    - area != *
+    - inside_city
+  action:
+    - action: write_line
+      type: 0x06
+      level_h: 1
+
+- condition:
+
+    - highway = service
+    - area != *
+    - inside_city
+    - or:
+        - access = no
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x07
+      level_h: 0
+  
+- condition:
+    - highway = track|road
+    - inside_city
+    - or:
+        - access = no
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x0a
+      level_h: 1
 
