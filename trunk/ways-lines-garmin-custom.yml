@@ -7,7 +7,7 @@
 - id: railway
   condition:
     - railway = rail
-    - service != siding|yard
+    - service != siding|yard|spur
   action:
     - action: write_line
       type: 0x14
