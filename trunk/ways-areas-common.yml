@@ -140,10 +140,19 @@
 
 - condition:
     - place = locality
+    - boundary != forestry_compartment
   action:
     - action: write_polygon
       type: 0x1d
       level_h: 1
+
+- condition:
+    - place = locality
+    - boundary = forestry_compartment
+  action:
+    - action: write_polygon
+      type: 0x1d
+      level_h: 2
 
 
 # Natural
