@@ -102,7 +102,6 @@
 
 - condition:
     - natural = bay
-    - only_node
   action:
     - action: write_poi
       type: 0x6503
@@ -115,7 +114,6 @@
 
 - condition:
     - natural = glacier
-    - only_node
   action:
     - action: write_poi
       type: 0x650A
@@ -127,13 +125,13 @@
     - action: write_poi
       type: 0x2800
 
-#- condition:
-#    - natural = water
-#    - waterway != riverbank
-#    - named
-#  action:
-#    - action: write_poi
-#      type: 0x650D
+- condition:
+    - natural = water
+    - waterway != riverbank
+    - named
+  action:
+    - action: write_poi
+      type: 0x650D
 
 - condition:
     - natural = spring
