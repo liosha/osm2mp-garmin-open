@@ -80,14 +80,27 @@
 
 - condition:
     - natural = wood
+    - wood != young|young_forest
+    - wood:type != young|young_forest
+    - wood:density != sparse
+
+    - landuse != cemetery
   action:
     - action: write_polygon
       type: 0x50
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
 - condition:
-    - natural = marsh|wetland
-    - wetland != reedbed|swamp
+    - natural = wetland
+    - wetland = bog|marsh|saltmarsh|tidalflat
+  action:
+    - action: write_polygon
+      type: 0x51
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = marsh
+    
   action:
     - action: write_polygon
       type: 0x51

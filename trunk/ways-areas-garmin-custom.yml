@@ -99,16 +99,55 @@
 
 - condition:
     - natural = wetland
-    - wetland = swamp
+    - wetland = swamp|mangrove
   action:
     - action: write_polygon
       type: 0x01100b
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+
+- condition:
+    - natural = wetland
+    - wetland != bog|swamp|marsh|saltmarsh|tidalflat|reedbed|mangrove
+  action:
+    - action: write_polygon
+      type: 0x01100c
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
 
 - condition:
     - natural = sand
   action:
     - action: write_polygon
       type: 0x01100d
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+
+- condition:
+    - or:
+        - wood:density = sparse
+        - wood:type = sparse
+  action:
+    - action: write_polygon
+      type: 0x1100e
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+  
+  
+- condition:
+    - natural = scrub
+    - wood = *
+  action:
+    - action: write_polygon
+      type: 0x1100f
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = wood
+    - or:
+         - wood = young|young_forest
+         - wood:type = young|young_forest
+  action:
+    - action: write_polygon
+      type: 0x1100f
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
