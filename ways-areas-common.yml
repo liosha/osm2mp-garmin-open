@@ -8,6 +8,7 @@
   action:
     - action: write_polygon
       type: 0x01
+      level_l: 1
       level_h: 4
 
 - condition:
@@ -15,6 +16,7 @@
   action:
     - action: write_polygon
       type: 0x02
+      level_l: 1
       level_h: 3
 
 - condition:
@@ -22,6 +24,7 @@
   action:
     - action: write_polygon
       type: 0x03
+      level_l: 1
       level_h: 2
 
 
@@ -35,7 +38,7 @@
       level_h: 1
 
 - condition:
-    - landuse = commercial|retail
+    - landuse = retail
   action:
     - action: write_polygon
       type: 0x08
@@ -138,6 +141,15 @@
       type: 0x1a
       level_h: 1
 
+# Natural
+
+- condition:
+    - place = island|islet
+  action:
+    - action: write_polygon
+      type: 0x1c
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
 - condition:
     - place = locality
     - boundary != forestry_compartment
@@ -152,10 +164,8 @@
   action:
     - action: write_polygon
       type: 0x1d
+      level_l: 1
       level_h: 2
-
-
-# Natural
 
 - condition:
     - or:
