@@ -68,7 +68,7 @@
       city: yes
 
 - condition:
-    - place = hamlet
+    - place = hamlet|isolated_dwelling
     - only_node
   action:
     - action: write_poi
