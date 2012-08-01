@@ -412,7 +412,6 @@
 
     - highway = service
     - area != *
-    - inside_city
     - or:
         - access = no
         - motorcar = no
