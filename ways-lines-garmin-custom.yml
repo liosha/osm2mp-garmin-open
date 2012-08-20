@@ -42,6 +42,14 @@
 
 - id: light_railway
   condition:
+    - railway = narrow_gauge|light_rail
+  action:
+    - action: write_line
+      type: 0x010f0f
+      level_h: 1
+
+- id: abandoned_railway
+  condition:
     - railway = abandoned
   action:
     - action: write_line
