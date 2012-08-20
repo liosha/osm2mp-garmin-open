@@ -522,7 +522,9 @@
 
 - condition:
     - place = airport
-    - only_node
+    - or:
+        - named
+        - only_node
   action:
     - action: write_poi
       type: 0x2F04
@@ -532,7 +534,9 @@
 - condition:
     - aeroway = aerodrome
     - place != airport
-    - only_node
+    - or:
+        - named
+        - only_node
   action:
     - action: write_poi
       type: 0x2F04
@@ -595,6 +599,12 @@
 
 - condition:
     - amenity = college|kindergarten|school|university
+    - or:
+        - and:
+            - building = *
+            - building != no
+        - named
+        - only_node
   action:
     - action: write_poi
       type: 0x2C05
@@ -707,6 +717,12 @@
     - or:
         - amenity = dentist|doctors|hospital
         - healthcare = centre|clinic|dentist|doctor|hospital
+    - or:
+        - and:
+            - building = *
+            - building != no
+        - named
+        - only_node
   action:
     - action: write_poi
       type: 0x3002
@@ -771,10 +787,10 @@
     - building = *
     - building != no
     - addr:housenumber = *
-    - only_node
   action:
     - action: write_poi
       type: 0x2800
       Label: %house
       contacts: yes
+
 

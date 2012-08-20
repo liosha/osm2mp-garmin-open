@@ -33,8 +33,13 @@
   action:
     - action: load_road
       type: 0x01
-      level_h: 4
+      level_h: 3
       routeparams: '3,4,0,0,0,0,0,0,0,0,0,0'
+    - action: write_line
+      type: 0x01
+      level_l: 4
+      Label:
+ 
 
 - condition:
     - highway = trunk_link
@@ -58,8 +63,12 @@
   action:
     - action: load_road
       type: 0x04
-      level_h: 3
+      level_h: 2
       routeparams: '3,3,0,0,0,0,0,0,0,0,0,0'
+    - action: write_line
+      type: 0x04
+      level_l: 3
+      Label:
 
 - condition:
     - highway = primary_link
@@ -114,7 +123,7 @@
     - highway = tertiary
     - inside_city
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -140,7 +149,7 @@
     - highway = unclassified
     - inside_city
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -155,7 +164,7 @@
 - condition:
     - highway = residential
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -169,7 +178,7 @@
 - condition:
     - highway = living_street
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -194,7 +203,7 @@
     - highway = service
     - area != *
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -220,7 +229,7 @@
     - highway = track
     - inside_city
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -244,7 +253,7 @@
     - highway = road
     - inside_city
     - and:
-        - access != no
+        - access != no|private
         - motorcar != no
         - vechicle != no
         - disused != yes
@@ -375,7 +384,7 @@
     - highway = tertiary
     - inside_city
     - or:
-        - access = no
+        - access = no|private
         - motorcar = no
         - vechicle = no
         - disused = yes
@@ -389,7 +398,7 @@
     - inside_city
     - highway = unclassified|residential|living_street
     - or:
-        - access = no
+        - access = no|private
         - motorcar = no
         - vechicle = no
         - disused = yes
@@ -413,7 +422,7 @@
     - highway = service
     - area != *
     - or:
-        - access = no
+        - access = no|private
         - motorcar = no
         - vechicle = no
         - disused = yes
@@ -427,7 +436,7 @@
     - highway = track|road
     - inside_city
     - or:
-        - access = no
+        - access = no|private
         - motorcar = no
         - vechicle = no
         - disused = yes

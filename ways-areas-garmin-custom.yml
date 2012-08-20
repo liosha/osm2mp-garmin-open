@@ -8,6 +8,16 @@
       type: 0x010f01
       level_h: 1
 
+- condition:
+    - or:
+        - area:highway = footway|pedestrian
+        - and:
+            - highway = footway|pedestrian
+            - area = *
+    - inside_city
+  action:
+    - action: write_polygon
+      type: 0x010f05  
 
 - condition:
     - landuse = farmyard

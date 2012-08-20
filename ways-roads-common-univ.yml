@@ -24,15 +24,15 @@
       routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
 
 
-#- condition:
-#    - highway = footway|path
-#    - layer != -[2-5]
-#    - area != *
-#    - inside_city
-#  action:
-#    - action: load_road
-#      type: 0x16
-#      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
+- condition:
+    - highway = footway|path
+    - layer != -[2-5]
+    - area != *
+    - inside_city
+  action:
+    - action: write_line
+      type: 0x10f01
+
 
 
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck

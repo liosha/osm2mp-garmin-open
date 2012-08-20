@@ -20,7 +20,7 @@
       level_h: 3
 
 - condition:
-    - place = village|hamlet
+    - place = village|hamlet|isolated_dwelling
   action:
     - action: write_polygon
       type: 0x03
@@ -73,7 +73,11 @@
   action:
     - action: write_polygon
       type: 0x0c
-      level_h: 2
+      level_h: 1
+    - action: write_polygon
+      type: 0x0c
+      level_l: 2
+      Label: 
 
 - condition:
     - building = *
@@ -90,8 +94,9 @@
   action:
     - action: write_polygon
       type: 0x13
-      Label: %house
-    - action: address_poi
+      Label: %street, %house
+#    - action: address_poi
+
 
 - condition:
     - or:
