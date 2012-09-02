@@ -28,7 +28,7 @@
 - ways-roads-garmin.yml
 - ways-roads-garmin-univ.yml
 
-- nodes-common-en.yml
+- nodes-common-ru.yml
 
 
 
@@ -39,7 +39,7 @@
 
 --- command-line
 --- > 
-  --countrylist "iso-3166-1-a2-en.txt"
+  --countrylist "iso-3166-1-a2-ru.txt"
   --disableuturns
   --shorelines
   --hugesea 100000
@@ -55,7 +55,7 @@
 --- taglist
 ---
 
-label:          [ name, loc_name, operator ]
+label:          [ name, loc_name, ref, operator ]
 house:          [ addr:housenumber, addr:housename ]
 entrance:       [ name, ref ]
 place:          [ addr:city, place_name, name ]
@@ -100,6 +100,7 @@ boundary:           1
 bridge:             1
 building:           1
 capital:            1
+description:        1
 disused:            1
 highway:            1
 historic:           1
@@ -127,6 +128,7 @@ tourism:            1
 tracktype:          1
 traffic_calming:    1
 tunnel:             1
+usage:              1
 waterway:           1
 wetland:            1
 whitewater:         1
@@ -245,7 +247,6 @@ cattle_grid:    0,0,0,0,0,0,0,0
 
 --- address
 ---
-
 
 - condition:
     - place = city|town|village|hamlet|allotments|isolated_dwelling

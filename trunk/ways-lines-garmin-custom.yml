@@ -16,6 +16,14 @@
       level_l: 1
       level_h: 2
 
+- condition:
+    - railway = rail
+    - usage = main
+  action:
+    - action: write_line
+      type: 0x010f13
+      level_h: 3
+
 - id: service_railway
   condition:
     - or:
@@ -26,7 +34,6 @@
   action:
     - action: write_line
       type: 0x010f13
-      level_h: 1
 
 - id: spur_railway
   condition:

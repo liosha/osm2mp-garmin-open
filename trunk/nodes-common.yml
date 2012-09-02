@@ -205,7 +205,7 @@
       contacts: yes
 
 - condition:
-    - tourism = hostel
+    - tourism = hostel|chalet
   action:
     - action: write_poi
       type: 0x2B02
@@ -541,6 +541,13 @@
     - action: write_poi
       type: 0x2F04
       level_h: 1
+      contacts: yes
+
+- condition:
+    - aeroway = terminal
+  action:
+    - action: write_poi
+      type: 0x2F04
       contacts: yes
 
 - condition:
