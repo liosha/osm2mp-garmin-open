@@ -71,6 +71,7 @@
 - condition:
     - waterway = stream
     - intermittent != yes
+    - tunnel != *
   action:
     - action: write_line
       type: 0x18
@@ -78,6 +79,7 @@
 
 - condition:
     - waterway = canal
+    - tunnel != *
   action:
     - action: write_line
       type: 0x2a
@@ -86,6 +88,7 @@
 - condition:
     - waterway = river
     - intermittent != yes
+    - tunnel != *
   action:
     - action: write_line
       type: 0x1f
@@ -98,6 +101,7 @@
 - condition:
     - waterway = drain
     - intermittent != yes
+    - tunnel != *
   action:
     - action: write_line
       type: 0x2a
@@ -109,6 +113,7 @@
 - condition:
     - waterway = ditch
     - intermittent != yes
+    - tunnel != *
   action:
     - action: write_line
       type: 0x2B

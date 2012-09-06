@@ -52,6 +52,9 @@
 - condition:
     - place = town
     - only_node
+    - and:
+        - population != 0
+        - abandoned != *
   action:
     - action: write_poi
       type: 0x0800
@@ -61,6 +64,9 @@
 - condition:
     - place = village
     - only_node
+    - and:
+        - population != 0
+        - abandoned != *
   action:
     - action: write_poi
       type: 0x0B00
@@ -70,6 +76,9 @@
 - condition:
     - place = hamlet|isolated_dwelling
     - only_node
+    - and:
+        - population != 0
+        - abandoned != *
   action:
     - action: write_poi
       type: 0x0C00
@@ -374,16 +383,6 @@
 
 # Shopping
 
-- condition:
-    - or:
-        - shop = dry_cleaning|laundry|beauty|hairdresser
-        - and:
-            - amenity = marketplace
-            - named
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
 
 - condition:
     - shop = department_store

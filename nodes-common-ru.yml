@@ -52,3 +52,50 @@
       contacts: yes
       Label: %label (банкомат)
 
+- condition:
+    - or:
+        - shop = dry_cleaning
+  action:
+    - action: write_poi
+      type: 0x2E00
+      contacts: yes
+      Label: %label (химчистка)
+
+- condition:
+    - or:
+        - shop = laundry
+  action:
+    - action: write_poi
+      type: 0x2E00
+      contacts: yes
+      Label: %label (прачечная)
+
+- condition:
+    - or:
+        - shop = beauty
+  action:
+    - action: write_poi
+      type: 0x2E00
+      contacts: yes
+      Label: %label (салон красоты)
+
+- condition:
+    - or:
+        - shop = hairdresser
+  action:
+    - action: write_poi
+      type: 0x2E00
+      contacts: yes
+      Label: %label (парикмахерская)
+
+- condition:
+    - place = town|village|hamlet|isolated_dwelling
+    - or:
+        - population = 0
+        - abandoned = *
+    - only_node
+  action:
+    - action: write_poi
+      type: 0x0C00
+      level_h: 1
+      Label: %label (нежил.)
