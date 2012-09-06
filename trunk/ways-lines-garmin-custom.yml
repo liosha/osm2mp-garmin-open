@@ -22,7 +22,7 @@
   action:
     - action: write_line
       type: 0x010f13
-      level_h: 3
+      level_l: 3
 
 - id: service_railway
   condition:
