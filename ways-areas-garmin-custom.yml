@@ -36,7 +36,7 @@
       level_h: 2
 
 - condition:
-    - natural = grassland|fell
+    - natural = grassland
   action:
     - action: write_polygon
       type: 0x011002
@@ -100,6 +100,19 @@
       level_h: 2
 
 - condition:
+    - or:
+        - natural = marsh
+        - wetland = marsh
+        - and:
+            - natural = wetland
+            - wetland != swamp|reedbed|mangrove
+            - inside_city
+  action:
+    - action: write_polygon
+      type: 0x011010
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
     - natural = wetland
     - wetland = reedbed
   action:
@@ -109,12 +122,11 @@
 
 - condition:
     - natural = wetland
-    - wetland = swamp|mangrove
+    - wetland = swamp
   action:
     - action: write_polygon
       type: 0x01100b
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
 
 - condition:
     - natural = wetland
@@ -124,14 +136,12 @@
       type: 0x01100c
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
-
 - condition:
     - natural = sand
   action:
     - action: write_polygon
       type: 0x01100d
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
 
 - condition:
     - or:
@@ -141,8 +151,7 @@
     - action: write_polygon
       type: 0x1100e
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-  
-  
+
 - condition:
     - natural = scrub
     - wood = *
@@ -161,3 +170,37 @@
       type: 0x1100f
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
+- condition:
+    - or:
+        - natural = marsh
+        - wetland = marsh
+        - and:
+            - natural = wetland
+            - wetland != swamp|reedbed|mangrove
+            - inside_city
+  action:
+    - action: write_polygon
+      type: 0x011010
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = wetland
+    - wetland = mangrove
+  action:
+    - action: write_polygon
+      type: 0x011011
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = scree
+  action:
+    - action: write_polygon
+      type: 0x011014
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = fell
+  action:
+    - action: write_polygon
+      type: 0x011015
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
