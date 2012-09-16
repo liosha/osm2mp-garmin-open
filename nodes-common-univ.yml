@@ -142,6 +142,7 @@
 
 - condition:
     - natural = wetland
+    - only_node
   action:
     - action: write_poi
       type: 0x6513
@@ -171,6 +172,7 @@
 
 - condition:
     - natural = cliff
+    - only_node
   action:
     - action: write_poi
       type: 0x6607
