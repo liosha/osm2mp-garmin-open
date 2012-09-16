@@ -98,4 +98,14 @@
     - action: write_poi
       type: 0x0C00
       level_h: 1
-      Label: %label (deserted)
+      Label: %label (uninhabited)
+
+- condition:
+    - place = allotments
+    - named
+    - only_node
+  action:
+    - action: write_poi
+      type: 0x0C00
+      level_h: 1
+      Label: %label (allotments)

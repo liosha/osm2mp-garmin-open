@@ -140,6 +140,11 @@
     - action: write_poi
       type: 0x6511
 
+- condition:
+    - natural = wetland
+  action:
+    - action: write_poi
+      type: 0x6513
 
 
 # Land features
@@ -156,6 +161,19 @@
   action:
     - action: write_poi
       type: 0x6604
+
+- condition:
+    - natural = cape
+  action:
+    - action: write_poi
+      type: 0x6606
+      level_h: 2
+
+- condition:
+    - natural = cliff
+  action:
+    - action: write_poi
+      type: 0x6607
 
 - condition:
     - or:
@@ -179,7 +197,7 @@
       type: 0x6614
 
 - condition:
-    - natural = peak
+    - natural = peak|hill
   action:
     - action: write_poi
       type: 0x6616

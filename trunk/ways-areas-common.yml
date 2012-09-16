@@ -35,7 +35,7 @@
   action:
     - action: write_polygon
       type: 0x05
-      level_h: 1
+#      level_h: 1
 
 - condition:
     - landuse = retail
@@ -90,10 +90,11 @@
     - or:
         - addr:housenumber = *
         - and:
-            - height != *
+            # - height != *
             - min_height != *
             - building:height != *
-            - building:levels != *
+            - building:part != *
+            # - building:levels != *
             - building:min_level != *
   action:
     - action: write_polygon
@@ -165,14 +166,12 @@
 
 - condition:
     - place = locality
-    - boundary != forestry_compartment
   action:
     - action: write_polygon
       type: 0x1d
       level_h: 1
 
 - condition:
-    - place = locality
     - boundary = forestry_compartment
   action:
     - action: write_polygon

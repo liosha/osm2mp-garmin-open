@@ -57,7 +57,7 @@
 
 - id: abandoned_railway
   condition:
-    - railway = abandoned
+    - railway = abandoned|disused
   action:
     - action: write_line
       type: 0x010f16
