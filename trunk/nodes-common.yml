@@ -299,7 +299,11 @@
       contacts: yes
 
 - condition:
-    - leisure = stadium
+    - or:
+        - leisure = stadium
+        - and:
+            - leisure = garden|park
+            - named
   action:
     - action: write_poi
       type: 0x2C08
@@ -501,6 +505,7 @@
 
 - condition:
     - amenity = parking
+    - parking:condition != residents
     - access != private
     - parking != garages|garage_boxes
   action:
@@ -773,22 +778,6 @@
       type: 0x2800
       level_h: 1
 
-
-
-##  The rest
-
-- condition:
-    - or:
-        - amenity = shelter
-        - tourism = alpine_hut
-        - and:
-            - landuse = residential
-            - only_node
-  action:
-    - action: write_poi
-      type: 0x6100
-
-
 - condition:
     - building = *
     - building != no
@@ -797,6 +786,36 @@
     - action: write_poi
       type: 0x2800
       Label: %house
-      contacts: yes
+
+##  The rest
+
+- condition:
+    - amenity = shelter
+    - inside_city
+  action:
+    - action: write_poi
+      type: 0x6100
+
+- condition:
+    - amenity = shelter
+    - ~inside_city
+  action:
+    - action: write_poi
+      type: 0x6100
+      level_h: 1
+
+- condition:
+    - or:
+        - tourism = alpine_hut
+        - and:
+            - or:
+                - landuse = residential
+                - building = residential|detached|house|hut
+            - only_node
+    - ~inside_city
+  action:
+    - action: write_poi
+      type: 0x6402
+      level_h: 1
 
 

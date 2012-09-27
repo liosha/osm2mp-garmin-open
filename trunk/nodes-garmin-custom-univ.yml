@@ -36,7 +36,14 @@
     - action: write_poi
       type: 0x11501
 
-
+- condition:
+    - or:
+        - ford = *
+        - highway = ford
+  action:
+    - action: write_poi
+      type: 0x660c
+      level_h: 1
 
 ##  Various custom points
 

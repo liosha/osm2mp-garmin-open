@@ -124,7 +124,11 @@
   action:
     - action: write_polygon
       type: 0x17
-      level_h: 2
+      level_h: 1
+    - action: write_polygon
+      type: 0x17
+      level_l: 2
+      Label:
 
 - id: forest
   condition:
@@ -135,7 +139,7 @@
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
 
 - condition:
-    - leisure = stadium|pitch
+    - leisure = stadium|pitch|track
   action:
     - action: write_polygon
       type: 0x18

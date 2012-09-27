@@ -66,7 +66,11 @@
   action:
     - action: write_polygon
       type: 0x011005
-      level_h: 2
+      level_h: 1
+    - action: write_polygon
+      type: 0x011005
+      level_l: 2
+      Label:
 
 - condition:
     - landuse = landfill
@@ -76,21 +80,20 @@
       level_h: 1
 
 - condition:
-    - landuse = quarry
     - or:
-        - resource = peat
-        - quarry:type = peat_cutting
+        - landuse = peat_cutting
+        - and:
+            - landuse = quarry
+            - or:
+                - resource = peat
+                - quarry:type = peat_cutting
   action:
     - action: write_polygon
       type: 0x011008
-      level_h: 2
-
-- condition:
-    - landuse = peat_cutting
-  action:
+      level_h: 1
     - action: write_polygon
       type: 0x011008
-      level_h: 2
+      level_l: 2
 
 - condition:
     - leisure = ice_rink

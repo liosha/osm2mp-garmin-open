@@ -17,7 +17,7 @@
       Label:
   
 - condition:
-    - place = city|town|village|hamlet
+    - place = city|town|village|hamlet|isolated_dwelling
     - landuse != residential
   action:
     - action: write_polygon
@@ -28,7 +28,10 @@
   action:
     - action: write_polygon
       type: 0x010f04
-      level_h: 2
+      level_h: 1
+    - action: write_polygon
+      type: 0x010f04
+      level_l: 2
 
 - condition:
     - or:
@@ -39,5 +42,9 @@
   action:
     - action: write_polygon
       type: 0x10f08
+    - action: write_polygon
+      type: 0x10f08
+      level_l: 1
       level_h: 2
+      Label:
 
