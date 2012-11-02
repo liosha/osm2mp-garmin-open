@@ -13,6 +13,21 @@
       Label:
       Text: %note
 
+- condition:
+    - building = *
+    - building != no
+    - addr:housenumber = *
+  action:
+    - action: write_poi
+      type: 0x3300
+      Label: %house
+  
+- condition:
+    - natural = tree
+  action:
+    - action: write_poi
+      type: 0x6701
+
 
 ##  Replaced rules
 
@@ -68,6 +83,7 @@
 
 - condition:
     - highway = crossing
+#    - crossing != traffic_signals
   action:
     - action: write_poi
       type: 0x011512
