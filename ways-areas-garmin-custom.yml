@@ -26,20 +26,16 @@
       type: 0x010f07
       level_h: 1
 
-
 - condition:
-    - landuse = grass|meadow
-    - ~inside_city
+    - or:
+        - landuse = meadow
+        - natural = grassland
+        - and:
+                - landuse = grass
+                - ~inside_city
   action:
     - action: write_polygon
       type: 0x011001
-      level_h: 2
-
-- condition:
-    - natural = grassland
-  action:
-    - action: write_polygon
-      type: 0x011002
       level_h: 2
 
 - condition:
@@ -206,4 +202,12 @@
   action:
     - action: write_polygon
       type: 0x011015
+      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+
+- condition:
+    - natural = wood
+    - inside_city
+  action:
+    - action: write_polygon
+      type: 0x011016
       level_h: [ 0, 0.016, 0.5, 2.5, 9 ]

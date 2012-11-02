@@ -40,3 +40,8 @@
     - action: write_line
       type: 0x010f0c
 
+- condition:
+    - natural = tree_row
+  action:
+    - action: write_line
+      type: 0x010f0b
