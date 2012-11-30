@@ -726,7 +726,7 @@
 
 - condition:
     - or:
-        - amenity = dentist|doctors|hospital
+        - amenity = clinic|dentist|doctors|hospital
         - healthcare = centre|clinic|dentist|doctor|hospital
     - or:
         - and:

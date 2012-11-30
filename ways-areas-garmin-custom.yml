@@ -27,6 +27,20 @@
       level_h: 1
 
 - condition:
+    - landuse = allotments
+  action:
+    - action: write_polygon
+      type: 0x010f0a
+      level_h: 2
+
+- condition:
+    - landuse = vineyard
+  action:
+    - action: write_polygon
+      type: 0x010f0b
+      level_h: 2
+
+- condition:
     - or:
         - landuse = meadow
         - natural = grassland
