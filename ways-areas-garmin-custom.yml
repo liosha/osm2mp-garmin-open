@@ -123,7 +123,7 @@
   action:
     - action: write_polygon
       type: 0x011010
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wetland
@@ -131,7 +131,7 @@
   action:
     - action: write_polygon
       type: 0x01100a
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wetland
@@ -139,7 +139,7 @@
   action:
     - action: write_polygon
       type: 0x01100b
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wetland
@@ -147,14 +147,14 @@
   action:
     - action: write_polygon
       type: 0x01100c
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = sand
   action:
     - action: write_polygon
       type: 0x01100d
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - or:
@@ -163,7 +163,7 @@
   action:
     - action: write_polygon
       type: 0x1100e
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = scrub
@@ -171,7 +171,7 @@
   action:
     - action: write_polygon
       type: 0x1100f
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wood
@@ -181,7 +181,7 @@
   action:
     - action: write_polygon
       type: 0x1100f
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - or:
@@ -194,7 +194,7 @@
   action:
     - action: write_polygon
       type: 0x011010
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wetland
@@ -202,21 +202,21 @@
   action:
     - action: write_polygon
       type: 0x011011
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = scree
   action:
     - action: write_polygon
       type: 0x011014
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = fell
   action:
     - action: write_polygon
       type: 0x011015
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - natural = wood
@@ -224,4 +224,4 @@
   action:
     - action: write_polygon
       type: 0x011016
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
