@@ -43,7 +43,7 @@
 - condition:
     - or:
         - highway = traffic_signals
-#        - crossing = traffic_signals
+        - crossing = traffic_signals
   action:
     - action: write_poi
       type: 0x011510

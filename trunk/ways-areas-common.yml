@@ -117,27 +117,6 @@
       level_l: 4
       Label:
 
-- id: park
-  condition:
-    - leisure = garden|park
-    - landuse != forest
-  action:
-    - action: write_polygon
-      type: 0x17
-      level_h: 1
-    - action: write_polygon
-      type: 0x17
-      level_l: 2
-      Label:
-
-- id: forest
-  condition:
-    - landuse = forest
-  action:
-    - action: write_polygon
-      type: 0x50
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
-
 - condition:
     - leisure = stadium|pitch|track
   action:
@@ -166,7 +145,7 @@
   action:
     - action: write_polygon
       type: 0x1c
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - place = locality
@@ -190,12 +169,12 @@
   action:
     - action: write_polygon
       type: 0x3f
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
     - waterway = riverbank
   action:
     - action: write_polygon
       type: 0x47
-      level_h: [ 0, 0.016, 0.5, 2.5, 9 ]
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 

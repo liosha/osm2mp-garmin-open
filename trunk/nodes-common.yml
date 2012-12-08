@@ -318,7 +318,7 @@
     - or:
         - leisure = stadium
         - and:
-            - leisure = garden|park
+            - leisure = pitch
             - named
   action:
     - action: write_poi
