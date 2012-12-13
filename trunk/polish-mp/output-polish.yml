@@ -1,0 +1,180 @@
+
+####    MP output templates
+
+
+--- output
+---
+
+
+comment: |
+  [% FOREACH line IN text.split('\n'); "; "; line | mp_filter; "\n"; END -%]
+
+
+info: |
+  [% INCLUDE comment  text = text; "\n" -%]
+
+
+section: |
+  [% "\n\n"; INCLUDE comment  text = text; "\n\n" -%]
+
+
+header: |
+  [IMG ID]
+  ID=[% opts.exists('ID') ? opts.ID : '88888888'; opts.delete('ID') %]
+  Name=[% opts.exists('Name') ? opts.Name : 'OSM-based map' | mp_filter; opts.delete('Name') %]
+  Copyright=OpenStreetMap project contributors under ODbL
+ 
+  LblCoding=9
+  CodePage=[% opts.exists('CodePage') ? opts.CodePage : '65001'; opts.delete('CodePage') %]
+  
+  [% # default zoomlevels
+    levels = [ 24, 22, 20, 18, 16, 15 ]; -%]
+  Levels=[% levels.size %]
+  [% FOREACH zoom IN [ 0 .. levels.max ];
+    key = "Level$zoom" -%]
+  [% key %]=[% opts.exists(key) ? opts.$key : levels.$zoom %]
+  [% opts.delete(key); END %]
+
+  [% # keys with default values
+    defs = {
+        POINumberFirst='N'
+        MG='Y'
+        POIIndex='Y'
+        Routing='N'
+        Elevation='M'
+        Preprocess='F'
+        TreSize='3000'
+    }; 
+    FOREACH key IN defs.keys -%]
+  [% key %]=[% opts.exists(key) ? opts.$key : defs.$key; opts.delete(key) %]
+  [% END %]
+
+  [% # keys without default values
+    FOREACH key IN opts.keys -%]
+  [% key %]=[% opts.$key | mp_filter %]
+  [% END %]
+
+  [END-IMG ID]
+
+  [% USE date -%]
+  [% INCLUDE comment
+    text = "###  Converted from OpenStreetMap data with osm2mp $version at " _ date.format(format='%Y-%m-%d %H:%M:%S')
+   %]
+  [% "\n" %]
+
+
+
+footer: |
+  [%- "\n\n" -%]
+  [% INCLUDE comment
+      text = "###  That's all, folks!"
+   %]
+
+
+_common_fields: |
+  [% IF data.level_h && data.level_h > (data.level_l || 0) -%]
+  EndLevel=[% data.level_h %]
+  [% END -%]
+  Type=[% data.type %]
+  [% label = data.name;
+  IF data.extra_fields.exists('Label');
+      label = data.extra_fields.Label;
+      data.extra_fields.delete('Label');
+  END;
+  IF label.defined -%]
+  Label=[% label | mp_filter %]
+  [% END -%]
+  [% FOREACH key IN data.extra_fields.keys.sort -%]
+  [% key %]=[% data.extra_fields.$key | mp_filter %]
+  [% END -%]
+
+
+
+point: |
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
+  [POI]
+  Data[% data.level_l || 0 %]=([% data.coords.1 %],[% data.coords.0 %])
+  [% INCLUDE _common_fields data = data -%]
+  [END]
+  [% %]
+
+
+
+polygon: |
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
+  [POLYGON]
+  [% FOREACH contour IN data.contours;
+      latlons = [];
+      FOREACH point IN contour; 
+        latlons.push( point.1 _ ',' _ point.0 );
+      END -%]
+  Data[% data.level_l || 0 %]=([% latlons.join('),(') %])
+  [% END -%]
+  [% INCLUDE _common_fields data = data -%]
+  [% # TODO: entrances -%]
+  [END]
+  [% %]
+
+
+
+polyline: |
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
+  [POLYLINE]
+  [% latlons = [];
+    FOREACH point IN data.chain; 
+      latlons.push( point.1 _ ',' _ point.0 );
+    END -%]
+  Data[% data.level_l || 0 %]=([% latlons.join('),(') %])
+  [% INCLUDE _common_fields data = data -%]
+  [END]
+  [% %]
+
+
+
+road: |
+  [% INCLUDE comment  text = comment  IF comment -%]
+  [POLYLINE]
+  Data[% opts.lzoom %]=([% opts.chain.0.0 %],[% opts.chain.0.1 %])
+  [%- temp = opts.chain.shift; FOREACH point IN opts.chain -%]
+  ,([% point.0 %],[% point.1 %])
+  [%- END %]
+  [% IF opts.hzoom -%]
+  EndLevel=[% opts.hzoom %]
+  [% END -%]
+  [% nods = opts.nods; opts.delete( 'lzoom', 'hzoom', 'chain', 'nods' ) -%]
+  [% FOREACH key IN opts.keys -%]
+  [% key %]=[% opts.$key | mp_filter %]
+  [% END -%]
+  [% IF nods; FOREACH nnod IN [ 0 .. nods.max ] -%]
+  Nod[% nnod %]=[% nods.$nnod.join(',') %]
+  [% END; END -%]
+  [END]
+  [% %]
+
+
+
+turn_restriction: |
+  [% INCLUDE comment  text = comment  IF comment -%]
+  [Restrict]
+  TraffPoints=[% opts.node_from %],[% opts.node_via %],[% opts.node_to %]
+  TraffRoads=[% opts.road_from %],[% opts.road_to %]
+  [% IF opts.param -%]
+  RestrParam=[% opts.param %]
+  [% END -%]
+  [END-Restrict]
+  [% %]
+
+
+
+destination_sign: |
+  [% INCLUDE comment  text = comment  IF comment -%]
+  [Sign]
+  SignPoints=[% opts.node_from %],[% opts.node_via %],[% opts.node_to %]
+  SignRoads=[% opts.road_from %],[% opts.road_to %]
+  [% IF opts.param -%]
+  SignParam=[% opts.param %]
+  [% END -%]
+  [END-Sign]
+  [% %]
+
+
