@@ -1,0 +1,50 @@
+--- ways
+---
+
+- condition:
+    - landuse = farmland|farm
+  action:
+    - action: write_polygon
+      type: 0x011006
+      level_h: 2  
+
+- condition:
+    - landuse = residential
+    - abandoned != *
+  action:
+    - action: write_polygon
+      type: 0x010f02
+      Label:
+  
+- condition:
+    - place = city|town|village|hamlet|isolated_dwelling
+    - landuse != residential
+  action:
+    - action: write_polygon
+      type: 0x010f03
+
+- condition:
+    - landuse = commercial
+  action:
+    - action: write_polygon
+      type: 0x010f04
+      level_h: 1
+    - action: write_polygon
+      type: 0x010f04
+      level_l: 2
+
+- condition:
+    - or:
+         - landuse = abandoned
+         - abandoned = *
+    - abandoned != no
+    - building != no
+  action:
+    - action: write_polygon
+      type: 0x10f08
+    - action: write_polygon
+      type: 0x10f08
+      level_l: 1
+      level_h: 2
+      Label:
+
