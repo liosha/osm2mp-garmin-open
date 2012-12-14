@@ -12,14 +12,11 @@
   action:
     - action:       load_city
       name:         %place
-      region:       %region
-      country:      %country
+    
+- condition:
+    - landuse = *
+  action:
+    - action:       load_access_area
     
     
-#- condition:
-#    - place = suburb
-#  action:
-#    - action:       load_suburb
-#      name:         %suburb
-
 
