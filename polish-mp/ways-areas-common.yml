@@ -102,8 +102,7 @@
       name:
         - %street, %house
         - %house
-#      Label: %street %house
-#    - action: address_poi
+    - action: address_poi
 
 
 - condition:
