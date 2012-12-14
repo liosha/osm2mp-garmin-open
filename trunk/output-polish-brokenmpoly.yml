@@ -1,5 +1,5 @@
 
-####    MP output templates
+####    MP output templates (for broken multipoligons: noheader)
 
 
 --- output
@@ -24,7 +24,7 @@ header: |
     text = "###  Converted from OpenStreetMap data with osm2mp $version at " _ date.format(format='%Y-%m-%d %H:%M:%S')
    %]
   [% INCLUDE comment
-    text = "###  Broken multipolygons appendix"
+      text = "###  Broken multipolygons appendix"
    %]
   [% "\n" %]
 
@@ -37,48 +37,67 @@ footer: |
    %]
 
 
+_common_fields: |
+  [% IF data.level_h && data.level_h > (data.level_l || 0) -%]
+  EndLevel=[% data.level_h %]
+  [% END -%]
+  Type=[% data.type %]
+  [% label = data.name;
+  IF data.extra_fields.exists('Label');
+      label = data.extra_fields.Label;
+      data.extra_fields.delete('Label');
+  END;
+  IF label.defined -%]
+  Label=[% label | mp_filter %]
+  [% END -%]
+  [% FOREACH key IN data.extra_fields.keys.sort -%]
+  [% key %]=[% data.extra_fields.$key | mp_filter %]
+  [% END -%]
+
+
 
 point: |
-  [% INCLUDE comment  text = comment  IF comment -%]
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
   [POI]
-  Data[% opts.lzoom %]=([% opts.coords.0 %],[% opts.coords.1 %])
-  [% IF opts.hzoom -%]
-  EndLevel=[% opts.hzoom %]
-  [% END -%]
-  [% opts.delete( 'lzoom', 'hzoom', 'coords' ) -%]
-  [% FOREACH key IN opts.keys -%]
-  [% key %]=[% opts.$key | mp_filter %]
-  [% END -%]
+  Data[% data.level_l || 0 %]=([% data.coords.1 %],[% data.coords.0 %])
+  [% INCLUDE _common_fields data = data -%]
   [END]
   [% %]
 
 
 
 polygon: |
-  [% INCLUDE comment  text = comment  IF comment -%]
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
   [POLYGON]
-  [% FOREACH contour IN opts.contours -%]
-  Data[% opts.lzoom %]=([% contour.0.0 %],[% contour.0.1 %])
-  [%- temp = contour.shift; FOREACH point IN contour -%]
-  ,([% point.0 %],[% point.1 %])
-  [%- END %]
+  [% FOREACH contour IN data.contours;
+      latlons = [];
+      FOREACH point IN contour; 
+        latlons.push( point.1 _ ',' _ point.0 );
+      END -%]
+  Data[% data.level_l || 0 %]=([% latlons.join('),(') %])
   [% END -%]
-  [% IF opts.hzoom -%]
-  EndLevel=[% opts.hzoom %]
-  [% END -%]
-  [% entrances = opts.EntryPoint; opts.delete( 'lzoom', 'hzoom', 'contours', 'EntryPoint' ) -%]
-  [% FOREACH key IN opts.keys -%]
-  [% key %]=[% opts.$key | mp_filter %]
-  [% END -%]
-  [% FOREACH entrance IN entrances -%]
-  EntryPoint=([% entrance.coords.0 %],[% entrance.coords.1 %]),[% entrance.name | mp_filter %]
-  [% END -%]
+  [% INCLUDE _common_fields data = data -%]
+  [% # TODO: entrances -%]
   [END]
   [% %]
 
 
 
 polyline: |
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
+  [POLYLINE]
+  [% latlons = [];
+    FOREACH point IN data.chain; 
+      latlons.push( point.1 _ ',' _ point.0 );
+    END -%]
+  Data[% data.level_l || 0 %]=([% latlons.join('),(') %])
+  [% INCLUDE _common_fields data = data -%]
+  [END]
+  [% %]
+
+
+
+road: |
   [% INCLUDE comment  text = comment  IF comment -%]
   [POLYLINE]
   Data[% opts.lzoom %]=([% opts.chain.0.0 %],[% opts.chain.0.1 %])
