@@ -140,18 +140,18 @@
       level_h: 4
 
 - condition:
+    - type = boundary|multipolygon
     - boundary = administrative
     - admin_level = 3|4
-    - only_rel
   action:
     - action: write_line
       type: 0x1c
       level_l: 4
 
 - condition:
+    - type = boundary|multipolygon
     - boundary = administrative
     - admin_level = 5|6
-    - only_rel
   action:
     - action: write_line
       type: 0x1d
