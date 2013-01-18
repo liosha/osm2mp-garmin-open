@@ -68,12 +68,18 @@
     - action: write_poi
       type: 0x011502
 
+#- condition:
+#    - amenity = recycling|waste_basket|waste_disposal
+#  action:
+#    - action: write_poi
+#      type: 0x011503
+
 - condition:
-    - amenity = recycling|waste_basket|waste_disposal
+    - highway = crossing
+    - crossing = traffic_signals
   action:
     - action: write_poi
-      type: 0x011503
-
+      type: 0x01150f
 
 - condition:
     - traffic_calming = yes|bump|cushion|hump|table

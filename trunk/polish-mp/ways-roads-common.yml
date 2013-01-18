@@ -201,6 +201,23 @@
 
 - condition:
     - highway = service
+    - ~inside_city
+    - area != *
+    - and:
+        - access != no|private
+        - motorcar != no
+        - vechicle != no
+        - disused != yes
+        - abandoned != yes
+  action:
+    - action: load_road
+      type: 0x07
+      level_h: 1
+      routeparams: '1,0,0,0,0,0,0,0,0,0,0,0'
+
+- condition:
+    - highway = service
+    - inside_city
     - area != *
     - and:
         - access != no|private
@@ -409,6 +426,20 @@
       level_h: 1
 
 - condition:
+    - inside_city
+    - highway = unclassified|residential|living_street
+    - or:
+        - access = no|private
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x06
+      level_h: 1
+
+- condition:
     - highway = pedestrian
     - area != *
     - inside_city
@@ -418,7 +449,22 @@
       level_h: 1
 
 - condition:
+    - ~inside_city
+    - highway = service
+    - area != *
+    - or:
+        - access = no|private
+        - motorcar = no
+        - vechicle = no
+        - disused = yes
+        - abandoned = yes
+  action:
+    - action: write_line
+      type: 0x07
+      level_h: 1
 
+- condition:
+    - inside_city
     - highway = service
     - area != *
     - or:
@@ -431,7 +477,7 @@
     - action: write_line
       type: 0x07
       level_h: 0
-  
+
 - condition:
     - highway = track|road
     - inside_city

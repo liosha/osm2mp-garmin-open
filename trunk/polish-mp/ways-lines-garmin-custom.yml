@@ -63,4 +63,61 @@
       type: 0x010f16
       level_h: 1
 
+# Bridge
+
+- condition:
+    - bridge = yes
+    - or:
+        - highway = service|track|road|path|footway
+        - and:
+            - highway = unclassified
+            - surface = unpaved|mud|grass|dirt|ground|earth|sand|gravel|pebblestone|compacted
+  action:
+    - action: write_line
+      type: 0x010f02
+
+# Water
+
+- condition:
+    - waterway = canal
+    - tunnel != *
+  action:
+    - action: write_line
+      type: 0x2a
+      level_h: 2
+
+- condition:
+    - waterway = river
+    - intermittent != yes
+    - tunnel != *
+  action:
+    - action: write_line
+      type: 0x1f
+      level_h: 1
+    - action: write_line
+      type: 0x010f0d
+      level_l: 2
+      level_h: 3
+
+- condition:
+    - waterway = drain
+    - intermittent != yes
+    - tunnel != *
+  action:
+    - action: write_line
+      type: 0x2a
+    - action: write_line
+      type: 0x010f0e
+      level_l: 1
+      level_h: 2
+
+- condition:
+    - waterway = ditch
+    - intermittent != yes
+    - tunnel != *
+  action:
+    - action: write_line
+      type: 0x2B
+      level_h: 1
+
 
