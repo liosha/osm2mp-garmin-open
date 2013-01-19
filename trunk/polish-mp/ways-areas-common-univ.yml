@@ -49,7 +49,7 @@
     - action: write_polygon
       type: 0x17
       level_l: 2
-      Label:
+      name:
 
 - id: forest
   condition:
