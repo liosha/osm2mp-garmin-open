@@ -14,7 +14,7 @@
   action:
     - action: write_polygon
       type: 0x010f02
-      Label:
+      name:
   
 - condition:
     - place = city|town|village|hamlet|isolated_dwelling
@@ -46,5 +46,5 @@
       type: 0x10f08
       level_l: 1
       level_h: 2
-      Label:
+      name:
 

@@ -19,7 +19,7 @@
   action:
     - action: write_line
       type: 0x010f12
-      Label:
+      name:
 
 - condition:
     - aeroway = taxiway

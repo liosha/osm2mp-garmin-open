@@ -38,7 +38,7 @@
     - action: write_line
       type: 0x01
       level_l: 4
-      Label:
+      name:
  
 
 - condition:
@@ -68,7 +68,7 @@
     - action: write_line
       type: 0x04
       level_l: 3
-      Label:
+      name:
 
 - condition:
     - highway = primary_link

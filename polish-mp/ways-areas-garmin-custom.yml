@@ -17,7 +17,20 @@
     - inside_city
   action:
     - action: write_polygon
-      type: 0x010f05  
+      type: 0x010f05
+
+- condition:
+    - or:
+        - area:highway = *
+        - and:
+            - highway = *
+            - area = *
+    - inside_city
+    - area:highway != footway|pedestrian|track|path
+    - highway != footway|pedestrian|track|path
+  action:
+    - action: write_polygon
+      type: 0x010f06
 
 - condition:
     - landuse = farmyard
@@ -25,6 +38,17 @@
     - action: write_polygon
       type: 0x010f07
       level_h: 1
+
+- condition:
+    - landuse = railway
+  action:
+    - action: write_polygon
+      type: 0x010f09
+      level_h: 1
+    - action: write_polygon
+      type: 0x010f09
+      level_l: 2
+      name:
 
 - condition:
     - landuse = allotments
@@ -80,7 +104,7 @@
     - action: write_polygon
       type: 0x011005
       level_l: 2
-      Label:
+      name:
 
 - condition:
     - landuse = landfill

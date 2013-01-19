@@ -46,7 +46,7 @@
     - action: write_polygon
       type: 0x08
       level_l: 2
-      Label:
+      name:
 
 - condition:
     - shop = mall|supermarket
@@ -81,7 +81,7 @@
     - action: write_polygon
       type: 0x0c
       level_l: 2
-      Label:
+      name:
 
 - condition:
     - building = *
@@ -117,7 +117,7 @@
     - action: write_polygon
       type: 0x14
       level_l: 4
-      Label:
+      name:
 
 - condition:
     - leisure = stadium|pitch|track
