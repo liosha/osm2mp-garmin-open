@@ -139,8 +139,10 @@
 
 - condition:
     - natural = water
-    - waterway != riverbank
-    - water != river
+    - or:
+        - water = lake
+        - status = озеро
+    - named
   action:
     - action: write_poi
       type: 0x650D
@@ -148,13 +150,61 @@
         selector: lang
         ru:
           selector: if
-          condition: name = (?ix: .* \b озеро .* )
+          condition: name = (?ix: .* озеро .* )
           then: %label
-          else:
-            - оз. %label
+          else: оз. %label
         en:
           - %label
 
+- condition:
+    - natural = water
+    - or:
+        - water = oxbow
+        - status = старица
+    - named
+  action:
+    - action: write_poi
+      type: 0x650D
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* старица .* )
+          then: %label
+          else: старица %label
+        en:
+          - %label
+
+- condition:
+    - natural = water
+    - or:
+        - water = pond
+        - status = пруд
+    - named
+  action:
+    - action: write_poi
+      type: 0x650D
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* пруд .* )
+          then: %label
+          else: %label пруд
+        en:
+          - %label
+
+- condition:
+    - natural = water
+    - and:
+        - water != sea|lake|oxbow|pond|river|canal|stream
+        - status != озеро|старица|пруд
+    - named
+  action:
+    - action: write_poi
+      type: 0x650D
+      name:
+        - %label
 
 - condition:
     - natural = spring
