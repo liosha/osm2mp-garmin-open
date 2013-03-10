@@ -100,6 +100,7 @@
     - action: write_polygon
       type: 0x13
       name:
+        - %suburb, %street, %house/%house2
         - %suburb, %street, %house
         - %street, %house/%house2
         - %street, %house
@@ -149,6 +150,16 @@
   action:
     - action: write_polygon
       type: 0x1c
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* \b остров .* )
+          then: %label
+          else:
+            - о. %label
+        en:
+          - %label
       level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
@@ -167,8 +178,74 @@
       level_h: 2
 
 - condition:
+    - natural = water
     - or:
-        - natural = water
+        - water = lake
+        - status = озеро
+  action:
+    - action: write_polygon
+      type: 0x3f
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* озеро .* )
+          then: %label
+          else:
+            - оз. %label
+            - озеро
+        en:
+          - %label
+
+- condition:
+    - natural = water
+    - or:
+        - water = oxbow
+        - status = старица
+  action:
+    - action: write_polygon
+      type: 0x3f
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* старица .* )
+          then: %label
+          else:
+            - старица %label
+        en:
+          - %label
+
+- condition:
+    - natural = water
+    - or:
+        - water = pond
+        - status = пруд
+  action:
+    - action: write_polygon
+      type: 0x3f
+      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* пруд .* )
+          then: %label
+          else:
+            - %label пруд
+            - пруд
+        en:
+          - %label
+
+- condition:
+    - or:
+        - and:
+            - natural = water
+            - water != lake|oxbow|pond|river
+#|canal|stream
+            - status != озеро|старица|пруд|река 
         - landuse = basin|reservoir
   action:
     - action: write_polygon
@@ -176,7 +253,11 @@
       level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
 
 - condition:
-    - waterway = riverbank
+    - or:
+        - and:
+            - natural = water
+            - water = river
+        - waterway = riverbank
   action:
     - action: write_polygon
       type: 0x47

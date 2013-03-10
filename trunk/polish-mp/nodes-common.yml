@@ -109,7 +109,7 @@
     - only_node
   action:
     - action: write_poi
-      type: 0x0C00
+      type: 0x0D00
       level_h: 1
       name:
         selector: lang
@@ -140,14 +140,6 @@
 # Food & Drink
 
 - condition:
-    - amenity = cafe
-    - cuisine != *
-  action: 
-    - action: write_poi
-      contacts: yes
-      type: 0x2A00
-
-- condition:
     - or:
         - amenity = restaurant
         - and:
@@ -165,7 +157,9 @@
         barbecue: 0x2A03
         chinese: 0x2A04
         cake: 0x2A05
+        bakery: 0x2A05
         coffee_shop: 0x2A05
+        ice_cream: 0x2A05
         pie: 0x2A05
         international: 0x2A06
         burger: 0x2A07
@@ -185,7 +179,9 @@
         british: 0x2A11
 
 - condition:
-    - shop = bakery
+    - or:
+        - shop = bakery|ice_cream
+        - amenity = bakery|ice_cream
   action:
     - action: write_poi
       type: 0x2A05
@@ -198,15 +194,16 @@
       type: 0x2A07
       contacts: yes
 
+- condition:
+    - amenity = cafe
+    - cuisine != *
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2A0E
 
 # Lodging
 
-- condition:
-    - tourism = guest_house
-  action:
-    - action: write_poi
-      type: 0x2B00
-      contacts: yes
 
 - condition:
     - tourism = hotel|motel
@@ -216,11 +213,19 @@
       contacts: yes
 
 - condition:
-    - tourism = hostel|chalet
+    - tourism = guest_house|hostel|chalet
   action:
     - action: write_poi
       type: 0x2B02
       contacts: yes
+
+- condition:
+    - tourism = alpine_hut|camp_site|caravan_site
+  action:
+    - action: write_poi
+      type: 0x2B03
+      contacts: yes
+      level_h: 1
 
 - condition:
     - or:
@@ -231,109 +236,10 @@
       type: 0x2B04
       contacts: yes
 
-- condition:
-    - tourism = camp_site|caravan_site
-  action:
-    - action: write_poi
-      type: 0x2B03
-      contacts: yes
-
-# Services
-
-- condition:
-    - shop = dry_cleaning
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b химчистка .* )
-          then: %label
-          else:
-            - %label (химчистка)
-            - Химчистка
-        en:
-          - %label (dry cleaning)
- 
-- condition:
-    - or:
-        - shop = laundry
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b прачечная .* )
-          then: %label
-          else:
-            - %label (прачечная)
-            - Прачечная
-        en:
-          - %label (laundry)
-
-- condition:
-    - or:
-        - shop = beauty
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b салон \s+ красоты .* )
-          then: %label
-          else:
-            - %label (салон красоты)
-            - Салон красоты
-        en:
-          - %label (beauty)
-
-- condition:
-    - or:
-        - shop = hairdresser
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b парикмахерская .* )
-          then: %label
-          else:
-            - %label (парикмахерская)
-            - Парикмахерская
-        en:
-          - %label (hairdresser)
-
-# Fuel
-
-- condition:
-    - amenity = fuel
-  action:
-    - action: write_poi
-      type: 0x2F01
-      contacts: yes
-
 
 
 # Attractions
 
-- condition:
-    - tourism = attraction|viewpoint
-  action:
-    - action: write_poi
-      type: 0x2C00
-      contacts: yes
 
 - condition:
     - or:
@@ -354,7 +260,9 @@
       contacts: yes
 
 - condition:
-    - historic = memorial|monument
+    - or:
+        - historic = memorial|monument
+        - tourism = attraction|viewpoint
   action:
     - action: write_poi
       type: 0x2C04
@@ -422,7 +330,7 @@
           selector: lang
           ru:
             - %label (сезонный)
-            - каток(сезонный)
+            - каток (сезонный)
           en:
             - %label (seasonal)
             - seasonal
@@ -472,6 +380,62 @@
       type: 0x2D03
       contacts: yes
 
+# Services
+
+- condition:
+    - shop = beauty|dry_cleaning|hairdresser|laundry
+  action:
+    - action: write_poi
+      type: 0x2E00
+      contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default: %label
+        beauty:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b салон \s+ красоты .* )
+            then: %label
+            else:
+              - %label (салон красоты)
+              - Салон красоты
+          en:
+            - %label (beauty)
+        dry_cleaning:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b химчистка .* )
+            then: %label
+            else:
+              - %label (химчистка)
+              - Химчистка
+          en:
+            - %label (dry cleaning)
+        hairdresser:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b парикмахерская .* )
+            then: %label
+            else:
+              - %label (парикмахерская)
+              - Парикмахерская
+          en:
+            - %label (hairdresser)
+        laundry:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b прачечная .* )
+            then: %label
+            else:
+              - %label (прачечная)
+              - Прачечная
+          en:
+            - %label (laundry)
 
 
 # Shopping
@@ -485,11 +449,142 @@
       contacts: yes
 
 - condition:
-    - shop = convenience|kiosk|butcher|grocery|supermarket|alcohol
+    - shop = butcher|grocery|greengrocer
   action:
     - action: write_poi
       type: 0x2E02
       contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default: %label
+        butcher:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b мяс \B .* )|(?ix: .* колбас .* )
+            then: %label
+            else:
+              - %label (мясо)
+              - Мясная лавка
+          en:
+            - %label (butchery)
+            - butcher shop
+        greengrocer:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* фрукт .* )|(?ix: .* овощ .* )
+            then: %label
+            else:
+              - %label (фрукты-овощи)
+              - Фрукты-овощи
+          en:
+            - %label (greengrocer)
+            - Greengrocer
+
+- condition:
+    - shop = confectionery|deli|seafood
+  action:
+    - action: write_poi
+      type: 0x2E02
+      contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* кондитер .* )
+            then: %label
+            else:
+              - %label (кондитерская)
+              - Кондитерская
+          en:
+            - %label (confectionery)
+            - Сonfectionery
+        deli:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* деликатес .* )
+            then: %label
+            else:
+              - %label (деликатесы)
+              - Деликатесы
+          en:
+            - %label (deli)
+            - Deli
+        seafood:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b мор \B .* )
+            then: %label
+            else:
+              - %label (морепродукты)
+              - Морепродукты
+          en:
+            - %label (seafood)
+            - Seafood
+
+- condition:
+    - shop = alcohol|beverages|coffee|tea|wine
+  action:
+    - action: write_poi
+      type: 0x2E02
+      contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default: %label
+        alcohol:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b вин \B .* )
+            then: %label
+            else:
+              - %label (алкоголь)
+              - Вино-водочный
+          en:
+            - %label (alcohol)
+            - Alcohol shop
+        wine:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b вин \B .* )
+            then: %label
+            else:
+              - %label (вино)
+              - Винный
+          en:
+            - %label (wine)
+            - Wine
+        beverages:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b напитки .* )
+            then: %label
+            else:
+              - %label (напитки)
+              - Напитки
+          en:
+            - %label (beverages)
+            - Beverages
+
+- condition:
+    - shop = general|convenience|supermarket
+  action:
+    - action: write_poi
+      type: 0x2E03
+      contacts: yes
+      name:
+        - %label
+        - Магазин
 
 - condition:
     - shop = mall|hypermarket
@@ -501,70 +596,585 @@
 - condition:
     - or:
         - amenity = pharmacy
+        - shop = pharmacy
   action:
     - action: write_poi
       type: 0x2E05
       contacts: yes
 
-- condition:
-    - shop = clothes
-  action:
-    - action: write_poi
-      type: 0x2E07
-      contacts: yes
+# 0x2E08 - Apparel
 
-- id: shoes_shop
-  condition:
-    - shop = shoes
+- condition:
+    - shop = boutique|clothes|fashion|shoes
   action:
     - action: write_poi
-      type: 0x2E07
       contacts: yes
+      type: 0x2E07
       name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b обув .* )
-          then: %label
-          else:
-            - %label (обувь)
-            - Обувной
-        en:
-          - %label (shoes)
-          - Shoes
+        selector: tag
+        tag: shop
+        _default: %label
+        boutique:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b бутик .* )
+            then: %label
+            else:
+              - %label (бутик)
+              - Бутик
+          en:
+            - %label (boutique)
+            - Boutique
+        shoes:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* обув \B .* )
+            then: %label
+            else:
+              - %label (обувь)
+              - Обувной
+          en:
+            - %label (shoes)
+            - Shoes
+
+# 0x2E08 - House and Garden
 
 - condition:
-    - shop = appliances|doityourself|garden_centre|hardware|houseware
+    - shop = doityourself|electrotools|tools|hardware
   action:
     - action: write_poi
-      type: 0x2E08
       contacts: yes
-
-- condition:
-    - shop = furniture
-  action:
-    - action: write_poi
       type: 0x2E09
-      contacts: yes
-
-- id: books_shop
-  condition:
-    - shop = books
-  action:
-    - action: write_poi
-      type: 0x2E0A
-      contacts: yes
       name:
-        selector: lang
-        ru:
-          - %label (книги)
-          - Книжный
-        en:
-          - %label (books)
-          - Books
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* инструмент .* )
+            then: %label
+            else:
+              - %label (инструмент)
+              - Инструмент
+          en:
+            - %label (tools)
+            - Tools
+        hardware:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* инструмент .* )|(?ix: .* креп \w ж .* )|(?ix: .* скоб \B .* )
+            then: %label
+            else:
+              - %label (скобяные)
+              - Скобяные товары
+          en:
+            - %label (hardware)
+            - Hardware
+        doityourself:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* инструмент .* )|(?ix: .* стро \B .* материал .* )
+            then: %label
+            else:
+              - %label (сделай сам)
+              - Стройматериалы и инструмент
+          en:
+            - %label (do it yourself)
+            - Do it yourself
 
 - condition:
-    - shop = bicycle|chemist|cosmetics|curtain|electrical|electronics|electrogoods|electrotools|fabric|kids|outdoor|sewing|sports|stationery|tools|tableware|toys
+    - shop = electrical|electrogoods|garden_centre|glaziery
+  action:
+    - action: write_poi
+      contacts: yes
+      type: 0x2E09
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* электр .* )
+            then: %label
+            else:
+              - %label (электротовары)
+              - Электротовары
+          en:
+            - %label (electrical)
+            - Electrical goods
+        garden_centre:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b сад .* )
+            then: %label
+            else:
+              - %label (для садоводов)
+              - Товары для садоводов
+          en:
+            - %label (garden centre)
+            - Garden centre
+        glaziery:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* окна .* )|(?ix: .* ст \w к \B .* )
+            then: %label
+            else:
+              - %label (окна)
+              - Окна и стёкла
+          en:
+            - %label (glaziery)
+            - Glaziery
+
+# 0x2E09 - Home Furnishings
+
+- condition:
+    - shop = appliances|houseware|electronics|tableware
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E09
+      name:
+        selector: tag
+        tag: shop
+        _default: %label
+        electronics:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* электроник .* )
+            then: %label
+            else:
+              - %label (электроника)
+              - Бытовая электроника
+          en:
+            - %label (electronics)
+            - Electronics
+        tableware:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* посуд \B .* )
+            then: %label
+            else:
+              - %label (посуда)
+              - Посуда
+          en:
+            - %label (dishes)
+            - Tableware
+
+- condition:
+    - shop = bathroom_furnishing|bed|furniture|kitchen
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E09
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* ванн \B .* )
+            then: %label
+            else:
+              - %label (ванные)
+              - Оборудование для ванных
+          en:
+            - %label (bathroom)
+            - Bathroom furnishing
+        bed:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* матра \B .* )|(?ix: .* спальн \B .* )
+            then: %label
+            else:
+              - %label (спальни)
+              - Спальни
+          en:
+            - %label (bedding)
+            - Вedding products
+        furniture:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* мебел \B .* )
+            then: %label
+            else:
+              - %label (мебель)
+              - Мебель
+          en:
+            - %label (furniture)
+            - Furniture
+        kitchen:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* кухн \B .* )|(?ix: .* кухон \B .* )
+            then: %label
+            else:
+              - %label (кухни)
+              - Кухонная мебель
+          en:
+            - %label (kitchen)
+            - Kitchen shop
+
+- condition:
+    - shop = curtain|interior_decoration|carpet
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E09
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* штор .* )
+            then: %label
+            else:
+              - %label (шторы)
+              - Шторы
+          en:
+            - %label (curtains)
+            - Curtains
+        interior_decoration:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* интерьер .* )|(?ix: .* декор .* )
+            then: %label
+            else:
+              - %label (декор)
+              - Декор интерьера
+          en:
+            - %label (interior)
+            - Interior decoration
+        carpet:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* ковр .* )
+            then: %label
+            else:
+              - %label (ковры)
+              - Ковры
+          en:
+            - %label (carpets)
+            - Carpet store
+
+# 0x2E0A - Speciality Retail
+
+- condition:
+    - shop = bicycle|motorcycle|sports
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b вело .* )
+            then: %label
+            else:
+              - %label (велосипеды)
+              - Велосипеды
+          en:
+            - %label (bicycle)
+            - Bicycle
+        motorcycle:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* мото .* )
+            then: %label
+            else:
+              - %label (мотоциклы)
+              - Мотоциклы
+          en:
+              - %label (motorcycles)
+              - Motorcycles
+        sports:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* спорт .* )
+            then: %label
+            else:
+              - %label (спортивный)
+              - Спортивный магазин
+          en:
+            - %label (sporting goods)
+            - Sporting goods
+
+- condition:
+    - shop = chemist|cosmetics|optician
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b бытовая \s+ химия .* )
+            then: %label
+            else:
+              - %label (бытовая химия)
+              - Бытовая химия
+          en:
+            - %label (chemist)
+            - Chemist
+        cosmetics:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b космети \B .* )|(?ix: .* \b парфюм .* )
+            then: %label
+            else:
+              - %label (косметика и парфюмерия)
+              - Косметика и парфюмерия
+          en:
+            - %label (cosmetics)
+            - Cosmetics
+        optician:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* оптик .* )
+            then: %label
+            else:
+              - %label (оптика)
+              - Оптика
+          en:
+            - %label (optician)
+            - Optician
+
+- condition:
+    - shop = books|stationery|fabric|sewing
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* книг  .* )|(?ix: .* книж .* )
+            then: %label
+            else:
+              - %label (книги)
+              - Книжный
+          en:
+            - %label (books)
+            - Bookstore
+        stationery:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* канц \B .* )|(?ix: .* бумага .* )
+            then: %label
+            else:
+              - %label (канцтовары)
+              - Канцтовары
+          en:
+            - %label (stationery)
+            - Stationery
+        fabric:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* ткан \B .* )
+            then: %label
+            else:
+              - %label (ткани)
+              - Ткани
+          en:
+            - %label (drapery)
+        sewing:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* шить \B .* )|(?ix: .* рукодел .* )
+            then: %label
+            else:
+              - %label (шитьё)
+              - Рукоделие и шитьё
+          en:
+            - %label (drapery)
+
+
+
+
+- condition:
+    - shop = baby_goods|kids|toys
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* дет \B .* )
+            then: %label
+            else:
+              - %label (детские товары)
+              - Товары для детей
+          en:
+            - %label (baby goods)
+            - Baby goods
+        toys:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* игруш \B .* )
+            then: %label
+            else:
+              - %label (игрушки)
+              - Игрушки
+          en:
+            - %label (toys)
+            - Toy store
+
+- condition:
+    - shop = fishing|hunting|outdoor
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* рыболов .* )
+            then: %label
+            else:
+              - %label (рыболовный)
+              - Рыболовный
+          en:
+            - %label (fishing shop)
+            - Fishing shop
+        hunting:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* охот \B .* )
+            then: %label
+            else:
+              - %label (охота)
+              - Магазин охотника
+          en:
+            - %label (hunting store)
+            - Hunting store
+        outdoor:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* турист .* )
+            then: %label
+            else:
+              - %label (туризм)
+              - Снаряжение для туризма
+          en:
+            - %label (outdoor store)
+            - Outdoor store
+
+- condition:
+    - shop = florist|gift|jewerly
+  action: 
+    - action: write_poi
+      contacts: yes
+      type: 0x2E0A
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* цвет .* )
+            then: %label
+            else:
+              - %label (цветы)
+              - Цветы
+          en:
+            - %label (florist)
+            - Florist
+        gift:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* подар \B .* )
+            then: %label
+            else:
+              - %label (подарки)
+              - Подарки
+          en:
+            - %label (gift shop)
+            - Gift shop
+        jewerly:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* ювелир .* )
+            then: %label
+            else:
+              - %label (ювелирный)
+              - Ювелирный
+          en:
+            - %label (jewerly)
+            - Jewerly
+
+# all other shops
+
+- condition:
+    - shop = *
+    - shop != bakery|ice_cream|department_store
+    - shop != beauty|dry_cleaning|hairdresser|laundry|pharmacy
+    - shop != butcher|grocery|greengrocer
+    - shop != confectionery|deli|seafood
+    - shop != alcohol|beverages|coffee|tea|wine
+    - shop != general|convenience|supermarket|mall|hypermarket
+    - shop != boutique|clothes|fashion|shoes
+    - shop != doityourself|electrotools|tools|hardware
+    - shop != electrical|electrogoods|garden_centre|glaziery
+    - shop != appliances|houseware|electronics|tableware
+    - shop != bathroom_furnishing|bed|furniture|kitchen
+    - shop != curtain|interior_decoration|carpet|sewing
+    - shop != bicycle|motorcycle|sports
+    - shop != chemist|cosmetics|optician|stationery|books
+    - shop != baby_goods|kids|fabric|sewing|toys
+    - shop != fishing|hunting|outdoor
+    - shop != florist|gift|jewerly|computer
+    - shop != car|car_repair|car_parts|tyres
   action:
     - action: write_poi
       type: 0x2E0A
@@ -577,7 +1187,14 @@
       type: 0x2E0B
       contacts: yes
 
+# Fuel
 
+- condition:
+    - amenity = fuel
+  action:
+    - action: write_poi
+      type: 0x2F01
+      contacts: yes
 
 # Auto Services
 
@@ -628,8 +1245,6 @@
     - action: write_poi
       type: 0x2F0E
       contacts: yes
-
-
 
 # Transportation
 
@@ -706,7 +1321,6 @@
       contacts: yes
 
 
-
 # Community
 
 - condition:
@@ -728,6 +1342,20 @@
     - action: write_poi
       type: 0x2C05
       contacts: yes
+      name:
+        selector: lang
+        en: %label
+        ru:
+          selector: tag
+          tag: amenity
+          _default: %label
+          kindergarten:
+            selector: if
+            condition: name = (?ix: .* \b дет \B .* сад .* )
+            then: %label
+            else:
+              - %label (детсад)
+              - Детсад
 
 - condition:
     - amenity = place_of_worship
@@ -866,12 +1494,6 @@
           - %label (exch)
           - Currency exchange
 
-- condition:
-    - amenity = bureau_de_change
-  action:
-    - action: write_poi
-      type: 0x2F06
-      contacts: yes
 
 
 # Hospital
@@ -949,12 +1571,9 @@
 
 - condition:
     - or:
-        - tourism = alpine_hut
-        - and:
-            - or:
-                - landuse = residential
-                - building = residential|detached|house|hut
-            - only_node
+        - landuse = residential
+        - building = residential|detached|house|hut
+    - only_node
     - ~inside_city
   action:
     - action: write_poi
