@@ -62,7 +62,10 @@
   action:
     - action: write_polygon
       type: 0x0a
-      level_h: 1
+    - action: write_polygon
+      type: 0x0a
+      level_l: 1
+      name:
 
 - condition:
     - amenity = hospital
@@ -70,7 +73,10 @@
   action:
     - action: write_polygon
       type: 0x0b
-      level_h: 1
+    - action: write_polygon
+      type: 0x0b
+      level_l: 1
+      name:
 
 - condition:
     - landuse = industrial

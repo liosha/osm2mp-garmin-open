@@ -211,6 +211,21 @@
     - action: write_poi
       type: 0x2B01
       contacts: yes
+      name:
+        selector: tag
+        tag: tourism
+        _default: %label
+        motel:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b мотель .* )|(?ix: .* \b motel .* )
+            then: %label
+            else:
+              - %label (мотель)
+              - Мотель
+          en:
+            - %label (motel)
 
 - condition:
     - tourism = guest_house|hostel|chalet
@@ -218,6 +233,21 @@
     - action: write_poi
       type: 0x2B02
       contacts: yes
+      name:
+        selector: tag
+        tag: tourism
+        _default: %label
+        hostel:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b хостел .* )|(?ix: .* \b hostel .* )
+            then: %label
+            else:
+              - %label (хостел)
+              - Хостел
+          en:
+            - %label (hostel)
 
 - condition:
     - tourism = alpine_hut|camp_site|caravan_site
@@ -543,7 +573,7 @@
           selector: lang
           ru:
             selector: if
-            condition: name = (?ix: .* \b вин \B .* )
+            condition: name = (?ix: .* \b вин \B .* )|(?ix: .* \b алко \B .* )|(?ix: .* \b спирт \B .* )
             then: %label
             else:
               - %label (алкоголь)
@@ -1230,7 +1260,11 @@
       contacts: yes
 
 - condition:
-    - amenity = parking
+    - or:
+        - and:
+            - amenity = parking_entrance
+            - named
+        - amenity = parking
     - parking:condition != residents
     - access != private
     - parking != garages|garage_boxes
@@ -1556,18 +1590,9 @@
 
 - condition:
     - amenity = shelter
-    - inside_city
   action:
     - action: write_poi
       type: 0x6100
-
-- condition:
-    - amenity = shelter
-    - ~inside_city
-  action:
-    - action: write_poi
-      type: 0x6100
-      level_h: 1
 
 - condition:
     - or:

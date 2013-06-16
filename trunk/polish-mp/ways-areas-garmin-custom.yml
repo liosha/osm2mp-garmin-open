@@ -25,7 +25,6 @@
         - and:
             - highway = *
             - area = *
-    - inside_city
     - area:highway != footway|pedestrian|track|path
     - highway != footway|pedestrian|track|path
   action:
