@@ -32,6 +32,7 @@
     - action: write_polygon
       type: 0x010f04
       level_l: 2
+      name:
 
 - condition:
     - or:
