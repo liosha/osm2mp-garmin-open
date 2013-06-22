@@ -32,9 +32,11 @@ fax:            [ 'contact:fax', fax ]
 contacts:
     Phone: %phone
 
+
 # unused
 building: {}
 
+road: {}
 
 ################################
 ##  Tags to skip
@@ -73,6 +75,8 @@ layer:              1
 landuse:            1
 leisure:            1
 man_made:           1
+maxspeed:           1
+maxspeed:practical: 1
 military:           1
 natural:            1
 place:              1
@@ -82,6 +86,7 @@ religion:           1
 route:              1
 service:            1
 shop:               1
+smoothness:         1
 sport:              1
 surface:            1
 tourism:            1
