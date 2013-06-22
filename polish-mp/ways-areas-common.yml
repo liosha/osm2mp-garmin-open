@@ -166,7 +166,15 @@
             - о. %label
         en:
           - %label
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: &1 
+        selector: thresholds
+        value: !!perl/code |
+          { _get_obj_area_size(shift) }
+        0:      0
+        0.009:  1
+        0.14:   2
+        2.3:    3
+        9:      4
 
 - condition:
     - place = locality
@@ -191,7 +199,7 @@
   action:
     - action: write_polygon
       type: 0x3f
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: *1
       name:
         selector: lang
         ru:
@@ -212,7 +220,7 @@
   action:
     - action: write_polygon
       type: 0x3f
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: *1
       name:
         selector: lang
         ru:
@@ -232,7 +240,7 @@
   action:
     - action: write_polygon
       type: 0x3f
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: *1
       name:
         selector: lang
         ru:
@@ -256,7 +264,7 @@
   action:
     - action: write_polygon
       type: 0x3f
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: *1
 
 - condition:
     - or:
@@ -267,5 +275,5 @@
   action:
     - action: write_polygon
       type: 0x47
-      level_h: [ 0, 0.009, 0.14, 2.3, 9 ]
+      level_h: *1
 

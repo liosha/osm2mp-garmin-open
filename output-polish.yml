@@ -22,7 +22,8 @@ header: |
   [IMG ID]
   ID=[% opts.exists('ID') ? opts.ID : '88888888'; opts.delete('ID') %]
   Name=[% opts.exists('Name') ? opts.Name : 'OSM-based map' | mp_filter; opts.delete('Name') %]
-  Copyright=OpenStreetMap project contributors under ODbL
+  [% USE date -%]
+  Copyright=Data from OpenStreetMap project under ODbL|Converted with osm2mp [% version %] at [% date.format(format='%Y-%m-%d %H:%M:%S') %]
  
   LblCoding=9
   CodePage=[% opts.exists('CodePage') ? opts.CodePage : '65001'; opts.delete('CodePage') %]
@@ -56,11 +57,7 @@ header: |
 
   [END-IMG ID]
 
-  [% USE date -%]
-  [% INCLUDE comment
-    text = "###  Converted from OpenStreetMap data with osm2mp $version at " _ date.format(format='%Y-%m-%d %H:%M:%S')
-   %]
-  [% "\n" %]
+  [% %]
 
 
 
@@ -80,6 +77,9 @@ _common_fields: |
   IF data.extra_fields.exists('Label');
       label = data.extra_fields.Label;
       data.extra_fields.delete('Label');
+  END;
+  IF data.refs && data.road_ref;
+      label = data.road_ref _ data.refs.sort.unique.join('-') _ ( label ? ' ' _ label : '' );
   END;
   IF label.defined -%]
   Label=[% label | mp_filter %]
@@ -130,24 +130,23 @@ polyline: |
   [% %]
 
 
-
 road: |
-  [% INCLUDE comment  text = comment  IF comment -%]
+  [% INCLUDE comment  text = data.comment  IF data.comment -%]
   [POLYLINE]
-  Data[% opts.lzoom %]=([% opts.chain.0.0 %],[% opts.chain.0.1 %])
-  [%- temp = opts.chain.shift; FOREACH point IN opts.chain -%]
-  ,([% point.0 %],[% point.1 %])
-  [%- END %]
-  [% IF opts.hzoom -%]
-  EndLevel=[% opts.hzoom %]
+  [% latlons = [];
+  FOREACH point IN data.chain;
+  latlons.push( point.1 _ ',' _ point.0 );
+  END -%]
+  Data0=([% latlons.join('),(') %])
+  RoadID=[% data.road_id %]
+  [% IF data.oneway -%]
+  DirIndicator=1
   [% END -%]
-  [% nods = opts.nods; opts.delete( 'lzoom', 'hzoom', 'chain', 'nods' ) -%]
-  [% FOREACH key IN opts.keys -%]
-  [% key %]=[% opts.$key | mp_filter %]
-  [% END -%]
-  [% IF nods; FOREACH nnod IN [ 0 .. nods.max ] -%]
-  Nod[% nnod %]=[% nods.$nnod.join(',') %]
-  [% END; END -%]
+  RouteParams=[% speed_code(data.speed) %],[% data.road_class %],[% data.oneway || 0 %],[% data.toll || 0 %],[% data.access_flags %]
+  [% INCLUDE _common_fields data = data -%]
+  [% nodcount = 0; FOREACH nod IN data.nod -%]
+  Nod[% nodcount %]=[% nod.0 %],[% nod.1 %],[% nod.2 || 0 %]
+  [% nodcount = nodcount + 1; END -%]
   [END]
   [% %]
 
