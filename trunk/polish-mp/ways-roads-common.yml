@@ -46,40 +46,57 @@
           secondary_link: 0x08
           tertiary:
             selector: if
-            condition:
+            condition: &7
               or:
-                  - surface = unpaved|ground|earth|mud|grass|sand|dirt
-                  - smoothness = very_bad|horrible|very_horrible|impassable
-            then: 0x0a
+                  - surface = mud|grass|dirt
+                  - smoothness = very_horrible|impassable
+            then: 0x16
             else:
               selector: if
-              condition: inside_city
-              then: 0x05
-              else: 0x03
+              condition: &10
+                or:
+                    - surface = unpaved|ground|gravel|earth|sand
+                    - smoothness = very_bad|horrible
+              then: 0x0a
+              else:
+                selector: if
+                condition: inside_city
+                then: 0x05
+                else: 0x03
           tertiary_link: 0x08
           unclassified:
             selector: if
-            condition:
-              or:
-                  - surface = unpaved|ground|gravel|earth|mud|grass|sand|dirt
-                  - smoothness = very_bad|horrible|very_horrible|impassable
-            then: 0x0a
+            condition: *7
+            then: 0x16
             else:
               selector: if
-              condition: inside_city
-              then: 0x06
-              else: 0x03
+              condition: *10
+              then: 0x0a
+              else:
+                selector: if
+                condition: inside_city
+                then: 0x06
+                else: 0x03
           residential: &1
             selector: if
-            condition:
-              or:
-                  - surface = unpaved|ground|gravel|earth|mud|grass|sand|dirt
-                  - smoothness = very_bad|horrible|very_horrible|impassable
-            then: 0x0a
-            else: 0x06
+            condition: *7
+            then: 0x16
+            else:
+              selector: if
+              condition: *10
+              then: 0x0a
+              else: 0x06
           living_street: *1
           pedestrian: *1
-          service: 0x07
+          service:
+            selector: if
+            condition: *7
+            then: 0x16
+            else:
+              selector: if
+              condition: *10
+              then: 0x0a
+              else: 0x07
 
       level_h:
         selector: tag
@@ -102,23 +119,16 @@
         secondary_link: 1
         tertiary: &5
           selector: if
-          condition:
+          condition: &9
             and:
-                - surface != unpaved|ground|earth|mud|grass|sand|dirt
+                - surface != unpaved|ground|earth|gravel|mud|grass|sand|dirt
                 - smoothness != very_bad|horrible|very_horrible|impassable
-          then:
-            selector: if
-            condition: inside_city
-            then: 1
-            else: 2
+          then: 2
         tertiary_link: 1
         unclassified: *5
         residential: &6
           selector: if
-          condition:
-            and:
-                - surface != unpaved|ground|gravel|earth|mud|grass|sand|dirt
-                - smoothness != very_bad|horrible|very_horrible|impassable
+          condition: *9
           then: 1
         living_street: *6
         pedestrian: *6
@@ -228,8 +238,11 @@
           then: 0x04
         _default:
           selector: if
-          condition: surface = unpaved|ground|earth|gravel|mud|grass|sand|dirt
-          then: &8
+          condition:
+            or:
+                - surface = unpaved|ground|earth|gravel|mud|grass|sand|dirt
+                - smoothness = very_bad|horrible|very_horrible|impassable
+          then:
             selector: tag
             tag: highway
             tertiary:
@@ -242,10 +255,6 @@
             living_street: 0x06
             pedestrian: 0x06
             service: 0x07
-          else:
-            selector: if
-            condition: smoothness = very_bad|horrible|very_horrible|impassable
-            then: *8
 
       level_l:
         selector: tag
@@ -422,7 +431,10 @@
         tertiary_link: 0x08
         unclassified:
           selector: if
-          condition: surface = unpaved|ground|earth|mud|grass|sand|dirt
+          condition:
+            or:
+                - surface = unpaved|ground|earth|gravel|mud|grass|sand|dirt
+                - smoothness = very_bad|horrible|very_horrible|impassable
           then: 0x10f08
           else:
             selector: if
