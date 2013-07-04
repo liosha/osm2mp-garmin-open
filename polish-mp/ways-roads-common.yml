@@ -7,7 +7,7 @@
 ## Main road network
 
 - condition:
-    - highway = (?:motorway|trunk|primary|secondary)(?:_link)?|tertiary|unclassified|residential|living_street|pedestrian|service
+    - highway = (?:motorway|trunk|primary|secondary|tertiary)(?:_link)?|unclassified|residential|living_street|pedestrian|service
     - route != ferry
     - area != *
     - and:
@@ -61,7 +61,7 @@
             selector: if
             condition:
               or:
-                  - surface = unpaved|ground|earth|mud|grass|sand|dirt
+                  - surface = unpaved|ground|gravel|earth|mud|grass|sand|dirt
                   - smoothness = very_bad|horrible|very_horrible|impassable
             then: 0x0a
             else:
@@ -73,7 +73,7 @@
             selector: if
             condition:
               or:
-                  - surface = unpaved|ground|earth|mud|grass|sand|dirt
+                  - surface = unpaved|ground|gravel|earth|mud|grass|sand|dirt
                   - smoothness = very_bad|horrible|very_horrible|impassable
             then: 0x0a
             else: 0x06
@@ -117,7 +117,7 @@
           selector: if
           condition:
             and:
-                - surface != unpaved|ground|earth|mud|grass|sand|dirt
+                - surface != unpaved|ground|gravel|earth|mud|grass|sand|dirt
                 - smoothness != very_bad|horrible|very_horrible|impassable
           then: 1
         living_street: *6
@@ -218,14 +218,17 @@
       type:
         selector: tag
         tag: highway
-        trunk: &7
+        trunk:
           selector: if
           condition: inside_city
           then: 0x01
-        primary: *7
+        primary: 
+          selector: if
+          condition: inside_city
+          then: 0x04
         _default:
           selector: if
-          condition: surface = unpaved|ground|earth|mud|grass|sand|dirt
+          condition: surface = unpaved|ground|earth|gravel|mud|grass|sand|dirt
           then: &8
             selector: tag
             tag: highway
