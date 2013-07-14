@@ -55,7 +55,7 @@
               selector: if
               condition: &10
                 or:
-                    - surface = unpaved|ground|gravel|earth|sand
+                    - surface = unpaved|ground|earth|sand
                     - smoothness = very_bad|horrible
               then: 0x0a
               else:
@@ -74,9 +74,13 @@
               then: 0x0a
               else:
                 selector: if
-                condition: inside_city
-                then: 0x06
-                else: 0x03
+                condition: surface = gravel|pebblestone|compacted
+                then: 0x10
+                else:
+                  selector: if
+                  condition: inside_city
+                  then: 0x06
+                  else: 0x03
           residential: &1
             selector: if
             condition: *7
@@ -85,7 +89,11 @@
               selector: if
               condition: *10
               then: 0x0a
-              else: 0x06
+              else:
+                selector: if
+                condition: surface = gravel|pebblestone|compacted
+                then: 0x10
+                else: 0x06
           living_street: *1
           pedestrian: *1
           service:
@@ -121,15 +129,28 @@
           selector: if
           condition: &9
             and:
-                - surface != unpaved|ground|earth|gravel|mud|grass|sand|dirt
+                - surface != unpaved|ground|earth|mud|grass|sand|dirt
                 - smoothness != very_bad|horrible|very_horrible|impassable
           then: 2
         tertiary_link: 1
-        unclassified: *5
+        unclassified:
+          selector: if
+          condition: *9
+          then:
+            selector: if
+            condition: surface != gravel|pebblestone|compacted
+            then:
+              selector: if
+              condition: inside_city
+              then: 1
+              else: 2
         residential: &6
           selector: if
           condition: *9
-          then: 1
+          then:
+            selector: if
+            condition: surface != gravel|pebblestone|compacted
+            then: 1
         living_street: *6
         pedestrian: *6
         service: 
@@ -172,13 +193,21 @@
           condition: inside_city
           then: '2,0,0,0,0,0,0,0,0,0,0,0'
           else: '3,0,0,0,0,0,0,0,0,0,0,0'
-        residential: '2,0,0,0,0,0,0,0,0,0,0,0'
+        residential:
+          selector: if
+          condition: *9
+          then: '2,0,0,0,0,0,0,0,0,0,0,0'
+          else: '1,0,0,0,0,0,0,0,0,0,0,0'
         living_street: '1,0,0,0,0,0,0,0,0,0,0,0'
         pedestrian: '0,0,0,0,0,1,1,1,1,0,0,1'
         service:
           selector: if
           condition: inside_city
-          then: '0,0,0,0,0,0,0,0,0,0,0,0'
+          then:
+            selector: if
+            condition: *9
+            then: '1,0,0,0,0,0,0,0,0,0,0,0'
+            else: '0,0,0,0,0,0,0,0,0,0,0,0'
           else: '1,0,0,0,0,0,0,0,0,0,0,0'
 
       oneway: &2
@@ -240,7 +269,7 @@
           selector: if
           condition:
             or:
-                - surface = unpaved|ground|earth|gravel|mud|grass|sand|dirt
+                - surface = unpaved|ground|earth|mud|grass|sand|dirt
                 - smoothness = very_bad|horrible|very_horrible|impassable
           then:
             selector: tag
@@ -255,7 +284,18 @@
             living_street: 0x06
             pedestrian: 0x06
             service: 0x07
-
+          else:
+            selector: if
+            condition: surface = gravel|pebblestone|compacted
+            then:
+              selector: tag
+              tag: highway
+              unclassified:
+                selector: if
+                condition: inside_city
+                then: 0x06
+                else: 0x10f08
+              residential: 0x06
       level_l:
         selector: tag
         tag: highway
