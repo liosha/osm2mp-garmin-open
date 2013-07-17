@@ -613,8 +613,22 @@
       type: 0x2E03
       contacts: yes
       name:
-        - %label
-        - Магазин
+        selector: lang
+        ru:
+          selector: tag
+          tag: opening_hours
+          _default:
+            - %label
+            - Магазин
+          24/7:
+            - %label (24/7)
+            - Магазин (24/7)
+        en:
+          selector: tag
+          tag: opening_hours
+          24/7:
+            - %label (24/7)
+            - Store (24/7)
 
 - condition:
     - shop = mall|hypermarket
@@ -631,6 +645,20 @@
     - action: write_poi
       type: 0x2E05
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: tag
+          tag: opening_hours
+          24/7:
+            - %label (24/7)
+            - Аптека (24/7)
+        en:
+          selector: tag
+          tag: opening_hours
+          24/7:
+            - %label (24/7)
+            - Pharmacy (24/7)
 
 # 0x2E08 - Apparel
 
@@ -779,7 +807,7 @@
           selector: lang
           ru:
             selector: if
-            condition: name = (?ix: .* электроник .* )
+            condition: name = (?ix: .* электрон .* )
             then: %label
             else:
               - %label (электроника)
@@ -1225,6 +1253,9 @@
     - action: write_poi
       type: 0x2F01
       contacts: yes
+      name:
+        - %label
+        - %operator
 
 # Auto Services
 
@@ -1508,11 +1539,18 @@
         selector: lang
         ru:
           - %label (банкомат)
+          - %operator (банкомат)
           - Банкомат
         en:
           - %label (ATM)
+          - %operator (ATM)
           - ATM
 
+      name:
+        - %label
+        - %operator
+
+		  
 - condition:
     - amenity = bureau_de_change
   action:
