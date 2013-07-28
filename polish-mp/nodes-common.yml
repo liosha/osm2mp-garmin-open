@@ -129,7 +129,10 @@
       name:
         selector: lang
         ru:
-          - %label (сад.уч)
+          selector: if
+          condition: name = (?ix: .* \b снт .* )|(?ix: .* \b сдт .* )
+          then: %label (сады)
+          else: %label
         en:
           - %label (dacha)
 
@@ -499,7 +502,7 @@
               - Мясная лавка
           en:
             - %label (butchery)
-            - butcher shop
+            - Butcher shop
         greengrocer:
           selector: lang
           ru:
@@ -739,7 +742,7 @@
             condition: name = (?ix: .* инструмент .* )|(?ix: .* стро \B .* материал .* )
             then: %label
             else:
-              - %label (сделай сам)
+              - %label (стройматериалы)
               - Стройматериалы и инструмент
           en:
             - %label (do it yourself)
