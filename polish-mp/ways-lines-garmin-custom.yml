@@ -120,4 +120,33 @@
       type: 0x2B
       level_h: 1
 
+###
+
+- condition:
+    - or:
+        - oneway = yes|true|1|-1
+        - junction = roundabout
+        - highway = motorway|motorway_link
+    - highway != residential|service|track|road
+  action:
+    - action: write_line
+      type: 0x010f18
+
+- condition:
+    - oneway = yes|true|1|-1
+    - highway = residential|service|track|road
+  action:
+    - action: write_line
+      type: 0x010f19
+
+- condition:
+    - or:
+        - building = collapsed
+        - ruins = yes
+        - and:
+            - building = *
+            - burnt = *
+  action:
+    - action: write_line
+      type: 0x010f1a
 
