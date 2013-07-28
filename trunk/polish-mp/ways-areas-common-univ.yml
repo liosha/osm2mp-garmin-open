@@ -93,9 +93,9 @@
 - condition:
     - natural = wood
     - ~inside_city
-    - wood != young|young_forest
-    - wood:type != young|young_forest
-    - wood:density != sparse
+    - wood:lost != burnt
+    - wood:age != very_young|young
+    - wood:density != very_sparse|sparse
     - landuse != cemetery
   action:
     - action: write_polygon
@@ -104,7 +104,7 @@
 
 - condition:
     - natural = wetland
-    - wetland = bog|saltmarsh|tidalflat
+    - wetland = bog|mangrove|saltmarsh|tidalflat
   action:
     - action: write_polygon
       type: 0x51
