@@ -45,17 +45,15 @@
       level_h: 2
 
 - condition:
-    - highway = bridleway|cycleway|footway|path
-    - layer != -[2-5]
+    - highway = track|road|bridleway|cycleway|footway|path
     - area != *
     - or:
        - boundary = forestry_compartment
-       - cutline = border|section
+       - cutline = border|section|firebreak
   action:
     - action: write_line
       type: 0x0F
       level_l: 2
-
 
   ## Transport platforms
 
