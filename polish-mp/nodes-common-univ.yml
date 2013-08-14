@@ -273,27 +273,26 @@
 - condition:
     - natural = peak|hill
     - ele = *
-    - named
   action:
     - action: write_poi
       type: 0x6616
-      level_h: 2
+      level_h:
+        selector: if
+        condition: named
+        then: 2
+        else: 1
       ele: yes
 
 - condition:
     - natural = peak|hill
-    - ~named
-  action:
-    - action: write_poi
-      type: 0x6616
-      level_h: 1
-      ele: yes
-
-- condition:
-    - natural = peak|hill
-    - ~named
     - ele != *
   action:
     - action: write_poi
-      type: 0x6706
+      type:
+        selector: if
+        condition: named
+        then: 0x6616
+        else: 0x6706
       level_h: 1
+
+

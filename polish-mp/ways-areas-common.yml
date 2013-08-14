@@ -186,80 +186,58 @@
         - %ref(%oldref)
         - %ref
 
-- condition:
-    - natural = water
-    - or:
-        - water = lake
-        - status = озеро
-  action:
-    - action: write_polygon
-      type: 0x3f
-      level_h: *1
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* озеро .* )
-          then: %label
-          else:
-            - оз. %label
-            - озеро
-        en:
-          - %label
 
 - condition:
-    - natural = water
+    - water != river
     - or:
-        - water = oxbow
-        - status = старица
-  action:
-    - action: write_polygon
-      type: 0x3f
-      level_h: *1
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* старица .* )
-          then: %label
-          else:
-            - старица %label
-        en:
-          - %label
-
-- condition:
-    - natural = water
-    - or:
-        - water = pond
-        - status = пруд
-  action:
-    - action: write_polygon
-      type: 0x3f
-      level_h: *1
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* пруд .* )
-          then: %label
-          else:
-            - %label пруд
-            - пруд
-        en:
-          - %label
-
-- condition:
-    - or:
-        - and:
-            - natural = water
-            - water != lake|oxbow|pond|river
-#|canal|stream
-            - status != озеро|старица|пруд|река 
+        - natural = water
         - landuse = basin|reservoir
   action:
     - action: write_polygon
-      type: 0x3f
+      type:
+        selector: thresholds
+        value: !!perl/code |
+          { _get_obj_area_size(shift) }
+        0:      0x41
+        0.009:  0x41
+        0.14:   0x3f
+        2.3:    0x3f
+        9:      0x3f
       level_h: *1
+      name:
+        selector: if
+        condition: water != river
+        then:
+          selector: lang
+          en: %label
+          ru:
+            selector: if
+            condition: name != (?ix: .* озеро .* )|(?ix: .* пруд .* )|(?ix: .* старица .* )
+            then:
+              selector: if
+              condition:
+                or:
+                    - water = lake
+                    - status = озеро
+              then: оз. %label
+              else:
+                selector: if
+                condition:
+                  or:
+                      - water = pond
+                      - status = пруд
+                then:
+                  - %label пруд
+                  - пруд
+                else:
+                  selector: if
+                  condition:
+                    or:
+                        - water = oxbow
+                        - status = старица
+                  then: старица %label
+                  else: %label
+            else: %label
 
 - condition:
     - or:

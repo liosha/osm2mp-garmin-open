@@ -24,7 +24,7 @@
     - man_made = cut_line|cutline
     - highway != *
     - boundary != forestry_compartment
-    - cutline != border|section|firebreak
+    - cutline != border|section|firebreak|logway
     - power != *
     - railway != *
   action:
@@ -43,6 +43,15 @@
     - action: write_line
       type: 0x0F
       level_h: 2
+
+- condition:
+    - highway != *
+    - or:
+       - man_made = logway
+       - cutline = logway
+  action:
+    - action: write_line
+      type: 0x0F
 
 - condition:
     - highway = track|road|bridleway|cycleway|footway|path
