@@ -150,3 +150,17 @@
     - action: write_line
       type: 0x010f1a
 
+- condition:
+    - natural = ridge
+  action:
+    - action: write_line
+      type: 0x010f1e
+      level_h: 2
+
+- condition:
+    - natural = arete
+  action:
+    - action: write_line
+      type: 0x010f1e
+      level_h: 1
+
