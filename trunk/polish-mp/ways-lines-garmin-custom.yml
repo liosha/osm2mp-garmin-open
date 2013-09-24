@@ -124,7 +124,9 @@
 
 - condition:
     - or:
-        - oneway = yes|true|1|-1
+        - and:
+            - highway = *
+            - oneway = yes|true|1|-1
         - junction = roundabout
         - highway = motorway|motorway_link
     - highway != residential|service|track|road
