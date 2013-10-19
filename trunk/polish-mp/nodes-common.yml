@@ -130,7 +130,7 @@
         selector: lang
         ru:
           selector: if
-          condition: name = (?ix: .* \b снт .* )|(?ix: .* \b сдт .* )
+          condition: name = (?ix: .* \b снт .* )|(?ix: .* \b сдт .* )|(?ix: .* \b с/т .* )
           then: %label (сады)
           else: %label
         en:
@@ -263,7 +263,7 @@
 - condition:
     - or:
         - tourism = resort
-        - leisure = resort
+        - leisure = resort|summer_camp
   action:
     - action: write_poi
       type: 0x2B04
@@ -1300,6 +1300,7 @@
             - named
         - amenity = parking
     - parking:condition != residents
+    - parking:primary_usage != residents
     - access != no|private
     - psv != yes
     - parking != garages|garage_boxes
@@ -1613,7 +1614,7 @@
       level_h: 3
 
 - condition:
-    - place = suburb
+    - place = suburb|neighbourhood
   action:
     - action: write_poi
       type: 0x1F00

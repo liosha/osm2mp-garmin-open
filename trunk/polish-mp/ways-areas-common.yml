@@ -128,8 +128,10 @@
       level_h: 1
 
 - condition:
-    - sport = *
-    - leisure != *
+    - or:
+        - sport = *
+        - leisure = sports_centre
+    - leisure != stadium|pitch|track
   action:
     - action: write_polygon
       type: 0x19
@@ -219,7 +221,9 @@
                 or:
                     - water = lake
                     - status = озеро
-              then: оз. %label
+              then:
+                - оз. %label
+                - %label
               else:
                 selector: if
                 condition:
@@ -228,7 +232,7 @@
                       - status = пруд
                 then:
                   - %label пруд
-                  - пруд
+                  - %label
                 else:
                   selector: if
                   condition:
