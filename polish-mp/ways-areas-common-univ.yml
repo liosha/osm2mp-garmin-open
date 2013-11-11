@@ -85,6 +85,9 @@
 
 - condition:
     - natural = scrub
+    - wood:lost != burnt
+    - wood:age != very_young|young
+    - wood:density != very_sparse|sparse
   action:
     - action: write_polygon
       type: 0x4f

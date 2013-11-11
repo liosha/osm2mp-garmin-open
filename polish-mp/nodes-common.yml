@@ -1281,6 +1281,25 @@
       contacts: yes
 
 - condition:
+    - amenity = vehicle_inspection
+  action:
+    - action: write_poi
+      type: 0x2F03
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* техосмотр .* )|(?ix: .* гто .* )
+          then: %label
+          else:
+            - %label (техосмотр)
+            - Пункт техосмотра
+        en:
+          - %label (inspection)
+          - Vehicle inspection
+
+- condition:
     - or:
         - shop = car_parts
         - and:
@@ -1367,7 +1386,9 @@
 
 # id:   railway_station
 - condition:
-    - railway = halt|station
+    - or:
+        - railway = halt|station
+        - building = train_station
     - station != subway
   action:
     - action: write_poi
