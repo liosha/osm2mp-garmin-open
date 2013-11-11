@@ -194,17 +194,15 @@
       level_h: *1
 
 - condition:
-    - natural = wood
-    - wood:density = sparse
-    - wood:age != young|very_young
+    - wood:density = very_sparse|sparse
+    - wood:age != very_young|young
   action:
     - action: write_polygon
       type: 0x1100e
       level_h: *1
 
 - condition:
-    - natural = wood
-    - wood:age = young|very_young
+    - wood:age = very_young|young
   action:
     - action: write_polygon
       type: 0x1100f

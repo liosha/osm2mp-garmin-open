@@ -38,14 +38,10 @@
     - or:
          - landuse = abandoned
          - abandoned = *
-    - abandoned != no
-    - building != no
+         - abandoned:landuse = *
+    - building != *
   action:
     - action: write_polygon
       type: 0x10f08
-    - action: write_polygon
-      type: 0x10f08
-      level_l: 1
       level_h: 2
-      name:
 

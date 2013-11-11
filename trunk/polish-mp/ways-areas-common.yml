@@ -190,10 +190,10 @@
 
 
 - condition:
-    - water != river
-    - or:
-        - natural = water
-        - landuse = basin|reservoir
+    - natural = water
+    - landuse != basin|reservoir
+    - water != river|pond
+    - status != пруд
   action:
     - action: write_polygon
       type:
@@ -214,7 +214,7 @@
           en: %label
           ru:
             selector: if
-            condition: name != (?ix: .* озеро .* )|(?ix: .* пруд .* )|(?ix: .* старица .* )
+            condition: name != (?ix: .* озеро .* )|(?ix: .* старица .* )
             then:
               selector: if
               condition:
@@ -228,20 +228,32 @@
                 selector: if
                 condition:
                   or:
-                      - water = pond
-                      - status = пруд
-                then:
-                  - %label пруд
-                  - %label
-                else:
-                  selector: if
-                  condition:
-                    or:
-                        - water = oxbow
-                        - status = старица
-                  then: старица %label
-                  else: %label
+                      - water = oxbow
+                      - status = старица
+                then: старица %label
+                else: %label
             else: %label
+
+- condition:
+    - or:
+        - and:
+            - natural = water
+            - or:
+                - water = pond
+                - status = пруд
+        - landuse = basin|reservoir
+  action:
+    - action: write_polygon
+      type: 0x45
+      level_h: *1
+
+- condition:
+    - leisure = swimming_pool
+    - building != *
+    - covered != yes
+  action:
+    - action: write_polygon
+      type: 0x45
 
 - condition:
     - or:
