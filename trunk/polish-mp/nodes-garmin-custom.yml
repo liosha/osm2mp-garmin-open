@@ -44,6 +44,6 @@
     - highway = traffic_signals
   action:
     - action: write_poi
-      type: 0x011510
+      type: 0x3310
       #Label: traffic light
 
