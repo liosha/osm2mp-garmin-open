@@ -103,9 +103,7 @@
 
 - condition:
     - place = town|village|hamlet|isolated_dwelling
-    - or:
-        - population = 0
-        - abandoned = *
+    - population = 0
     - only_node
   action:
     - action: write_poi
@@ -116,7 +114,27 @@
         ru:
           - %label (нежил.)
         en:
-          - %label (uninhabited)
+          - %label (uninhabit.)
+      city: yes
+
+
+- condition:
+    - or:
+        - and:
+            - place = town|village|hamlet|isolated_dwelling
+            - abandoned = *
+        - abandoned:place = *
+    - only_node
+  action:
+    - action: write_poi
+      type: 0x0D00
+      level_h: 1
+      name:
+        selector: lang
+        ru:
+          - %label (бывш.)
+        en:
+          - %label (former)
 
 - condition:
     - place = allotments
@@ -1638,11 +1656,12 @@
     - place = suburb|neighbourhood
   action:
     - action: write_poi
-      type: 0x1F00
+      type: 0x2800
       level_h: 1
 
 - condition:
     - place = locality
+    - abandoned:place != *
     - only_node
   action:
     - action: write_poi
