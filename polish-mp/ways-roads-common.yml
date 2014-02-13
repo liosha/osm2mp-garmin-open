@@ -119,7 +119,11 @@
           then: 2
           else: 3
         primary_link: 1
-        secondary: 2
+        secondary:
+          selector: if
+          condition: inside_city
+          then: 2
+          else: 3
         secondary_link: 1
         tertiary: &5
           selector: if
