@@ -300,7 +300,7 @@
             residential: 0x06
             living_street: 0x06
             pedestrian: 0x06
-            service: 0x07
+            service: 0x10f05
 
       level_l:
         selector: tag
@@ -469,7 +469,7 @@
         unclassified:
           selector: if
           condition: *12
-          then: 0x10f08
+          then: 0x10
           else: *16
         residential: 0x06
         living_street: 0x06

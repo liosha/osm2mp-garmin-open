@@ -2,6 +2,66 @@
 ---
 
 
+# Forestry cutlines and boundaries
+
+- condition:
+    - boundary = forestry_compartment
+    - type != boundary|multipolygon
+    - man_made != cut_line|cutline
+  action:
+    - action: write_line
+      type: 0x010F08
+      level_h: 1
+
+- condition:
+    - man_made = cut_line|cutline
+    - highway != *
+    - boundary != forestry_compartment
+    - cutline != border|section|firebreak|logway
+    - power != *
+    - railway != *
+  action:
+    - action: write_line
+      type: 0x0F
+    - action: write_line
+      type: 0x010F09
+      level_l: 1
+#      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
+
+- condition:
+    - man_made = cut_line|cutline
+    - highway != *
+    - or:
+       - boundary = forestry_compartment
+       - cutline = border|section|firebreak
+  action:
+    - action: write_line
+      type: 0x0F
+      level_h: 1
+    - action: write_line
+      type: 0x010F09
+      level_l: 2
+
+- condition:
+    - highway != *
+    - or:
+       - man_made = logway
+       - cutline = logway
+  action:
+    - action: write_line
+      type: 0x010F09
+
+- condition:
+    - highway = track|road|bridleway|cycleway|footway|path
+    - area != *
+    - or:
+       - boundary = forestry_compartment
+       - cutline = border|section|firebreak
+  action:
+    - action: write_line
+      type: 0x010F09
+      level_l: 2
+
 # Railways - avoiding garmin zoomlevel bug
 
 - id: railway
@@ -23,6 +83,9 @@
     - action: write_line
       type: 0x010f13
       level_l: 3
+    - action: write_line
+      type: 0x010f17
+      level_l: 4
 
 - id: service_railway
   condition:

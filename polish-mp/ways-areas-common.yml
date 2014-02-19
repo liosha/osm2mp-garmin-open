@@ -21,12 +21,23 @@
 
 - condition:
     - place = village|hamlet|isolated_dwelling
+    - population != 0
+    - abandoned != *
   action:
     - action: write_polygon
       type: 0x03
       level_l: 1
       level_h: 2
 
+- condition:
+    - place = village|hamlet|isolated_dwelling
+    - or:
+        - population = 0
+        - abandoned = *
+  action:
+    - action: write_polygon
+      type: 0x03
+      level_l: 1
 
 # Man-made
 
