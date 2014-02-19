@@ -104,6 +104,7 @@
 - condition:
     - place = town|village|hamlet|isolated_dwelling
     - population = 0
+    - abandoned != *
     - only_node
   action:
     - action: write_poi
@@ -115,8 +116,6 @@
           - %label (нежил.)
         en:
           - %label (uninhabit.)
-      city: yes
-
 
 - condition:
     - or:
@@ -1633,7 +1632,7 @@
 ##  Labels
 
 - condition:
-    - type = boundary|multipolygon        
+    - type = boundary|multipolygon
     - boundary = administrative
     - admin_level = 4
   action:
@@ -1643,14 +1642,17 @@
       level_h: 4
 
 - condition:
-    - type = boundary|multipolygon        
+    - type = boundary|multipolygon
     - boundary = administrative
     - admin_level = 6
   action:
     - action: write_poi
-      type: 0x1500
       level_l: 3
       level_h: 3
+      type:
+        selector: if
+        condition: name != (?ix: .* \b городской \s+ округ .* )|(?ix: .* \b го \s .* )|(?ix: .* \b зато \s .* )
+        then: 0x1500
 
 - condition:
     - place = suburb|neighbourhood

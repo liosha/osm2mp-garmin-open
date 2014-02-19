@@ -43,5 +43,5 @@
   action:
     - action: write_polygon
       type: 0x10f08
-      level_h: 2
+      level_h: 1
 

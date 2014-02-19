@@ -18,51 +18,7 @@
     - inside_city
   action:
     - action: write_line
-      type: 0x13  
-
-- condition:
-    - man_made = cut_line|cutline
-    - highway != *
-    - boundary != forestry_compartment
-    - cutline != border|section|firebreak|logway
-    - power != *
-    - railway != *
-  action:
-    - action: write_line
-      type: 0x0F
-      level_h: 1
-#      routeparams: '0,0,0,0,1,1,1,1,1,0,0,1'
-
-- condition:
-    - man_made = cut_line|cutline
-    - highway != *
-    - or:
-       - boundary = forestry_compartment
-       - cutline = border|section|firebreak
-  action:
-    - action: write_line
-      type: 0x0F
-      level_h: 2
-
-- condition:
-    - highway != *
-    - or:
-       - man_made = logway
-       - cutline = logway
-  action:
-    - action: write_line
-      type: 0x0F
-
-- condition:
-    - highway = track|road|bridleway|cycleway|footway|path
-    - area != *
-    - or:
-       - boundary = forestry_compartment
-       - cutline = border|section|firebreak
-  action:
-    - action: write_line
-      type: 0x0F
-      level_l: 2
+      type: 0x13
 
   ## Transport platforms
 
