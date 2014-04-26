@@ -114,7 +114,7 @@
       level_h: *1
 
 - condition:
-    - natural = beach
+    - natural = beach|shoal
   action:
     - action: write_polygon
       type: 0x53

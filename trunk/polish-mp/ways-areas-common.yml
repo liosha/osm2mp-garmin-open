@@ -80,7 +80,11 @@
       level_h: 1
 
 - condition:
-    - landuse = industrial
+    - or:
+        - landuse = industrial
+        - man_made = water_works
+        - power = generator|station|substation|sub_station
+    - building != *
   action:
     - action: write_polygon
       type: 0x0c
@@ -109,11 +113,17 @@
     - action: write_polygon
       type: 0x13
       name:
-        - %suburb, %street, %house/%house2
-        - %suburb, %street, %house
+        - %label, %street, %house/%house2, %suburb
+        - %street, %house/%house2, %suburb
+        - %label, %street, %house, %suburb
+        - %street, %house, %suburb
+        - %label, %street, %house/%house2
         - %street, %house/%house2
+        - %label, %street, %house
         - %street, %house
+        - %label, %house
         - %house
+        - %label
     - action: address_poi
 
 
@@ -149,6 +159,9 @@
 
 - condition:
     - landuse = cemetery
+    - or:
+        - religion = christian
+        - religion != *
   action:
     - action: write_polygon
       type: 0x1a
@@ -171,6 +184,15 @@
             - о. %label
         en:
           - %label
+      level_l: 
+        selector: thresholds
+        value: !!perl/code |
+          { _get_obj_area_size(shift) }
+        0:      0
+        2:      1
+        20:     2
+        400:    3
+        10000:  4
       level_h: &1 
         selector: thresholds
         value: !!perl/code |
