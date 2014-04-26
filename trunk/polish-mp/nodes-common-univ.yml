@@ -27,6 +27,12 @@
 # Manmade features
 
 - condition:
+    - highway = milestone
+  action:
+    - action: write_poi
+      type: 0x5a00
+
+- condition:
     - or:
         - and:
             - bridge = yes
@@ -76,7 +82,8 @@
       type: 0x640C
 
 - condition:
-    - man_made = survey_point|tower|water_tower
+    - man_made = survey_point|tower
+    - tower:type != communication
   action:
     - action: write_poi
       type: 0x6411

@@ -312,7 +312,7 @@
 - condition:
     - or:
         - historic = memorial|monument
-        - tourism = attraction|viewpoint
+        - tourism = attraction|viewpoint|artwork
   action:
     - action: write_poi
       type: 0x2C04
