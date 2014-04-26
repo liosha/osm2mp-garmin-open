@@ -62,16 +62,10 @@
 ##  Various custom points
 
 - condition:
-    - amenity = fountain
+    - power = tower
   action:
     - action: write_poi
-      type: 0x011502
-
-#- condition:
-#    - amenity = recycling|waste_basket|waste_disposal
-#  action:
-#    - action: write_poi
-#      type: 0x011503
+      type: 0x3306
 
 - condition:
     - highway = crossing
@@ -123,6 +117,37 @@
     - action: write_poi
       type: 0x3317
 
+
+- condition:
+    - amenity = fountain
+  action:
+    - action: write_poi
+      type: 0x011502
+
+#- condition:
+#    - amenity = recycling|waste_basket|waste_disposal
+#  action:
+#    - action: write_poi
+#      type: 0x011503
+
+- condition:
+    - man_made = tower
+    - tower:type = communication
+  action:
+    - action: write_poi
+      type: 0x011518
+
+- condition:
+    - man_made = water_tower
+  action:
+    - action: write_poi
+      type: 0x011519
+
+- condition:
+    - man_made = crane
+  action:
+    - action: write_poi
+      type: 0x01151a
 
 ##  Whitewater
 
