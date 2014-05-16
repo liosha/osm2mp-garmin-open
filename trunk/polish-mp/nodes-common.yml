@@ -327,7 +327,7 @@
       contacts: yes
 
 - condition:
-    - tourism = zoo
+    - tourism = zoo|aquarium
   action:
     - action: write_poi
       type: 0x2C07
@@ -339,8 +339,6 @@
     - action: write_poi
       type: 0x2C08
       contacts: yes
-
-
 
 # Recreation
 
@@ -1516,6 +1514,13 @@
   action:
     - action: write_poi
       type: 0x3004
+      contacts: yes
+
+- condition:
+    - amenity=community_centre
+  action:
+    - action: write_poi
+      type: 0x3005
       contacts: yes
 
 - condition:

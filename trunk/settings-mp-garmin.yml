@@ -16,12 +16,15 @@ house2:         [ 'addr2:housenumber', 'addr:housenumber2' ]
 oldref:         [ old_ref ]
 operator:       [ operator ]
 street:         [ addr:street, addr:place, addr:quarter, name ]
-street2:        [ addr:street2]
+street2:        [ addr:street, addr2:street ]
 suburb:         [ addr:suburb ]
 phone:          [ 'contact:phone', phone ]
 website:        [ 'contact:website', website, url ]
 email:          [ 'contact:email', email ]
 fax:            [ 'contact:fax', fax ]
+ele:            [ ele ]
+pk:             [ pk ]
+pkbkw:          [ 'pk:backward' ]
 
 
 
