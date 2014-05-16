@@ -31,6 +31,10 @@
   action:
     - action: write_poi
       type: 0x5a00
+      name:
+        - %pk/%pkbkw
+        - %pk
+
 
 - condition:
     - or:
@@ -288,7 +292,9 @@
         condition: named
         then: 2
         else: 1
-      ele: yes
+      name:
+        - %label~[0x1f]%ele
+        - ~[0x1f]%ele
 
 - condition:
     - natural = peak|hill
