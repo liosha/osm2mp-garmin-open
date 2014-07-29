@@ -73,6 +73,12 @@
       type: 0x6408
 
 - condition:
+    - forestry_sign = *
+  action:
+    - action: write_poi
+      type: 0x640A
+
+- condition:
     - military = bunker
   action:
     - action: write_poi

@@ -3,6 +3,15 @@
 
 # RouteParams=speed,class,oneway,toll,emergency,delivery,car,bus,taxi,foot,bike,truck
 
+- condition:
+    - highway = pedestrian
+  action:
+    - action: load_road
+      type: 0x16
+      routeparams: '0,0,0,0,0,1,1,1,1,0,0,1'
+    - action: write_line
+      type: 0x06
+      level_h: 1
 
 - condition:
     - highway = bridleway|cycleway

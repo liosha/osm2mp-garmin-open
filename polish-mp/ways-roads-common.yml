@@ -7,7 +7,7 @@
 ## Main road network
 
 - condition:
-    - highway = (?:motorway|trunk|primary|secondary|tertiary)(?:_link)?|unclassified|residential|living_street|pedestrian|service
+    - highway = (?:motorway|trunk|primary|secondary|tertiary)(?:_link)?|unclassified|residential|living_street|service
     - route != ferry
     - area != *
     - and:
@@ -91,7 +91,6 @@
               then: 0x0a
               else: 0x06
           living_street: *1
-          pedestrian: *1
           service:
             selector: if
             condition: *7
@@ -146,7 +145,6 @@
           condition: *9
           then: 1
         living_street: *6
-        pedestrian: *6
         service: 
           selector: if
           condition: inside_city
@@ -220,7 +218,6 @@
             else: '1,0,0,0,0,0,0,0,0,0,0,0'
           else: '1,0,0,0,0,0,0,0,0,0,0,0'
         living_street: '1,0,0,0,0,0,0,0,0,0,0,0'
-        pedestrian: '0,0,0,0,0,1,1,1,1,0,0,1'
         service:
           selector: if
           condition: inside_city
@@ -299,7 +296,6 @@
             unclassified: 0x10
             residential: 0x06
             living_street: 0x06
-            pedestrian: 0x06
             service: 0x10f05
 
       level_l:
@@ -473,7 +469,6 @@
           else: *16
         residential: 0x06
         living_street: 0x06
-        pedestrian: 0x06
         service: 0x07
 
       level_h:
@@ -492,5 +487,4 @@
         unclassified: 1
         residential: 1
         living_street: 1
-        pedestrian: 1
 

@@ -265,6 +265,7 @@
         - and:
             - natural = wood
             - burnt = *
+        - wood:damage = burnt|dead_wood
         - wood:lost = burnt|dead_wood
   action:
     - action: write_polygon

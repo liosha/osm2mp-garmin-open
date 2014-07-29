@@ -62,6 +62,13 @@
 ##  Various custom points
 
 - condition:
+    - amenity = bench
+    - ~inside_city
+  action:
+    - action: write_poi
+      type: 0x3303
+
+- condition:
     - power = tower
   action:
     - action: write_poi
@@ -116,6 +123,12 @@
   action:
     - action: write_poi
       type: 0x3317
+
+- condition:
+    - barrier = log
+  action:
+    - action: write_poi
+      type: 0x3318
 
 
 - condition:
