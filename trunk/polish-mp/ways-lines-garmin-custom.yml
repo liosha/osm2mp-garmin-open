@@ -186,6 +186,14 @@
 ###
 
 - condition:
+    - barrier = ditch
+    - waterway != *
+  action:
+    - action: write_line
+      type: 0x010f0a
+      level_h: 1
+
+- condition:
     - or:
         - and:
             - highway = *

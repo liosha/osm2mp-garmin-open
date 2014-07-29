@@ -497,7 +497,7 @@
       contacts: yes
 
 - condition:
-    - shop = butcher|grocery|greengrocer
+    - shop = butcher|dairy|grocery|greengrocer
   action:
     - action: write_poi
       type: 0x2E02
@@ -518,6 +518,18 @@
           en:
             - %label (butchery)
             - Butcher shop
+        dairy:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* молоч .* )|(?ix: .* молок .* )
+            then: %label
+            else:
+              - %label (молоко)
+              - Молочные продукты
+          en:
+            - %label (dairy)
+            - Dairy store
         greengrocer:
           selector: lang
           ru:
@@ -742,7 +754,7 @@
           selector: lang
           ru:
             selector: if
-            condition: name = (?ix: .* инструмент .* )|(?ix: .* креп \w ж .* )|(?ix: .* скоб \B .* )
+            condition: name = (?ix: .* инструм .* )|(?ix: .* креп \w ж .* )|(?ix: .* скоб \B .* )
             then: %label
             else:
               - %label (скобяные)
@@ -754,7 +766,7 @@
           selector: lang
           ru:
             selector: if
-            condition: name = (?ix: .* инструмент .* )|(?ix: .* стро \B .* материал .* )
+            condition: name = (?ix: .* инструм .* )|(?ix: .* стро \B .* материал .* )
             then: %label
             else:
               - %label (стройматериалы)
@@ -825,7 +837,7 @@
           selector: lang
           ru:
             selector: if
-            condition: name = (?ix: .* электрон .* )
+            condition: name = (?ix: .* электрон .* )|(?ix: .* радио .* )
             then: %label
             else:
               - %label (электроника)
@@ -1100,9 +1112,6 @@
           en:
             - %label (drapery)
 
-
-
-
 - condition:
     - shop = baby_goods|kids|toys
   action: 
@@ -1235,7 +1244,7 @@
     - shop = *
     - shop != bakery|ice_cream|department_store
     - shop != beauty|dry_cleaning|hairdresser|laundry|pharmacy
-    - shop != butcher|grocery|greengrocer
+    - shop != butcher|dairy|grocery|greengrocer
     - shop != confectionery|deli|seafood
     - shop != alcohol|beverages|coffee|tea|wine
     - shop != general|convenience|supermarket|mall|hypermarket
@@ -1598,7 +1607,7 @@
         - %label
         - %operator
 
-		  
+
 - condition:
     - amenity = bureau_de_change
   action:
