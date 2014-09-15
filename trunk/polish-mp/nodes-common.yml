@@ -14,9 +14,12 @@
 
 - condition:
     - only_node
-    - entrance = main
+    - or:
+        - entrance = main
+        - amenity = parking_entrance
   action:
     - action: load_main_entrance        
+
 
 
 
@@ -1260,6 +1263,25 @@
     - shop != fishing|hunting|outdoor
     - shop != florist|gift|jewerly|computer
     - shop != car|car_repair|car_parts|tyres
+    - shop != ticket
+  action:
+    - action: write_poi
+      type: 0x2E0A
+      contacts: yes
+
+- condition:
+        - shop = ticket
+        - and:
+            - tickets:air != yes
+            - tickets:aerialway != yes
+            - tickets:bus != yes
+            - tickets:public_transport != yes
+            - tickets:railway != yes
+            - tickets:subway != yes
+            - tickets:tram != yes
+            - tickets:trolleybus != yes
+            - tickets != air|airway|aerialway|bus|psv|public_transport|
+            - tickets != railway|subway|tram|trolleybus
   action:
     - action: write_poi
       type: 0x2E0A
@@ -1434,6 +1456,37 @@
     - action: write_poi
       type: 0x2F17
       contacts: yes
+
+# Travel tickets
+- condition: 
+    - shop = ticket
+    - or:
+        - tickets:air = yes
+        - tickets:aerialway = yes
+        - tickets:bus = yes
+        - tickets:public_transport = yes
+        - tickets:railway = yes
+        - tickets:subway = yes
+        - tickets:tram = yes
+        - tickets:trolleybus = yes
+        - tickets = air|airway|aerialway|bus|psv|public_transport|
+        - tickets = railway|subway|tram|trolleybus
+  action:
+    - action: write_poi
+      type: 0x2F17
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* билет .* )|(?ix: .* касс .* )
+          then: %label
+          else:
+            - %label (билетная касса)
+            - Проездные билеты
+        en:
+          - %label (travel tickets)
+          - Travel tickets
 
 
 # Community
