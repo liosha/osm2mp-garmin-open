@@ -683,12 +683,14 @@
         ru:
           selector: tag
           tag: opening_hours
+          _default: %label
           24/7:
             - %label (24/7)
             - Аптека (24/7)
         en:
           selector: tag
           tag: opening_hours
+          _default: %label
           24/7:
             - %label (24/7)
             - Pharmacy (24/7)
