@@ -116,6 +116,7 @@
 
 
 
+
 # Water features
 
 - condition:
@@ -123,6 +124,15 @@
   action:
     - action: write_poi
       type: 0x6503
+      level_h: 2
+
+- condition:
+    - natural = strait
+  action:
+    - action: write_poi
+      type: 0x6506
+      level_h: 2
+
 
 - condition:
     - waterway = waterfall
@@ -142,7 +152,7 @@
     - named
   action:
     - action: write_poi
-      type: 0x2800
+      type: 0x650c
       name:
         selector: lang
         ru:
@@ -153,6 +163,22 @@
             - о. %label
         en:
           - %label
+
+- condition:
+    - natural = peninsula
+    - named
+  action:
+    - action: write_poi
+      type: 0x650c
+      level_h: 2
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* полуостров .* |(?ix: .* п-ов .* )
+          then: %label
+          else: п-ов %label
+        en: %label
 
 - condition:
     - natural = water
@@ -258,6 +284,16 @@
     - action: write_poi
       type: 0x6606
       level_h: 2
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* мыс .* )|(?ix: .* м. .* )
+          then: %label
+          else: м. %label
+        en: %label
+
+
 
 - condition:
     - natural = cliff
@@ -298,6 +334,7 @@
   action:
     - action: write_poi
       type: 0x6614
+      level_h: 1
 
 - condition:
     - natural = peak|hill
@@ -325,5 +362,11 @@
         then: 0x6616
         else: 0x6706
       level_h: 1
+
+- condition:
+    - natural = stone
+  action:
+    - action: write_poi
+      type: 0x6619
 
 
