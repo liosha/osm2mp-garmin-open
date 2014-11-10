@@ -54,14 +54,18 @@
   action:
     - action: write_polygon
       type: 0x010f0a
-      level_h: 2
+      level_h:
+        selector: if
+        condition: inside_city
+        then: 0
+        else: 1
 
 - condition:
     - landuse = vineyard
   action:
     - action: write_polygon
       type: 0x010f0b
-      level_h: 2
+      level_h: 1
 
 - condition:
     - landuse = cemetery
@@ -100,12 +104,12 @@
 - condition:
     - or:
         - landuse = grass
+        - landuse = village_green
         - leisure = common
-    - inside_city
   action:
     - action: write_polygon
       type: 0x011004
-      level_h: 2
+      level_h: 1
 
 - condition:
     - landuse = quarry
@@ -239,7 +243,12 @@
       level_h: *1
 
 - condition:
-    - natural = scree
+    - or:
+        - natural = scree
+        - and:
+            - natural = reef
+            - reef = stone
+
   action:
     - action: write_polygon
       type: 0x011014
@@ -258,6 +267,17 @@
   action:
     - action: write_polygon
       type: 0x011016
+      level_h: *1
+
+- condition:
+    - or:
+        - natural = rock|bare_rock|bedrock
+        - and:
+            - natural = reef
+            - reef = rock
+  action:
+    - action: write_polygon
+      type: 0x011017
       level_h: *1
 
 - condition:
