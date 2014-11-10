@@ -4,6 +4,34 @@
 
 
 # Custom lines
+- condition:
+    - natural = cliff|steep_shore
+    - cliff != ravine
+  action:
+    - action: write_line
+      type: 0x010f1d
+      level_h: 1
+    - action: write_line
+      type: 0x010f1c
+      level_l: 2
+
+- condition:
+    - or:
+        - natural = ravine|gully
+        - and:
+            - natural = cliff
+            - cliff = ravine
+  action:
+    - action: write_line
+      type: 0x010f1c
+      level_h: 1
+
+- condition:
+    - natural = terrace_edge
+  action:
+    - action: write_line
+      type: 0x010f1b
+      level_h: 1
 
 - condition:
     - aerialway = cable_car|chair_lift|drag_lift|gondola|mixed_lift
@@ -35,13 +63,14 @@
       type: 0x010f10
 
 - condition:
-    - natural = cliff
-  action:
-    - action: write_line
-      type: 0x010f0c
-
-- condition:
     - natural = tree_row
   action:
     - action: write_line
       type: 0x010f0b
+
+- condition:
+    - embankment = yes
+    - highway != motorway|primary|secondary|\w+_link
+  action:
+    - action: write_line
+      type: 0x010f03
