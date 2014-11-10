@@ -224,8 +224,10 @@
 
 - condition:
     - natural = water
+    - intermittent != yes
     - landuse != basin|reservoir
     - water != river|pond
+    - salt != yes
     - status != пруд
   action:
     - action: write_polygon
@@ -268,9 +270,19 @@
             else: %label
 
 - condition:
+    - natural = water
+    - salt = yes
+    - intermittent != yes
+  action:
+    - action: write_polygon
+      type: 0x3b
+      level_h: *1
+
+- condition:
     - or:
         - and:
             - natural = water
+            - intermittent != yes
             - or:
                 - water = pond
                 - status = пруд
@@ -289,6 +301,7 @@
       type: 0x45
 
 - condition:
+    - intermittent != yes
     - or:
         - and:
             - natural = water
@@ -299,3 +312,10 @@
       type: 0x47
       level_h: *1
 
+- condition:
+    - natural = water
+    - intermittent = yes
+  action:
+    - action: write_polygon
+      type: 0x4C
+      level_h: *1
