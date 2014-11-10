@@ -1740,6 +1740,8 @@
       level_h: 1
 
 
+
+
 ##  The rest
 
 - condition:
@@ -1758,5 +1760,14 @@
     - action: write_poi
       type: 0x6402
       level_h: 1
+
+- condition:
+    - highway = motorway_junction
+    - only_node
+  action:
+    - action: write_poi
+      type: 0x6417
+      level_h: 1
+      name: %ref
 
 

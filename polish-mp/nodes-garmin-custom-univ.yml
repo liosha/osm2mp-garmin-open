@@ -162,6 +162,23 @@
     - action: write_poi
       type: 0x01151a
 
+- condition:
+    - power = generator
+    - or:
+        - generator:source = wind
+        - plant:source = wind
+        - power_source = wind
+  action:
+    - action: write_poi
+      type: 0x01151b
+
+- condition:
+    - man_made = monitoring_station
+    - monitoring_station = radar
+  action:
+    - action: write_poi
+      type: 0x01151c
+
 ##  Whitewater
 
 - condition:
