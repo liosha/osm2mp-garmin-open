@@ -175,7 +175,7 @@
         selector: lang
         ru:
           selector: if
-          condition: name = (?ix: .* полуостров .* |(?ix: .* п-ов .* )
+          condition: name = (?ix: .* полуостров .*) |(?ix: .* п-ов .* )
           then: %label
           else: п-ов %label
         en: %label
