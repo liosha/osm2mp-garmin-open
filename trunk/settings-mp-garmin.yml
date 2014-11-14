@@ -6,6 +6,7 @@
 --- taglist
 ---
 
+bridge:         [ bridge:name, bridge_name ]
 label:          [ name, loc_name ]
 ref:            [ ref, loc_ref ]
 entrance:       [ name, ref ]
@@ -119,7 +120,7 @@ background:
 
 sea:
     comment:    sea areas from costlines
-    type:       0x28
+    type:       0x32
     level_h:    4
   
 

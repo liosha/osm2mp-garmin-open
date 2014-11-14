@@ -85,7 +85,15 @@
       type: 0x26
       level_h: 1
 
-# Boundaries
+
+# Relief
+
+- condition:
+    - natural = gully
+  action:
+    - action: write_line
+      type: 0x21
+      level_h: 1
 
 # Boundaries
 

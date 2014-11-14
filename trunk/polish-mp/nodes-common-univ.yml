@@ -23,7 +23,6 @@
       contacts: yes
 
 
-
 # Manmade features
 
 - condition:
@@ -45,6 +44,7 @@
   action:
     - action: write_poi
       type: 0x6401
+      name: %bridge
 
 - condition:
     - or:

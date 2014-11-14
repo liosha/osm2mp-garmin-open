@@ -37,8 +37,10 @@
 - condition:
     - or:
          - landuse = abandoned
-         - abandoned = *
          - abandoned:landuse = *
+         - and:
+             - place = town|village|hamlet|isolated_dwelling
+             - abandoned = *
     - building != *
   action:
     - action: write_polygon

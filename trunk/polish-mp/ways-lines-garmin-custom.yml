@@ -149,6 +149,28 @@
       type: 0x2a
       level_h: 2
 
+
+- condition:
+    - or:
+        - barrier = ditch
+        - waterway = drystream
+  action:
+    - action: write_line
+      type: 0x010f0a
+      level_h: 1
+
+
+- condition:
+    - waterway = wadi|dryriver
+  action:
+    - action: write_line
+      type: 0x010f0c
+      level_h: 1
+    - action: write_line
+      type: 0x010f0a
+      level_l: 2
+
+
 - condition:
     - waterway = river
     - intermittent != yes
@@ -184,14 +206,6 @@
       level_h: 1
 
 ###
-
-- condition:
-    - barrier = ditch
-    - waterway != *
-  action:
-    - action: write_line
-      type: 0x010f0a
-      level_h: 1
 
 - condition:
     - or:

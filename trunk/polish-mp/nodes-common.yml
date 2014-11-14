@@ -1567,7 +1567,9 @@
       contacts: yes
 
 - condition:
-    - amenity = townhall
+    - or:
+        - amenity = townhall
+        - office = government
   action:
     - action: write_poi
       type: 0x3003
@@ -1597,7 +1599,7 @@
 - condition:
     - or:
         - amenity = embassy|public_building|register_office
-        - office = government
+        - office = administrative
   action:
     - action: write_poi
       type: 0x3007
