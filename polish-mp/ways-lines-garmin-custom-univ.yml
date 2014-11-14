@@ -10,21 +10,24 @@
   action:
     - action: write_line
       type: 0x010f1d
-      level_h: 1
     - action: write_line
       type: 0x010f1c
-      level_l: 2
+      level_l: 1
+      level_h: 2
 
 - condition:
     - or:
-        - natural = ravine|gully
+        - natural = ravine
         - and:
             - natural = cliff
             - cliff = ravine
   action:
     - action: write_line
       type: 0x010f1c
-      level_h: 1
+  action:
+    - action: write_line
+      type: 0x21
+      level_l: 1
 
 - condition:
     - natural = terrace_edge

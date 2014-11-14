@@ -114,7 +114,15 @@
       level_h: *1
 
 - condition:
+    - natural = lichens|moss|tundra
+  action:
+    - action: write_polygon
+      type: 0x52
+      level_h: *1
+
+- condition:
     - natural = beach|shoal
+    - surface != pebblestone|stone
   action:
     - action: write_polygon
       type: 0x53

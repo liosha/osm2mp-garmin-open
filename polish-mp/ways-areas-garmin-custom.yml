@@ -88,11 +88,29 @@
       level_h: 2
 
 - condition:
+
     - natural = grassland
   action:
     - action: write_polygon
       type: 0x011002
       level_h: 2
+
+- condition:
+    - natural = wetland
+    - wetland = wet_meadow|tundra
+  action:
+    - action: write_polygon
+      type: 0x011002
+      level_h: &1 
+        selector: thresholds
+        value: !!perl/code |
+          { _get_obj_area_size(shift) }
+        0:      0
+        0.009:  1
+        0.14:   2
+        2.3:    3
+        9:      4
+
 
 - condition:
     - natural = heath
@@ -154,26 +172,6 @@
       type: 0x011009
       level_h: 2
 
-- condition:
-    - or:
-        - natural = marsh
-        - wetland = marsh|reedbed
-        - and:
-            - natural = wetland
-            - wetland != swamp|reedbed|mangrove
-            - inside_city
-  action:
-    - action: write_polygon
-      type: 0x011010
-      level_h: &1 
-        selector: thresholds
-        value: !!perl/code |
-          { _get_obj_area_size(shift) }
-        0:      0
-        0.009:  1
-        0.14:   2
-        2.3:    3
-        9:      4
 
 - condition:
     - natural = wetland
@@ -224,10 +222,10 @@
 - condition:
     - or:
         - natural = marsh
-        - wetland = marsh
+        - wetland = marsh|reedbed
         - and:
             - natural = wetland
-            - wetland != swamp|reedbed|mangrove
+            - wetland != swamp|reedbed|mangrove|wet_meadow|tundra
             - inside_city
   action:
     - action: write_polygon
@@ -244,11 +242,27 @@
 
 - condition:
     - or:
+        - natural = mud
+        - and:
+            - natural = littoral_zone
+            - littoral_zone = mud
+        - and:
+            - natural = beach|shoal
+            - surface = mud
+  action:
+    - action: write_polygon
+      type: 0x011012
+      level_h: *1
+
+- condition:
+    - or:
         - natural = scree
         - and:
-            - natural = reef
-            - reef = stone
-
+            - natural = littoral_zone
+            - littoral_zone = stone
+        - and:
+            - natural = beach|shoal
+            - surface = pebblestone|stone
   action:
     - action: write_polygon
       type: 0x011014
@@ -275,6 +289,9 @@
         - and:
             - natural = reef
             - reef = rock
+        - and:
+            - natural = littoral_zone
+            - littoral_zone = rock
   action:
     - action: write_polygon
       type: 0x011017
