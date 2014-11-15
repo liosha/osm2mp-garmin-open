@@ -93,7 +93,7 @@
 
 - condition:
     - man_made = survey_point|tower
-    - tower:type != communication
+    - tower:type != communication|cooling
   action:
     - action: write_poi
       type: 0x6411

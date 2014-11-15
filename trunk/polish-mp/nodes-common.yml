@@ -1770,6 +1770,6 @@
     - action: write_poi
       type: 0x6417
       level_h: 1
-      name: %ref
+      name: <%ref>
 
 
