@@ -261,7 +261,7 @@
             - natural = littoral_zone
             - littoral_zone = stone
         - and:
-            - natural = beach|shoal
+            - natural = beach|shoal|fell
             - surface = pebblestone|stone
   action:
     - action: write_polygon
@@ -269,7 +269,9 @@
       level_h: *1
 
 - condition:
-    - natural = fell
+    - or:
+        - landuse = brownfield|greenfield
+        - natural = fell
   action:
     - action: write_polygon
       type: 0x011015
