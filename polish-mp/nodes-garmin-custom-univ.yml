@@ -148,7 +148,12 @@
     - tower:type = communication
   action:
     - action: write_poi
-      type: 0x011518
+      type:
+        selector: tag
+        tag: tower:construction
+        _default: 0x011518
+        dish: 0x01151c
+        dome: 0x01151d
 
 - condition:
     - man_made = water_tower
@@ -178,6 +183,20 @@
   action:
     - action: write_poi
       type: 0x01151c
+
+
+- condition:
+    - man_made = tower
+    - tower:type = cooling
+  action:
+    - action: write_poi
+      type: 0x01151e
+
+- condition:
+    - man_made = chimney
+  action:
+    - action: write_poi
+      type: 0x01151f
 
 ##  Whitewater
 
