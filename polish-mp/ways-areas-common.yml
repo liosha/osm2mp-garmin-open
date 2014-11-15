@@ -50,6 +50,7 @@
 
 - condition:
     - landuse = retail
+    - building != *
   action:
     - action: write_polygon
       type: 0x08
@@ -58,6 +59,7 @@
 - condition:
     - shop = mall|supermarket
     - landuse != commercial|retail
+    - building != *
   action:
     - action: write_polygon
       type: 0x08
