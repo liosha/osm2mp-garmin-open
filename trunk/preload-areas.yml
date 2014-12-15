@@ -12,7 +12,7 @@
     - action:       load_access_area
     
 - condition:
-    - place = *
+    - place = city|town|village|hamlet
   action:
     - action:       load_cityside_area
 
