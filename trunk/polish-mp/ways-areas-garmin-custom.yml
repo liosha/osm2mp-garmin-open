@@ -77,6 +77,13 @@
       level_h: 1
 
 - condition:
+    - leisure = ice_rink
+  action:
+    - action: write_polygon
+      type: 0x010f10
+      level_h: 2
+
+- condition:
     - or:
         - landuse = meadow
         - and:
@@ -88,16 +95,9 @@
       level_h: 2
 
 - condition:
-
-    - natural = grassland
-  action:
-    - action: write_polygon
-      type: 0x011002
-      level_h: 2
-
-- condition:
-    - natural = wetland
-    - wetland = wet_meadow|tundra
+    - or:
+        - wetland = wet_meadow
+        - natural = grassland
   action:
     - action: write_polygon
       type: 0x011002
@@ -110,7 +110,6 @@
         0.14:   2
         2.3:    3
         9:      4
-
 
 - condition:
     - natural = heath
@@ -166,12 +165,14 @@
       level_l: 2
 
 - condition:
-    - leisure = ice_rink
+    - natural = wood
+    - or:
+        - wood:flaw = stunted
+        - wood:density = very_sparse|sparse
   action:
     - action: write_polygon
-      type: 0x011009
-      level_h: 2
-
+      type: 0x11009
+      level_h: *1
 
 - condition:
     - natural = wetland
@@ -205,8 +206,7 @@
       level_h: *1
 
 - condition:
-    - wood:density = very_sparse|sparse
-    - wood:age != very_young|young
+    - natural = lichens|moss
   action:
     - action: write_polygon
       type: 0x1100e
@@ -214,6 +214,7 @@
 
 - condition:
     - wood:age = very_young|young
+    - wood:density != very_sparse|sparse
   action:
     - action: write_polygon
       type: 0x1100f
@@ -325,3 +326,54 @@
     - action: write_polygon
       type: 0x01101c
       level_h: *1
+
+- condition:
+    - wood:density = very_sparse|sparse
+    - wood:age = very_young|young
+  action:
+    - action: write_polygon
+      type: 0x1101d
+      level_h: *1
+
+- condition:
+    - wood:density = very_sparse|sparse
+    - wood:age != very_young|young
+  action:
+    - action: write_polygon
+      type: 0x1101e
+      level_h: *1
+
+### Experimental polygon
+
+- condition:
+    - leaf_type = broadleaved
+  action:
+    - action: write_polygon
+      type: 0x1101f
+      level_h: *1
+      name:
+        selector: lang
+        ru: лиственный лес
+        en: broadleaved forest
+
+- condition:
+    - leaf_type = needleleaved
+  action:
+    - action: write_polygon
+      type: 0x1101f
+      level_h: *1
+      name:
+        selector: lang
+        ru: хвойный лес
+        en: coniferous forest
+
+- condition:
+    - leaf_type = mixed
+  action:
+    - action: write_polygon
+      type: 0x1101f
+      level_h: *1
+      name:
+        selector: lang
+        ru: смешанный лес
+        en: mixed forest

@@ -98,6 +98,7 @@
     - ~inside_city
     - wood:lost != burnt
     - wood:age != very_young|young
+    - wood:flaw != stunted
     - wood:density != very_sparse|sparse
     - landuse != cemetery
   action:
@@ -114,7 +115,9 @@
       level_h: *1
 
 - condition:
-    - natural = lichens|moss|tundra
+    - or:
+        - wetland = tundra
+        - natural = tundra
   action:
     - action: write_polygon
       type: 0x52

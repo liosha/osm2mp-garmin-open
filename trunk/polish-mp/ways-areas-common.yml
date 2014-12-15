@@ -144,7 +144,7 @@
       name:
 
 - condition:
-    - leisure = stadium|pitch|track
+    - leisure = stadium|pitch|track|golf_course|miniature_golf
   action:
     - action: write_polygon
       type: 0x18
