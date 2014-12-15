@@ -126,6 +126,14 @@
       type: 0x010f16
       level_h: 1
 
+# Tram
+
+- condition:
+    - railway = tram
+  action:
+    - action: write_line
+      type: 0x010f14
+
 # Bridge
 
 - condition:
