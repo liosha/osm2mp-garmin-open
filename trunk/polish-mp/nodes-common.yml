@@ -346,7 +346,9 @@
 # Recreation
 
 - condition:
-    - sport = golf
+    - or:
+        - leisure = golf_course|miniature_golf
+        - sport = golf
   action:
     - action: write_poi
       contacts: yes
@@ -429,6 +431,14 @@
   action:
     - action: write_poi
       type: 0x2D03
+      contacts: yes
+
+
+- condition:
+    - amenity = casino
+  action:
+    - action: write_poi
+      type: 0x2D04
       contacts: yes
 
 # Services
@@ -1306,6 +1316,7 @@
       contacts: yes
       name:
         - %label
+        - %brand
         - %operator
 
 # Auto Services

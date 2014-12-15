@@ -6,8 +6,9 @@
 --- taglist
 ---
 
-bridge:         [ bridge:name, bridge_name ]
 label:          [ name, loc_name ]
+bridge:         [ bridge:name, bridge_name ]
+brand:          [ brand ]
 ref:            [ ref, loc_ref ]
 entrance:       [ name, ref ]
 place:          [ place_name, name ]
