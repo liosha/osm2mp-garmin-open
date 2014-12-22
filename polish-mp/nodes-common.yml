@@ -112,6 +112,7 @@
   action:
     - action: write_poi
       type: 0x0D00
+      city: yes
       level_h: 1
       name:
         selector: lang
@@ -125,11 +126,12 @@
         - and:
             - place = town|village|hamlet|isolated_dwelling
             - abandoned = *
+            - only_node
         - abandoned:place = *
-    - only_node
   action:
     - action: write_poi
       type: 0x0D00
+      city: yes
       level_h: 1
       name:
         selector: lang
@@ -145,6 +147,7 @@
   action:
     - action: write_poi
       type: 0x0C00
+      city: yes
       level_h: 1
       name:
         selector: lang
@@ -200,10 +203,29 @@
         french: 0x2A0F
         german: 0x2A10
         british: 0x2A11
+      name:
+        selector: tag
+        tag: amenity
+        restaurant:
+          selector: lang
+          ru:
+            - %label
+            - Ресторан
+          en:
+            - %label
+            - Restaurant
+        cafe:
+          selector: lang
+          ru:
+            - %label
+            - Кафе
+          en:
+            - %label
+            - Cafe
 
 - condition:
     - or:
-        - shop = bakery|ice_cream
+        - shop = ice_cream
         - amenity = bakery|ice_cream
   action:
     - action: write_poi
@@ -216,6 +238,14 @@
     - action: write_poi
       type: 0x2A07
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - фаст фуд
+        en:
+          - %label
+          - fast food
 
 - condition:
     - amenity = cafe
@@ -224,6 +254,14 @@
     - action: write_poi
       contacts: yes
       type: 0x2A0E
+      name:
+        selector: lang
+        ru:
+          - %label
+          - кафе
+        en:
+          - %label
+          - cafe
 
 # Lodging
 
@@ -249,6 +287,7 @@
               - Мотель
           en:
             - %label (motel)
+            - Motel
 
 - condition:
     - tourism = guest_house|hostel|chalet
@@ -271,6 +310,7 @@
               - Хостел
           en:
             - %label (hostel)
+            - Hostel
 
 - condition:
     - tourism = alpine_hut|camp_site|caravan_site
@@ -288,6 +328,14 @@
     - action: write_poi
       type: 0x2B04
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - курорт
+        en:
+          - %label
+          - resort
 
 
 
@@ -302,6 +350,14 @@
     - action: write_poi
       type: 0x2C01
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Парк развлечений
+        en:
+          - %label
+          - Theme park
 
 - condition:
     - or:
@@ -335,6 +391,14 @@
     - action: write_poi
       type: 0x2C07
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Зоопарк
+        en:
+          - %label
+          - Zoo
 
 - condition:
     - leisure = stadium
@@ -342,6 +406,14 @@
     - action: write_poi
       type: 0x2C08
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Стадион
+        en:
+          - %label
+          - Stadium
 
 # Recreation
 
@@ -353,6 +425,14 @@
     - action: write_poi
       contacts: yes
       type: 0x2D05
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Гольф
+        en:
+          - %label
+          - Golf
 
 - condition:
     - sport = skiing
@@ -360,6 +440,14 @@
     - action: write_poi
       type: 0x2D06
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Лыжный спорт
+        en:
+          - %label
+          - Skiing
 
 - condition:
     - sport = bowls
@@ -367,6 +455,14 @@
     - action: write_poi
       type: 0x2D07
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Боулинг
+        en:
+          - %label
+          - Bowling
 
 - condition:
     - or:
@@ -396,6 +492,14 @@
     - action: write_poi
       type: 0x2D09
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Бассейн
+        en:
+          - %label
+          - Swimming
 
 - condition:
     - or:
@@ -408,6 +512,14 @@
     - action: write_poi
       type: 0x2D0A
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Спортивный объект
+        en:
+          - %label
+          - Sports
 
 
 # Entertainment
@@ -418,6 +530,14 @@
     - action: write_poi
       type: 0x2D01
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Театр
+        en:
+          - %label
+          - Theatre
 
 - condition:
     - amenity = bar|biergarten|nightclub|pub
@@ -425,6 +545,14 @@
     - action: write_poi
       type: 0x2D02
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Бар/ночной клуб
+        en:
+          - %label
+          - Bar/nightclub
 
 - condition:
     - amenity = cinema
@@ -432,6 +560,14 @@
     - action: write_poi
       type: 0x2D03
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Кинотеатр
+        en:
+          - %label
+          - Cinema
 
 
 - condition:
@@ -444,7 +580,7 @@
 # Services
 
 - condition:
-    - shop = beauty|dry_cleaning|hairdresser|laundry
+    - shop = beauty|dry_cleaning|hairdresser|laundry|tattoo
   action:
     - action: write_poi
       type: 0x2E00
@@ -464,6 +600,7 @@
               - Салон красоты
           en:
             - %label (beauty)
+            - beauty shop
         dry_cleaning:
           selector: lang
           ru:
@@ -475,6 +612,7 @@
               - Химчистка
           en:
             - %label (dry cleaning)
+            - dry cleaning
         hairdresser:
           selector: lang
           ru:
@@ -486,6 +624,7 @@
               - Парикмахерская
           en:
             - %label (hairdresser)
+            - hairdresser
         laundry:
           selector: lang
           ru:
@@ -497,6 +636,18 @@
               - Прачечная
           en:
             - %label (laundry)
+            - laundry
+        tattoo:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b тату .* )
+            then: %label
+            else:
+              - %label (тату-салон)
+              - Тату-салон
+          en:
+            - %label (tattoo)
 
 
 # Shopping
@@ -508,6 +659,14 @@
     - action: write_poi
       type: 0x2E01
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Универсальный магазин
+        en:
+          - %label
+          - Department store
 
 - condition:
     - shop = butcher|dairy|grocery|greengrocer
@@ -518,7 +677,18 @@
       name:
         selector: tag
         tag: shop
-        _default: %label
+        grocery:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b продукт \B .* )|(?ix: .* бакале .* )
+            then: %label
+            else:
+              - %label (бакалея)
+              - Бакалея
+          en:
+            - %label (grocery)
+            - Grocery
         butcher:
           selector: lang
           ru:
@@ -557,7 +727,7 @@
             - Greengrocer
 
 - condition:
-    - shop = confectionery|deli|seafood
+    - shop = bakery|confectionery|deli|seafood
   action:
     - action: write_poi
       type: 0x2E02
@@ -565,7 +735,19 @@
       name:
         selector: tag
         tag: shop
-        _default:
+        bakery:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* хлеб .* )|(?ix: .* булоч .* )
+            then: %label
+            else:
+              - %label (булочная)
+              - Булочная
+          en:
+            - %label (bakery)
+            - Bakery
+        confectionery:
           selector: lang
           ru:
             selector: if
@@ -679,6 +861,14 @@
     - action: write_poi
       type: 0x2E04
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Торговый центр
+        en:
+          - %label
+          - Hypermarket
 
 - condition:
     - or:
@@ -693,7 +883,9 @@
         ru:
           selector: tag
           tag: opening_hours
-          _default: %label
+          _default:
+            - %label (24/7)
+            - Аптека
           24/7:
             - %label (24/7)
             - Аптека (24/7)
@@ -716,7 +908,18 @@
       name:
         selector: tag
         tag: shop
-        _default: %label
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b одеж .* )
+            then: %label
+            else:
+              - %label (одежда)
+              - Одежда
+          en:
+            - %label (clothes)
+            - Clothes
         boutique:
           selector: lang
           ru:
@@ -1257,8 +1460,8 @@
 
 - condition:
     - shop = *
-    - shop != bakery|ice_cream|department_store
-    - shop != beauty|dry_cleaning|hairdresser|laundry|pharmacy
+    - shop != bakery|ice_cream|department_store|pharmacy
+    - shop != beauty|dry_cleaning|hairdresser|laundry|tattoo
     - shop != butcher|dairy|grocery|greengrocer
     - shop != confectionery|deli|seafood
     - shop != alcohol|beverages|coffee|tea|wine
@@ -1273,9 +1476,9 @@
     - shop != chemist|cosmetics|optician|stationery|books
     - shop != baby_goods|kids|fabric|sewing|toys
     - shop != fishing|hunting|outdoor
-    - shop != florist|gift|jewerly|computer
+    - shop != florist|gift|jewerly
     - shop != car|car_repair|car_parts|tyres
-    - shop != ticket
+    - shop != computer|ticket
   action:
     - action: write_poi
       type: 0x2E0A
@@ -1315,9 +1518,15 @@
       type: 0x2F01
       contacts: yes
       name:
-        - %label
-        - %brand
-        - %operator
+          selector: lang
+          ru:
+            - %label
+            - %brand
+            - %operator
+            - АЗС
+          en:
+            - %label
+            - filling station
 
 # Auto Services
 
@@ -1327,17 +1536,52 @@
     - action: write_poi
       type: 0x2F02
       contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Прокат/обмен авто
+          en:
+            - %label
+            - car rental/sharing
 
 - condition:
     - or:
-        - shop = car_repair|tyres
+        - shop = car_repair
         - and:
             - shop = car
-            - service = repair|tyres
+            - service = repair
   action:
     - action: write_poi
       type: 0x2F03
       contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Ремонт авто
+          en:
+            - %label
+            - Car repair
+
+- condition:
+    - or:
+        - shop = tyres
+        - and:
+            - shop = car
+            - service = tyres
+  action:
+    - action: write_poi
+      type: 0x2F03
+      contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Шиномонтаж
+          en:
+            - %label
+            - Tyres
 
 - condition:
     - amenity = vehicle_inspection
@@ -1370,6 +1614,14 @@
     - action: write_poi
       type: 0x2F07
       contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Автозапчасти
+          en:
+            - %label
+            - Car parts
 
 - condition:
     - or:
@@ -1386,6 +1638,14 @@
     - action: write_poi
       type: 0x2F0B
       contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Парковка
+          en:
+            - %label
+            - Parking
 
 - condition:
     - amenity = car_wash
@@ -1393,6 +1653,14 @@
     - action: write_poi
       type: 0x2F0E
       contacts: yes
+      name:
+          selector: lang
+          ru:
+            - %label
+            - Автомойка
+          en:
+            - %label
+            - Car wash
 
 # Transportation
 
@@ -1510,6 +1778,14 @@
     - action: write_poi
       type: 0x2C03
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Библиотека
+        en:
+          - %label
+          - Library
 
 - condition:
     - amenity = college|kindergarten|school|university
@@ -1576,6 +1852,14 @@
     - action: write_poi
       type: 0x3001
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Полиция
+        en:
+          - %label
+          - Police
 
 - condition:
     - or:
@@ -1592,13 +1876,29 @@
     - action: write_poi
       type: 0x3004
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Суд
+        en:
+          - %label
+          - Courthouse
 
 - condition:
-    - amenity=community_centre
+    - amenity = community_centre
   action:
     - action: write_poi
       type: 0x3005
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Общественный центр
+        en:
+          - %label
+          - Community centre
 
 - condition:
     - barrier = border_control
@@ -1622,6 +1922,14 @@
     - action: write_poi
       type: 0x3008
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Пожарная часть
+        en:
+          - %label
+          - fire station
 
 - condition:
     - amenity = post_office
@@ -1629,6 +1937,14 @@
     - action: write_poi
       type: 0x2F05
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Почта
+        en:
+          - %label
+          - Post office
 
 - condition:
     - amenity = bank
@@ -1638,6 +1954,14 @@
     - action: write_poi
       type: 0x2F06
       contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Банк
+        en:
+          - %label
+          - Bank
 
 - condition:
     - amenity = bank
@@ -1650,8 +1974,12 @@
       contacts: yes
       name:
         selector: lang
-        ru: %label (+банкомат)
-        en: %label (+atm)
+        ru:
+          - %label (+банкомат)
+          - Банк+банкомат
+        en:
+          - %label (+atm)
+          - Bank+atm
 
 - condition:
     - amenity = atm
@@ -1670,7 +1998,6 @@
           - %label (ATM)
           - %operator (ATM)
           - ATM
-
       name:
         - %label
         - %operator
@@ -1692,13 +2019,10 @@
           - Currency exchange
 
 
-
 # Hospital
 
 - condition:
-    - or:
-        - amenity = clinic|dentist|doctors|hospital
-        - healthcare = centre|clinic|dentist|doctor|hospital
+    - amenity = clinic|dentist|doctors|hospital
     - or:
         - and:
             - building = *
@@ -1709,7 +2033,73 @@
     - action: write_poi
       type: 0x3002
       contacts: yes
+      name:
+        selector: tag
+        tag: amenity
+        _default:
+          selector: lang
+          ru:
+            - %label
+            - Больница
+          en:
+            - %label
+            - Hospital
+        dentist:
+          selector: lang
+          ru:
+            - %label
+            - Стоматология
+          en:
+            - %label
+            - Dentist
+        doctors:
+          selector: lang
+          ru:
+            - %label
+            - Врач/медпункт
+          en:
+            - %label
+            - Doctors
 
+- condition:
+    - healthcare = centre|clinic|dentist|doctor|hospital
+    - or:
+        - and:
+            - building = *
+            - building != no
+        - named
+        - only_node
+  action:
+    - action: write_poi
+      type: 0x3002
+      contacts: yes
+      name:
+        selector: tag
+        tag: healthcare
+        _default:
+          selector: lang
+          ru:
+            - %label
+            - Больница
+          en:
+            - %label
+            - Hospital
+        dentist:
+          selector: lang
+          ru:
+            - %label
+            - Стоматология
+          en:
+            - %label
+            - Dentist
+        doctor:
+          selector: lang
+          ru:
+            - %label
+            - Врач/медпункт
+          en:
+            - %label
+            - Doctor
 
 ##  Labels
 
