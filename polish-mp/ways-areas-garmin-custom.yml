@@ -96,8 +96,8 @@
 
 - condition:
     - or:
-        - wetland = wet_meadow
         - natural = grassland
+        - wetland = marsh|saltmarsh|wet_meadow
   action:
     - action: write_polygon
       type: 0x011002
@@ -165,13 +165,15 @@
       level_l: 2
 
 - condition:
-    - natural = wood
     - or:
-        - wood:flaw = stunted
+        - natural = wood
+        - wetland = swamp
+    - or:
         - wood:density = very_sparse|sparse
+        - wood:flaw = *
   action:
     - action: write_polygon
-      type: 0x11009
+      type: 0x011009
       level_h: *1
 
 - condition:
@@ -182,17 +184,10 @@
       type: 0x01100a
       level_h: *1
 
-- condition:
-    - natural = wetland
-    - wetland = swamp
-  action:
-    - action: write_polygon
-      type: 0x01100b
-      level_h: *1
 
 - condition:
     - natural = wetland
-    - wetland != bog|swamp|marsh|saltmarsh|tidalflat|reedbed|mangrove
+    - wetland != bog|fen|swamp|marsh|moss|saltmarsh|tidalflat|reedbed|mangrove
   action:
     - action: write_polygon
       type: 0x01100c
@@ -206,7 +201,9 @@
       level_h: *1
 
 - condition:
-    - natural = lichens|moss
+    - or:
+        - natural = lichens|moss
+        - wetland = bog|moss
   action:
     - action: write_polygon
       type: 0x1100e
@@ -221,16 +218,12 @@
       level_h: *1
 
 - condition:
-    - or:
-        - natural = marsh
-        - wetland = marsh|reedbed
-        - and:
-            - natural = wetland
-            - wetland != swamp|reedbed|mangrove|wet_meadow|tundra
-            - inside_city
+    - natural = wetland
+    - wetland != bog|mangrove|marsh|moss|reedbed|saltmarsh|swamp|tundra|wet_meadow
+    - inside_city
   action:
     - action: write_polygon
-      type: 0x011010
+      type: 0x011002
       level_h: *1
 
 - condition:
@@ -329,6 +322,14 @@
 
 - condition:
     - wood:density = very_sparse|sparse
+    - wood:flaw = *
+  action:
+    - action: write_polygon
+      type: 0x1101d
+      level_h: *1
+
+- condition:
+    - wood:density = very_sparse|sparse
     - wood:age = very_young|young
   action:
     - action: write_polygon
@@ -338,6 +339,7 @@
 - condition:
     - wood:density = very_sparse|sparse
     - wood:age != very_young|young
+    - wood:flaw != *
   action:
     - action: write_polygon
       type: 0x1101e

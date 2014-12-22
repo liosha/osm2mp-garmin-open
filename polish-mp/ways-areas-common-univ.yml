@@ -87,7 +87,13 @@
     - natural = scrub
     - wood:lost != burnt
     - wood:age != very_young|young
-    - wood:density != very_sparse|sparse
+  action:
+    - action: write_polygon
+      type: 0x4f
+      level_h: *1
+
+- condition:
+    - wetland = fen
   action:
     - action: write_polygon
       type: 0x4f
@@ -107,8 +113,18 @@
       level_h: *1
 
 - condition:
-    - natural = wetland
-    - wetland = bog|mangrove|saltmarsh|tidalflat
+    - wetland = swamp
+    - wood:age != very_young|young
+    - wood:density != very_sparse|sparse
+    - wood:flaw != stunted
+  action:
+    - action: write_polygon
+      type: 0x50
+      level_h: *1
+
+- condition:
+    - natural = marsh|wetland
+    - wetland = bog|fen|mangrove|marsh|moss|reedbed|saltmarsh|swamp|tidalflat
   action:
     - action: write_polygon
       type: 0x51
@@ -124,8 +140,9 @@
       level_h: *1
 
 - condition:
-    - natural = beach|shoal
+    - natural = beach|shoal|littoral_zone
     - surface != pebblestone|stone
+    - littoral_zone != mud|pebblestone|rock|stone
   action:
     - action: write_polygon
       type: 0x53

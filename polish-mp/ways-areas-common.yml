@@ -31,13 +31,18 @@
 
 - condition:
     - place = village|hamlet|isolated_dwelling
-    - or:
-        - population = 0
-        - abandoned = *
+    - population = 0
+    - abandoned != *
   action:
     - action: write_polygon
       type: 0x03
       level_l: 1
+      name:
+        selector: lang
+        ru:
+          - %label (нежил.)
+        en:
+          - %label (uninhabit.)
 
 # Man-made
 
@@ -207,6 +212,7 @@
 
 - condition:
     - place = locality
+    - abandoned:place != *
   action:
     - action: write_polygon
       type: 0x1d
