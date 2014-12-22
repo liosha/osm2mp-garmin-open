@@ -218,6 +218,23 @@
 - condition:
     - or:
         - and:
+            - place = town|village|hamlet|isolated_dwelling
+            - abandoned = *
+        - abandoned:place = *
+  action:
+    - action: write_line
+      type: 0x010f07
+      level_h: 1
+      name:
+        selector: lang
+        ru:
+          - %label (бывш.)
+        en:
+          - %label (former)
+
+- condition:
+    - or:
+        - and:
             - highway = *
             - oneway = yes|true|1|-1
         - junction = roundabout
@@ -257,5 +274,14 @@
   action:
     - action: write_line
       type: 0x010f1e
+      level_h: 1
+
+- condition:
+    - or:
+        - leisure = nature_reserve
+        - boundary = national_park
+  action:
+    - action: write_line
+      type: 0x010f1f
       level_h: 1
 

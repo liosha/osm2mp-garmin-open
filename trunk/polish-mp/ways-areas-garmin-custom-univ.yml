@@ -19,9 +19,18 @@
 - condition:
     - place = city|town|village|hamlet|isolated_dwelling
     - landuse != residential
+    - abandoned != *
   action:
     - action: write_polygon
       type: 0x010f03
+      name:
+        selector: tag
+        tag: population
+        default: %label
+        0:
+          selector: lang
+          ru: %label (нежил.)
+          en: %label (uninhabit.)
 
 - condition:
     - landuse = commercial
@@ -38,9 +47,6 @@
     - or:
          - landuse = abandoned
          - abandoned:landuse = *
-         - and:
-             - place = town|village|hamlet|isolated_dwelling
-             - abandoned = *
     - building != *
   action:
     - action: write_polygon
