@@ -1,26 +1,32 @@
 
 ####    Additional common points
 
+
 --- nodes
 ---
 
 # Others
 
-- id:   toilets
-  condition:
-    - amenity = toilets
+- condition:
+    - hazard = *
   action:
     - action: write_poi
-      type: 0x2F10
-      contacts: yes
+      type: 0x1C00
 
-- id:   sauna
-  condition:
-    - amenity = sauna
+
+- condition:
+    - historic = wreck
   action:
     - action: write_poi
-      type: 0x2F10
-      contacts: yes
+      type: 0x4200
+      name:
+        selector: lang
+        ru:
+          - %label
+          - обломки судна
+        en:
+          - %label
+          - wreck
 
 
 # Manmade features
@@ -113,7 +119,6 @@
   action:
     - action: write_poi
       type: 0x6414
-
 
 
 

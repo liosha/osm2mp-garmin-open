@@ -31,25 +31,49 @@
 
 ##  Replaced rules
 
-- id:   sauna
-  condition:
-    - amenity = sauna
-  action:
-    - action: write_poi
-      type: 0x2F10
-      contacts: yes
-    - action: write_poi
-      type: 0x3301
 
 - id:   toilets
   condition:
     - amenity = toilets
   action:
     - action: write_poi
-      type: 0x2F10
-      contacts: yes
+      type: 0x4E00
+      name:
+        selector: lang
+        ru:
+          - %label
+          - туалет
+        en:
+          - %label
+          - toilets
+
+##      toilets
+#      type: 0x2F10
+#      contacts: yes
+#    - action: write_poi
+#      type: 0x331b
+
+- id:   sauna
+  condition:
+    - amenity = sauna
+  action:
     - action: write_poi
-      type: 0x331b
+      type: 0x4F00
+      name:
+        selector: lang
+        ru:
+          - %label
+          - баня/сауна
+        en:
+          - %label
+          - sauna
+
+##      sauna
+#      type: 0x2F10
+#      contacts: yes
+#    - action: write_poi
+#      type: 0x3301
+
 
 - condition:
     - or:

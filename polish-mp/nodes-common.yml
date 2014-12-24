@@ -149,19 +149,9 @@
       type: 0x0C00
       city: yes
       level_h: 1
-      name:
-        selector: lang
-        ru:
-          selector: if
-          condition: name = (?ix: .* \b снт .* )|(?ix: .* \b сдт .* )|(?ix: .* \b с/т .* )
-          then: %label (сады)
-          else: %label
-        en:
-          - %label (dacha)
 
 
 ##  Searchable POI
-
 
 # Food & Drink
 
@@ -227,6 +217,9 @@
     - or:
         - shop = ice_cream
         - amenity = bakery|ice_cream
+        - and:
+            - shop = bakery|confectionery|deli
+            - name = ( .* [К,к]улинария .* )
   action:
     - action: write_poi
       type: 0x2A05
@@ -234,6 +227,7 @@
 
 - condition:
     - amenity = fast_food|food_court
+    - name = !( .* [С,с]толовая .* )
   action:
     - action: write_poi
       type: 0x2A07
@@ -247,9 +241,11 @@
           - %label
           - fast food
 
+
 - condition:
     - amenity = cafe
     - cuisine != *
+    - name = !( .* [С,с]толовая .* )
   action: 
     - action: write_poi
       contacts: yes
@@ -263,6 +259,23 @@
           - %label
           - cafe
 
+- condition:
+    - amenity = fast_food|food_court|cafe
+    - cuisine != *
+    - name = ( .* [С,с]толовая .* )
+  action:
+    - action: write_poi
+      type: 0x2A0E
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - столовая
+        en:
+          - %label
+          - eatery
+
 # Lodging
 
 
@@ -275,7 +288,18 @@
       name:
         selector: tag
         tag: tourism
-        _default: %label
+        hotel:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b гостиница .* )|(?ix: .* \b отель .* )|(?ix: .* \b hotel .* )
+            then: %label
+            else:
+              - %label (гостиница)
+              - Гостиница
+          en:
+            - %label (hotel)
+            - Hotel
         motel:
           selector: lang
           ru:
@@ -521,7 +545,6 @@
           - %label
           - Sports
 
-
 # Entertainment
 
 - condition:
@@ -669,7 +692,7 @@
           - Department store
 
 - condition:
-    - shop = butcher|dairy|grocery|greengrocer
+    - shop = butcher|dairy|grocery|greengrocer|seafood
   action:
     - action: write_poi
       type: 0x2E02
@@ -725,9 +748,22 @@
           en:
             - %label (greengrocer)
             - Greengrocer
+        seafood:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b мор \B .* )
+            then: %label
+            else:
+              - %label (морепродукты)
+              - Морепродукты
+          en:
+            - %label (seafood)
+            - Seafood
 
 - condition:
-    - shop = bakery|confectionery|deli|seafood
+    - shop = bakery|confectionery|deli
+    - name != ( .* [К,к]улинария .* )
   action:
     - action: write_poi
       type: 0x2E02
@@ -771,18 +807,6 @@
           en:
             - %label (deli)
             - Deli
-        seafood:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b мор \B .* )
-            then: %label
-            else:
-              - %label (морепродукты)
-              - Морепродукты
-          en:
-            - %label (seafood)
-            - Seafood
 
 - condition:
     - shop = alcohol|beverages|coffee|tea|wine
