@@ -1933,7 +1933,7 @@
 
 - condition:
     - or:
-        - amenity = embassy|public_building|register_office
+        - amenity = embassy|public_building|register_office|public_service
         - office = administrative
   action:
     - action: write_poi

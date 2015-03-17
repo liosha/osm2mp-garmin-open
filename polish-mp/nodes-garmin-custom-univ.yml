@@ -125,7 +125,7 @@
       type: 0x3313
 
 - condition:
-    - barrier = lift_gate|toll_booth
+    - barrier = lift_gate|swing_gate|toll_booth
   action:
     - action: write_poi
       type: 0x3314
