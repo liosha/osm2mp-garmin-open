@@ -247,7 +247,7 @@
         0.009:  0x41
         0.14:   0x3f
         2.3:    0x3f
-        9:      0x3f
+        9:      0x3c
       level_h: *1
       name:
         selector: if
