@@ -21,7 +21,36 @@
     - action: write_poi
       type: 0x3300
       Label: %house
-  
+
+- condition:
+    - entrance = yes|main|staircase
+  action:
+    - action: write_poi
+      type: 0x3302
+      Label:
+        - %entrance (%flats)
+        - %entrance
+        - %flats
+
+- condition:
+    - or:
+        - historic = aircraft|memorial
+        - tourism = attraction|viewpoint
+  action:
+    - action: write_poi
+      type: 0x3401
+      contacts: yes
+
+- condition:
+    - or:
+        - historic = castle|fort|manor|museum|ship
+        - tourism = gallery|museum
+    - tourism != attraction
+  action:
+    - action: write_poi
+      type: 0x3411
+      contacts: yes
+
 - condition:
     - natural = tree
   action:

@@ -12,6 +12,8 @@
 
 - condition:
     - man_made = pipeline
+    - location != underground|underwater
+    - usage != distribution
   action:
     - action: write_line
       type: 0x28

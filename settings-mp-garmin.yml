@@ -11,6 +11,7 @@ bridge:         [ bridge:name, bridge_name ]
 brand:          [ brand ]
 ref:            [ ref, loc_ref ]
 entrance:       [ name, ref ]
+flats:          [ 'addr:flats' ]
 place:          [ place_name, name ]
 destination:    [ destination, label, name ]
 house:          [ 'addr:housename', 'addr:housenumber' ]
@@ -102,6 +103,7 @@ traffic_calming:      1
 tunnel:               1
 water:                1
 waterway:             1
+wetland:              1
 whitewater:           1
   
 

@@ -153,6 +153,8 @@
 
 ##  Searchable POI
 
+# Business
+
 # Food & Drink
 
 - condition:
@@ -385,8 +387,13 @@
 
 - condition:
     - or:
-        - historic = archaeological_site|battlefield|castle|museum|ruins
-        - tourism = museum
+        - historic = archaeological_site|battlefield|castle|fort|manor|museum|ship
+        - tourism = gallery|museum
+        - geological = palaeontological_site
+        - and:
+            - historic = ruins|tomb
+            - named
+    - tourism != attraction
   action:
     - action: write_poi
       type: 0x2C02
@@ -394,8 +401,11 @@
 
 - condition:
     - or:
-        - historic = memorial|monument
+        - historic = aircraft|cannon|memorial|monument
         - tourism = attraction|viewpoint|artwork
+        - and:
+            - historic = building
+            - named
   action:
     - action: write_poi
       type: 0x2C04
@@ -1533,6 +1543,15 @@
       type: 0x2E0B
       contacts: yes
 
+# Services
+
+- condition:
+    - amenity = training|driving_school
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+
 # Fuel
 
 - condition:
@@ -2181,6 +2200,7 @@
     - or:
         - landuse = residential
         - building = residential|detached|house|hut
+        - tourism = wilderness_hut
     - only_node
     - ~inside_city
   action:
