@@ -5,6 +5,7 @@
 
 - condition:
     - highway = pedestrian
+    - area != *
   action:
     - action: load_road
       type: 0x16

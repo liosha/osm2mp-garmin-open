@@ -151,6 +151,7 @@
 - condition:
     - or:
         - landuse = peat_cutting
+        - abandoned:landuse = peat_cutting
         - and:
             - landuse = quarry
             - or:
@@ -313,8 +314,9 @@
       level_h: *1
 
 - condition:
-    - wood:damage = windfall
-    - wood:lost = windfall
+    - or:
+        - wood:damage = windfall
+        - wood:lost = windfall
   action:
     - action: write_polygon
       type: 0x01101c

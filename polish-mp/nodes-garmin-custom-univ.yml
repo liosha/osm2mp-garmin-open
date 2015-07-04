@@ -23,7 +23,11 @@
       Label: %house
 
 - condition:
-    - entrance = yes|main|staircase
+    - or:
+        - entrance = staircase
+        - and:
+            - entrance = yes|main
+            - addr:flats = *
   action:
     - action: write_poi
       type: 0x3302
@@ -33,23 +37,120 @@
         - %flats
 
 - condition:
-    - or:
-        - historic = aircraft|memorial
-        - tourism = attraction|viewpoint
+    - tourism = attraction
+    - historic != aircraft|archaeological_site|battlefield
+    - historic != cannon|memorial|monument|museum
+    - historic != ship|tank|tractor|vehicle
+    - geological != palaeontological_site
+  action:
+    - action: write_poi
+      type: 0x3400
+
+
+- condition:
+    - tourism = viewpoint
   action:
     - action: write_poi
       type: 0x3401
-      contacts: yes
+
+- condition:
+    - historic = memorial
+  action:
+    - action: write_poi
+      type: 0x3402
+
+- condition:
+    - historic = monument
+  action:
+    - action: write_poi
+      type: 0x3403
+
+- condition:
+    - historic = aircraft
+  action:
+    - action: write_poi
+      type: 0x3404
 
 - condition:
     - or:
-        - historic = castle|fort|manor|museum|ship
+        - historic = cannon
+        - memorial = cannon
+        - memorial:type = cannon
+  action:
+    - action: write_poi
+      type: 0x3405
+
+- condition:
+    - or:
+        - historic = tank
+        - memorial = tank
+        - memorial:type = tank
+  action:
+    - action: write_poi
+      type: 0x3406
+
+- condition:
+    - or:
+        - historic = tractor
+        - memorial = tractor
+        - memorial:type = tractor
+  action:
+    - action: write_poi
+      type: 0x3407
+
+- condition:
+    - or:
+        - historic = vehicle
+        - memorial = vehicle
+        - memorial:type = vehicle
+  action:
+    - action: write_poi
+      type: 0x3408
+
+- condition:
+    - or:
+        - historic = castle|fort|manor
+        - and:
+            - historic = building|ruins|tomb
+            - named
+  action:
+    - action: write_poi
+      type: 0x3410
+
+- condition:
+    - or:
+        - historic = museum
         - tourism = gallery|museum
-    - tourism != attraction
   action:
     - action: write_poi
       type: 0x3411
-      contacts: yes
+
+- condition:
+    - historic = archaeological_site
+  action:
+    - action: write_poi
+      type: 0x3412
+
+- condition:
+    - historic = battlefield
+  action:
+    - action: write_poi
+      type: 0x3413
+
+- condition:
+    - or:
+        - historic = ship
+        - memorial = ship
+  action:
+    - action: write_poi
+      type: 0x3414
+
+- condition:
+    - geological = palaeontological_site
+  action:
+    - action: write_poi
+      type: 0x3415
+
 
 - condition:
     - natural = tree

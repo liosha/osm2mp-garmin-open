@@ -61,9 +61,21 @@
 
 - condition:
     - barrier = wall
+    - landuse != *
+    - amenity != *
   action:
     - action: write_line
       type: 0x010f10
+
+- condition:
+    - barrier = wall
+    - or:
+        - landuse = *
+        - amenity = *
+  action:
+    - action: write_line
+      type: 0x010f10
+      name:
 
 - condition:
     - natural = tree_row

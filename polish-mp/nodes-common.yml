@@ -387,25 +387,211 @@
 
 - condition:
     - or:
-        - historic = archaeological_site|battlefield|castle|fort|manor|museum|ship
-        - tourism = gallery|museum
-        - geological = palaeontological_site
+        - historic = castle|fort|manor
         - and:
-            - historic = ruins|tomb
+            - historic = building|ruins|tomb
             - named
-    - tourism != attraction
   action:
     - action: write_poi
       type: 0x2C02
       contacts: yes
 
 - condition:
-    - or:
-        - historic = aircraft|cannon|memorial|monument
-        - tourism = attraction|viewpoint|artwork
-        - and:
-            - historic = building
-            - named
+    - historic = archaeological_site
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - археологические раскопки
+      en:
+        - %label
+        - archaeological site
+
+- condition:
+    - historic = battlefield
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - поле битвы
+      en:
+        - %label
+        - battlefield
+
+- condition:
+    - historic = ship
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - корабль
+      en:
+        - %label
+        - ship
+
+- condition:
+    - geological = palaeontological_site
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - палеонтологические раскопки
+      en:
+        - %label
+        - palaeontological site
+
+- condition:
+    - tourism = gallery
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - галерея живописи
+      en:
+        - %label
+        - gallery
+
+- condition:
+    - tourism = museum
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      selector: lang
+      ru:
+        - %label
+        - музей
+      en:
+        - %label
+        - museum
+
+- condition:
+    - historic = aircraft
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - самолет
+      en:
+        - %label
+        - aircraft
+
+- condition:
+    - historic = cannon
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - пушка
+      en:
+        - %label
+        - cannon
+
+- condition:
+    - historic = memorial|monument
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - памятник
+      en:
+        - %label
+        - memorial/monument
+
+- condition:
+    - historic = tank
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - танк
+      en:
+        - %label
+        - tank (weapon)
+
+- condition:
+    - historic = tractor
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - трактор-памятник
+      en:
+        - %label
+        - tractor
+
+- condition:
+    - historic = vehicle
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - автомобиль-памятник
+      en:
+        - %label
+        - vehicle
+
+- condition:
+    - tourism = viewpoint
+  action:
+    - action: write_poi
+      type: 0x2C04
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - видовая точка
+      en:
+        - %label
+        - viewpoint
+
+- condition:
+    - tourism = attraction|artwork
   action:
     - action: write_poi
       type: 0x2C04
