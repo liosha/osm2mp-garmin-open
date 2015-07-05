@@ -55,6 +55,8 @@
 
 - condition:
     - historic = memorial
+    - memorial != aircraft|cannon|ship|tank|tractor|vehicle
+    - memorial:type != aircraft|cannon|ship|tank|tractor|vehicle
   action:
     - action: write_poi
       type: 0x3402
