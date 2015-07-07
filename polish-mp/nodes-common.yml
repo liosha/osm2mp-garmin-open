@@ -387,7 +387,9 @@
 
 - condition:
     - or:
-        - historic = castle|fort|manor
+        - historic = battery|bastion|boundary_stone
+        - historic = castle|city_gate|fort|fortress
+        - historic = manor|monastery|wayside_cross
         - and:
             - historic = building|ruins|tomb
             - named

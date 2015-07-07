@@ -109,9 +109,11 @@
     - action: write_poi
       type: 0x3408
 
+
+
 - condition:
     - or:
-        - historic = castle|fort|manor
+        - historic = boundary_stone|wayside_cross
         - and:
             - historic = building|ruins|tomb
             - named
@@ -298,6 +300,34 @@
 #  action:
 #    - action: write_poi
 #      type: 0x011503
+
+- condition:
+    - historic = fort|bastion
+  action:
+    - action: write_poi
+      type: 0x01150a
+      level_h: 1
+
+- condition:
+    - historic = castle|fortress|monastery
+  action:
+    - action: write_poi
+      type: 0x01150b
+      level_h: 1
+
+- condition:
+    - historic = city_gate
+  action:
+    - action: write_poi
+      type: 0x01150c
+      level_h: 1
+
+- condition:
+    - historic = manor
+  action:
+    - action: write_poi
+      type: 0x01150d
+      level_h: 1
 
 - condition:
     - man_made = mast
