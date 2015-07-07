@@ -40,7 +40,6 @@
         - %pk/%pkbkw
         - %pk
 
-
 - condition:
     - or:
         - and:
@@ -121,6 +120,13 @@
       type: 0x6414
 
 
+- condition:
+    - man_made = water_well
+    - drinking_water = yes
+    - amenity != drinking_water
+  action:
+    - action: write_poi
+      type: 0x6417
 
 # Water features
 
