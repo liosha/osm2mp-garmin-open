@@ -387,16 +387,31 @@
 
 - condition:
     - or:
-        - historic = battery|bastion|boundary_stone
+        - historic = boundary_stone
         - historic = castle|city_gate|fort|fortress
         - historic = manor|monastery|wayside_cross
         - and:
-            - historic = building|ruins|tomb
+            - historic = building|bunker|ruins|tomb
             - named
   action:
     - action: write_poi
       type: 0x2C02
       contacts: yes
+
+- condition:
+    - historic = battery|bastion|fortification
+  action:
+    - action: write_poi
+      type: 0x2C02
+      contacts: yes
+      name:
+      selector: lang
+      ru:
+        - %label
+        - оборонительное сооружение
+      en:
+        - %label
+        - fortification
 
 - condition:
     - historic = archaeological_site

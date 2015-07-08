@@ -37,10 +37,11 @@
         - %flats
 
 - condition:
-    - tourism = attraction
+    - tourism = attraction|artwork
     - historic != aircraft|archaeological_site|battlefield
-    - historic != cannon|memorial|monument|museum
-    - historic != ship|tank|tractor|vehicle
+    - historic != bastion|battery|boundary_stone|bunker|cannon|castle
+    - historic != fort|fortification|memorial|monument
+    - historic != museum|ship|tank|tractor|vehicle|wayside_cross
     - geological != palaeontological_site
   action:
     - action: write_poi
@@ -140,6 +141,7 @@
   action:
     - action: write_poi
       type: 0x3413
+      level_h: 1
 
 - condition:
     - or:
@@ -155,6 +157,11 @@
     - action: write_poi
       type: 0x3415
 
+- condition:
+    - historic = bastion|battery|fortification
+  action:
+    - action: write_poi
+      type: 0x3416
 
 - condition:
     - natural = tree
@@ -302,17 +309,22 @@
 #      type: 0x011503
 
 - condition:
-    - historic = fort|bastion
+    - historic = fort
   action:
     - action: write_poi
       type: 0x01150a
       level_h: 1
 
 - condition:
-    - historic = castle|fortress|monastery
+    - historic = castle
+    - castle_type = fortress
   action:
     - action: write_poi
-      type: 0x01150b
+      type:
+        selector: if
+        condition: name = (?ix: .* форт .* )|(?ix: .* fort \b .* )
+        then: 0x01150a
+        else: 0x01150b
       level_h: 1
 
 - condition:
@@ -327,6 +339,14 @@
   action:
     - action: write_poi
       type: 0x01150d
+      level_h: 1
+
+- condition:
+      - historic = castle|monastery
+      - castle_type != fortress
+  action:
+    - action: write_poi
+      type: 0x01150e
       level_h: 1
 
 - condition:

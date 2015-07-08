@@ -84,7 +84,9 @@
       type: 0x640A
 
 - condition:
-    - military = bunker
+    - or:
+        - military = bunker
+        - historic = bunker
   action:
     - action: write_poi
       type: 0x640B
