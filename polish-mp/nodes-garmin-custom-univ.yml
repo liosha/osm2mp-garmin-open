@@ -36,17 +36,7 @@
         - %entrance
         - %flats
 
-- condition:
-    - tourism = attraction|artwork
-    - historic != aircraft|archaeological_site|battlefield
-    - historic != bastion|battery|boundary_stone|bunker|cannon|castle
-    - historic != fort|fortification|memorial|monument
-    - historic != museum|ship|tank|tractor|vehicle|wayside_cross
-    - geological != palaeontological_site
-  action:
-    - action: write_poi
-      type: 0x3400
-
+# Tourism
 
 - condition:
     - tourism = viewpoint
@@ -110,13 +100,28 @@
     - action: write_poi
       type: 0x3408
 
+- condition:
+    - tourism = attraction|artwork
+    - historic != aircraft|archaeological_site|battlefield
+    - historic != bastion|battery|boundary_stone|bunker|cannon|castle
+    - historic != fort|fortification|memorial|monument
+    - historic != museum|ship|tank|tractor|vehicle|wayside_cross
+    - geological != palaeontological_site
+  action:
+    - action: write_poi
+      type:
+        selector: tag
+        tag: tourism
+        attraction: 0x340a
+        artwork: 0x340b
 
+# Historic
 
 - condition:
     - or:
         - historic = boundary_stone|wayside_cross
         - and:
-            - historic = building|ruins|tomb
+            - historic = building|tomb
             - named
   action:
     - action: write_poi
@@ -162,6 +167,12 @@
   action:
     - action: write_poi
       type: 0x3416
+
+- condition:
+    - historic = ruins
+  action:
+    - action: write_poi
+      type: 0x3418
 
 - condition:
     - natural = tree
