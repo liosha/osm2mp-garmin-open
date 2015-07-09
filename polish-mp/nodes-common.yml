@@ -405,13 +405,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - оборонительное сооружение
-      en:
-        - %label
-        - fortification
+        selector: lang
+        ru:
+          - %label
+          - оборонительное сооружение
+        en:
+          - %label
+          - fortification
 
 - condition:
     - historic = archaeological_site
@@ -420,13 +420,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - археологические раскопки
-      en:
-        - %label
-        - archaeological site
+        selector: lang
+        ru:
+          - %label
+          - археологические раскопки
+        en:
+          - %label
+          - archaeological site
 
 - condition:
     - historic = battlefield
@@ -435,13 +435,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - поле битвы
-      en:
-        - %label
-        - battlefield
+        selector: lang
+        ru:
+          - %label
+          - поле битвы
+        en:
+          - %label
+          - battlefield
 
 - condition:
     - historic = ship
@@ -450,13 +450,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - корабль
-      en:
-        - %label
-        - ship
+        selector: lang
+        ru:
+          - %label
+          - корабль
+        en:
+          - %label
+          - ship
 
 - condition:
     - geological = palaeontological_site
@@ -465,13 +465,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - палеонтологические раскопки
-      en:
-        - %label
-        - palaeontological site
+        selector: lang
+        ru:
+          - %label
+          - палеонтологические раскопки
+        en:
+          - %label
+          - palaeontological site
 
 - condition:
     - tourism = gallery
@@ -480,13 +480,13 @@
       type: 0x2C02
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - галерея живописи
-      en:
-        - %label
-        - gallery
+        selector: lang
+        ru:
+          - %label
+          - галерея живописи
+        en:
+          - %label
+          - gallery
 
 - condition:
     - tourism = museum
@@ -494,13 +494,14 @@
     - action: write_poi
       type: 0x2C02
       contacts: yes
-      selector: lang
-      ru:
-        - %label
-        - музей
-      en:
-        - %label
-        - museum
+      name:
+        selector: lang
+        ru:
+          - %label
+          - музей
+        en:
+          - %label
+          - museum
 
 - condition:
     - historic = aircraft
@@ -509,13 +510,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - самолет
-      en:
-        - %label
-        - aircraft
+        selector: lang
+        ru:
+          - %label
+          - самолет
+        en:
+          - %label
+          - aircraft
 
 - condition:
     - historic = cannon
@@ -524,13 +525,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - пушка
-      en:
-        - %label
-        - cannon
+        selector: lang
+        ru:
+          - %label
+          - пушка
+        en:
+          - %label
+          - cannon
 
 - condition:
     - historic = memorial|monument
@@ -539,13 +540,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - памятник
-      en:
-        - %label
-        - memorial/monument
+        selector: lang
+        ru:
+          - %label
+          - памятник
+        en:
+          - %label
+          - memorial/monument
 
 - condition:
     - historic = tank
@@ -554,13 +555,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - танк
-      en:
-        - %label
-        - tank (weapon)
+        selector: lang
+        ru:
+          - %label
+          - танк
+        en:
+          - %label
+          - tank (weapon)
 
 - condition:
     - historic = tractor
@@ -569,13 +570,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - трактор-памятник
-      en:
-        - %label
-        - tractor
+        selector: lang
+        ru:
+          - %label
+          - трактор-памятник
+        en:
+          - %label
+          - tractor
 
 - condition:
     - historic = vehicle
@@ -584,13 +585,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - автомобиль-памятник
-      en:
-        - %label
-        - vehicle
+        selector: lang
+        ru:
+          - %label
+          - автомобиль-памятник
+        en:
+          - %label
+          - vehicle
 
 - condition:
     - tourism = viewpoint
@@ -599,13 +600,13 @@
       type: 0x2C04
       contacts: yes
       name:
-      selector: lang
-      ru:
-        - %label
-        - видовая точка
-      en:
-        - %label
-        - viewpoint
+        selector: lang
+        ru:
+          - %label
+          - видовая точка
+        en:
+          - %label
+          - viewpoint
 
 - condition:
     - tourism = attraction|artwork
