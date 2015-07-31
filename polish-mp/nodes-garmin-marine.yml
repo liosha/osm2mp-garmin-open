@@ -102,7 +102,9 @@
 # Lights
 
 - condition:
-    - seamark = lighthouse|landmark
+    - or:
+        - man_made = lighthouse
+        - seamark = lighthouse|landmark
   action:
     - action: write_poi
       type: 0x010100
