@@ -280,6 +280,9 @@
     - or:
         - leisure = nature_reserve
         - boundary = national_park
+        - and:
+            - boundary = protected_area
+            - protect_class = 1|2|3|4|5|7
   action:
     - action: write_line
       type: 0x010f1f
