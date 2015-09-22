@@ -377,6 +377,7 @@
         _default: 0x011518
         dish: 0x01151c
         dome: 0x01151d
+      level_h: 1
 
 - condition:
     - man_made = water_tower
