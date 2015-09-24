@@ -26,6 +26,7 @@ website:        [ 'contact:website', website, url ]
 email:          [ 'contact:email', email ]
 fax:            [ 'contact:fax', fax ]
 ele:            [ ele ]
+rtsascale:      [ 'rtsa_scale' ]
 pk:             [ pk ]
 pkbkw:          [ 'pk:backward' ]
 

@@ -323,18 +323,19 @@
   action:
     - action: write_poi
       type: 0x660A
-
 - condition:
     - mountain_pass = yes
   action:
     - action: write_poi
-      type: 0x6606
+      type: 0x660d
       level_h: 1
       name:
+        - %label %rtsascale, %ele
+        - %label %rtsascale
         - %label, %ele
-        - %label
+        - %rtsascale, %ele
+        - %rtsascale
         - %ele
-
 
 - condition:
     - natural = plain
@@ -382,4 +383,18 @@
     - action: write_poi
       type: 0x6619
 
+- condition:
+    - natural = saddle
+    - mountain_pass != yes
+  action:
+    - action: write_poi
+      type: 0x661a
+      level_h: 1
+      name:
+        - %label %rtsascale, %ele
+        - %label %rtsascale
+        - %label, %ele
+        - %rtsascale, %ele
+        - %rtsascale
+        - %ele
 
