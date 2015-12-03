@@ -121,7 +121,6 @@
     - action: write_poi
       type: 0x6414
 
-
 - condition:
     - man_made = water_well
     - drinking_water = yes
@@ -130,6 +129,12 @@
     - action: write_poi
       type: 0x6417
 
+- condition:
+    - leisure = firepit
+  action:
+    - action: write_poi
+      type: 0x6418  
+	  
 # Water features
 
 - condition:
