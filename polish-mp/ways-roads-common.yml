@@ -355,10 +355,14 @@
 - condition:
     - highway = track|road
     - area != *
-    - and:
-        - surface != mud|grass|dirt
-        - smoothness != very_horrible|impassable
-        - tracktype != grade4|grade5
+    - surface != mud|grass|dirt
+    - smoothness != very_horrible|impassable
+    - tracktype != grade4|grade5
+    - access != no|private
+    - motorcar != no
+    - vechicle != no
+    - disused != yes
+    - abandoned != yes
   action:
     - action: load_road
       type: 0x0a

@@ -27,7 +27,7 @@ email:          [ 'contact:email', email ]
 fax:            [ 'contact:fax', fax ]
 ele:            [ ele ]
 rtsascale:      [ 'rtsa_scale' ]
-pk:             [ pk ]
+pk:             [ pk, distance ]
 pkbkw:          [ 'pk:backward' ]
 
 

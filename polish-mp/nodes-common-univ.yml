@@ -122,19 +122,33 @@
       type: 0x6414
 
 - condition:
+    - leisure = firepit
+  action:
+    - action: write_poi
+      type: 0x6418  
+
+- condition:
     - man_made = water_well
     - drinking_water = yes
     - amenity != drinking_water
   action:
     - action: write_poi
-      type: 0x6417
+      type: 0x6419
 
 - condition:
-    - leisure = firepit
+    - man_made = water_well|well
+    - drinking_water != yes
+    - amenity != drinking_water
   action:
     - action: write_poi
-      type: 0x6418  
-	  
+      type: 0x641a
+
+- condition:
+    - signpost = forestry_compartment
+  action:
+    - action: write_poi
+      type: 0x641e
+
 # Water features
 
 - condition:

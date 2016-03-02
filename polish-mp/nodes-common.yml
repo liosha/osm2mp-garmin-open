@@ -712,7 +712,7 @@
       contacts: yes
       name:
         selector: if
-        condition: seasonal = yes
+        condition: seasonal = yes|winter
         then:
           selector: lang
           ru:
@@ -720,7 +720,6 @@
             - каток (сезонный)
           en:
             - %label (seasonal)
-            - seasonal
         else: %label
 
 
@@ -1778,19 +1777,57 @@
 # Auto Services
 
 - condition:
-    - amenity = car_rental|car_sharing
+    - amenity = car_rental
   action:
     - action: write_poi
       type: 0x2F02
       contacts: yes
       name:
-          selector: lang
-          ru:
-            - %label
-            - Прокат/обмен авто
-          en:
-            - %label
-            - car rental/sharing
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* прокат .* )
+          then: %label
+          else:
+            - %label (прокат авто)
+            - Прокат автомобилей
+        en:
+          - %label
+          - Car rental
+
+- condition:
+    - amenity = car_sharing
+  action:
+    - action: write_poi
+      type: 0x2F02
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label
+          - Каршеринг
+        en:
+          - %label
+          - Car sharing
+
+- condition:
+    - amenity = taxi
+  action:
+    - action: write_poi
+      type: 0x2F02
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* такси .* )
+          then: %label
+          else:
+            - %label (такси)
+            - Такси
+        en:
+          - %label
+          - Taxi
 
 - condition:
     - or:
@@ -1803,13 +1840,13 @@
       type: 0x2F03
       contacts: yes
       name:
-          selector: lang
-          ru:
-            - %label
-            - Ремонт авто
-          en:
-            - %label
-            - Car repair
+        selector: lang
+        ru:
+          - %label
+          - Ремонт авто
+        en:
+          - %label
+          - Car repair
 
 - condition:
     - or:
