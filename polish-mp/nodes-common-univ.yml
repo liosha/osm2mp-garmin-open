@@ -149,6 +149,30 @@
     - action: write_poi
       type: 0x641e
 
+- condition:
+    - man_made = game_feeder
+  action:
+    - action: write_poi
+      type: 0x6421
+
+- condition:
+    - man_made = salt_lick
+  action:
+    - action: write_poi
+      type: 0x6422
+
+- condition:
+    - amenity = hunting_stand
+  action:
+    - action: write_poi
+      type: 0x6423
+
+- condition:
+    - amenity = picnic_table
+  action:
+    - action: write_poi
+      type: 0x6426
+
 # Water features
 
 - condition:
