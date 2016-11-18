@@ -245,6 +245,18 @@
       type: 0x3303
 
 - condition:
+    - man_made = game_feeder
+  action:
+    - action: write_poi
+      type: 0x3304
+
+- condition:
+    - man_made = salt_lick
+  action:
+    - action: write_poi
+      type: 0x3305
+
+- condition:
     - power = tower
   action:
     - action: write_poi

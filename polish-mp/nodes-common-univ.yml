@@ -144,34 +144,22 @@
       type: 0x641a
 
 - condition:
-    - signpost = forestry_compartment
+    - amenity = picnic_table
   action:
     - action: write_poi
-      type: 0x641e
-
-- condition:
-    - man_made = game_feeder
-  action:
-    - action: write_poi
-      type: 0x6421
-
-- condition:
-    - man_made = salt_lick
-  action:
-    - action: write_poi
-      type: 0x6422
+      type: 0x641b
 
 - condition:
     - amenity = hunting_stand
   action:
     - action: write_poi
-      type: 0x6423
+      type: 0x641c
 
 - condition:
-    - amenity = picnic_table
+    - signpost = forestry_compartment
   action:
     - action: write_poi
-      type: 0x6426
+      type: 0x641e
 
 # Water features
 
