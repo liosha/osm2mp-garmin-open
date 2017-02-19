@@ -813,78 +813,6 @@
       type: 0x2D04
       contacts: yes
 
-# Services
-
-- condition:
-    - shop = beauty|dry_cleaning|hairdresser|laundry|tattoo
-  action:
-    - action: write_poi
-      type: 0x2E00
-      contacts: yes
-      name:
-        selector: tag
-        tag: shop
-        _default: %label
-        beauty:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b салон \s+ красоты .* )
-            then: %label
-            else:
-              - %label (салон красоты)
-              - Салон красоты
-          en:
-            - %label (beauty)
-            - beauty shop
-        dry_cleaning:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b химчистка .* )
-            then: %label
-            else:
-              - %label (химчистка)
-              - Химчистка
-          en:
-            - %label (dry cleaning)
-            - dry cleaning
-        hairdresser:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b парикмахерская .* )
-            then: %label
-            else:
-              - %label (парикмахерская)
-              - Парикмахерская
-          en:
-            - %label (hairdresser)
-            - hairdresser
-        laundry:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b прачечная .* )
-            then: %label
-            else:
-              - %label (прачечная)
-              - Прачечная
-          en:
-            - %label (laundry)
-            - laundry
-        tattoo:
-          selector: lang
-          ru:
-            selector: if
-            condition: name = (?ix: .* \b тату .* )
-            then: %label
-            else:
-              - %label (тату-салон)
-              - Тату-салон
-          en:
-            - %label (tattoo)
-
 
 # Shopping
 
@@ -1137,7 +1065,7 @@
 # 0x2E08 - Apparel
 
 - condition:
-    - shop = boutique|clothes|fashion|shoes
+    - shop = boutique|clothes|fashion|linen|shoes
   action:
     - action: write_poi
       contacts: yes
@@ -1169,6 +1097,18 @@
           en:
             - %label (boutique)
             - Boutique
+        linen:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* бель \B .* )
+            then: %label
+            else:
+              - %label (белье)
+              - Магазин белья
+          en:
+            - %label (linen)
+            - Linen
         shoes:
           selector: lang
           ru:
@@ -1703,7 +1643,7 @@
     - shop != confectionery|deli|seafood
     - shop != alcohol|beverages|coffee|tea|wine
     - shop != general|convenience|supermarket|mall|hypermarket
-    - shop != boutique|clothes|fashion|shoes
+    - shop != boutique|clothes|fashion|linen|shoes
     - shop != doityourself|electrotools|tools|hardware
     - shop != electrical|electrogoods|garden_centre|glaziery
     - shop != appliances|houseware|electronics|tableware
@@ -1749,11 +1689,208 @@
 # Services
 
 - condition:
-    - amenity = training|driving_school
+    - craft=hvac|carpenter
+    - named
   action:
     - action: write_poi
       type: 0x2F00
       contacts: yes
+
+- condition:
+    - craft=clockmaker|watchmaker
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* часов .* )
+          then: %label
+          else:
+            - %label (часовщик)
+            - Часовщик
+        en:
+          selector: tag
+          tag: craft
+          clockmaker:
+            selector: if
+            condition: name = (?ix: .* clock .* )
+          then: %label
+          else:
+            - %label (clockmaker)
+            - Сlockmaker
+          watchmaker:
+            selector: if
+            condition: name = (?ix: .* watch .* )
+          then: %label
+          else:
+            - %label (watchmaker)
+            - Watchmaker
+
+- condition:
+    - craft=dressmaker|tailor
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          - %label (портные)
+          - Пошив/ремонт одежды
+        en:
+          - %label
+          - Tailor
+
+- condition:
+    - craft=locksmith|key_cutter|photographer|shoemaker
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* слесар .* )
+            then: %label
+            else:
+              - %label (слесарь)
+              - Слесарь
+          en:
+            - %label
+            - Locksmith
+        key_cutter:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* ключ .* )
+            then: %label
+            else:
+              - %label (ключи)
+              - Дубликаты ключей
+          en:
+            - %label
+            - Key cutter
+        photographer:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* фото .* )
+            then: %label
+            else:
+              - %label (фотография)
+              - Фотография
+          en:
+            - %label
+            - Photographer
+        shoemaker:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* обув .* )
+            then: %label
+            else:
+              - %label (сапожник)
+              - Сапожник
+          en:
+            - %label
+            - Shoemaker
+
+- condition:
+    - office=travel_agent
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+      name:
+        selector: lang
+        ru:
+          selector: if
+          condition: name = (?ix: .* тур .* )
+          then: %label
+          else:
+            - %label (турагентство)
+            - Турагентство
+        en:
+          - %label
+          - Travel agent
+
+- condition:
+    - shop = beauty|dry_cleaning|hairdresser|laundry|tattoo
+  action:
+    - action: write_poi
+      type: 0x2F00
+      contacts: yes
+      name:
+        selector: tag
+        tag: shop
+        _default: %label
+        beauty:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b салон \s+ красоты .* )
+            then: %label
+            else:
+              - %label (салон красоты)
+              - Салон красоты
+          en:
+            - %label (beauty)
+            - beauty shop
+        dry_cleaning:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b химчистка .* )
+            then: %label
+            else:
+              - %label (химчистка)
+              - Химчистка
+          en:
+            - %label (dry cleaning)
+            - dry cleaning
+        hairdresser:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b парикмахерская .* )
+            then: %label
+            else:
+              - %label (парикмахерская)
+              - Парикмахерская
+          en:
+            - %label (hairdresser)
+            - hairdresser
+        laundry:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b прачечная .* )
+            then: %label
+            else:
+              - %label (прачечная)
+              - Прачечная
+          en:
+            - %label (laundry)
+            - laundry
+        tattoo:
+          selector: lang
+          ru:
+            selector: if
+            condition: name = (?ix: .* \b тату .* )
+            then: %label
+            else:
+              - %label (тату-салон)
+              - Тату-салон
+          en:
+            - %label (tattoo)
+
 
 # Fuel
 
@@ -1772,6 +1909,8 @@
             - АЗС
           en:
             - %label
+            - %brand
+            - %operator
             - filling station
 
 # Auto Services
@@ -2146,9 +2285,7 @@
           - Police
 
 - condition:
-    - or:
-        - amenity = townhall
-        - office = government
+    - amenity = townhall
   action:
     - action: write_poi
       type: 0x3003
@@ -2194,7 +2331,7 @@
 - condition:
     - or:
         - amenity = embassy|public_building|register_office|public_service
-        - office = administrative
+        - office = administrative|government
   action:
     - action: write_poi
       type: 0x3007
