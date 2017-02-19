@@ -86,7 +86,7 @@
 - condition:
     - natural = scrub
     - wood:lost != burnt
-    - wood:age != very_young|young
+    - wood:age != very_young|young|juvenile
   action:
     - action: write_polygon
       type: 0x4f
@@ -103,7 +103,7 @@
     - natural = wood
     - ~inside_city
     - wood:lost != burnt
-    - wood:age != very_young|young
+    - wood:age != very_young|young|juvenile
     - wood:flaw != stunted
     - wood:density != very_sparse|sparse
     - landuse != cemetery
@@ -114,7 +114,7 @@
 
 - condition:
     - wetland = swamp
-    - wood:age != very_young|young
+    - wood:age != very_young|young|juvenile
     - wood:density != very_sparse|sparse
     - wood:flaw != stunted
   action:

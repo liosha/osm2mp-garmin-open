@@ -26,7 +26,7 @@
       name:
         selector: tag
         tag: population
-        default: %label
+        _default: %label
         0:
           selector: lang
           ru: %label (нежил.)
@@ -47,6 +47,8 @@
     - or:
          - landuse = abandoned
          - abandoned:landuse = *
+         - was:landuse = construction|farmyard|industrial
+         - was:landuse = peat_cutting|quarry|residential
     - building != *
   action:
     - action: write_polygon

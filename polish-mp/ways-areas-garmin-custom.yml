@@ -129,9 +129,13 @@
       level_h: 1
 
 - condition:
-    - landuse = quarry
-    - resource != peat
-    - quarry:type != peat_cutting
+    - and:
+        - resource != peat
+        - quarry:type != peat_cutting
+        - or:
+            - landuse = quarry
+            - abandoned:landuse = quarry
+            - was:landuse = quarry
   action:
     - action: write_polygon
       type: 0x011005
@@ -152,6 +156,7 @@
     - or:
         - landuse = peat_cutting
         - abandoned:landuse = peat_cutting
+        - was:landuse = peat_cutting
         - and:
             - landuse = quarry
             - or:
@@ -211,8 +216,7 @@
       level_h: *1
 
 - condition:
-    - wood:age = very_young|young
-    - wood:density != very_sparse|sparse
+    - wood:age = very_young|young|juvenile
   action:
     - action: write_polygon
       type: 0x1100f
@@ -332,7 +336,7 @@
 
 - condition:
     - wood:density = very_sparse|sparse
-    - wood:age = very_young|young
+    - wood:age = very_young|young|juvenile
   action:
     - action: write_polygon
       type: 0x1101d
@@ -340,7 +344,7 @@
 
 - condition:
     - wood:density = very_sparse|sparse
-    - wood:age != very_young|young
+    - wood:age != very_young|young|juvenile
     - wood:flaw != *
   action:
     - action: write_polygon

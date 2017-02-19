@@ -5,7 +5,7 @@
 
 # Custom lines
 - condition:
-    - natural = cliff|steep_shore
+    - natural = cliff|steep_shore|earth_bank
     - cliff != ravine
   action:
     - action: write_line
