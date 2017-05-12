@@ -116,7 +116,7 @@
   action:
     - action: write_polygon
       type: 0x011003
-      level_h: 2
+      level_h: *1
 
 - condition:
     - or:
@@ -145,6 +145,21 @@
       level_l: 2
       name:
 
+
+- condition:
+    - landuse = farmland|farm
+  action:
+    - action: write_polygon
+      type: 0x011006
+      level_h: 2
+
+- condition:
+    - landuse = food_plot
+  action:
+    - action: write_polygon
+      type: 0x011006
+      level_h: 1
+
 - condition:
     - landuse = landfill
   action:
@@ -172,9 +187,7 @@
 
 - condition:
     - or:
-        - natural = wood
         - wetland = swamp
-    - or:
         - wood:density = very_sparse|sparse
         - wood:flaw = *
   action:
@@ -216,7 +229,11 @@
       level_h: *1
 
 - condition:
-    - wood:age = very_young|young|juvenile
+    - scrub:density != very_sparse|sparse
+    - wood:density != very_sparse|sparse
+    - or:
+        - wood:age = very_young|young|juvenile
+        - scrub = seedling
   action:
     - action: write_polygon
       type: 0x1100f
@@ -329,6 +346,14 @@
 - condition:
     - wood:density = very_sparse|sparse
     - wood:flaw = *
+  action:
+    - action: write_polygon
+      type: 0x1101d
+      level_h: *1
+
+- condition:
+    - scrub:density = very_sparse|sparse
+    - scrub = seedling
   action:
     - action: write_polygon
       type: 0x1101d

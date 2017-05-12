@@ -30,7 +30,7 @@
       level_l: 1
 
 - condition:
-    - natural = terrace_edge
+    - natural = river_terrace|terrace_edge
   action:
     - action: write_line
       type: 0x010f1b

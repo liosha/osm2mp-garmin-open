@@ -161,6 +161,12 @@
     - action: write_poi
       type: 0x641e
 
+- condition:
+    - signpost = forestry_allotment
+  action:
+    - action: write_poi
+      type: 0x641f
+
 # Water features
 
 - condition:
