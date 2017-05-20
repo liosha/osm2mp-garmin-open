@@ -1717,17 +1717,17 @@
           clockmaker:
             selector: if
             condition: name = (?ix: .* clock .* )
-          then: %label
-          else:
-            - %label (clockmaker)
-            - Сlockmaker
+            then: %label
+            else:
+              - %label (clockmaker)
+              - Сlockmaker
           watchmaker:
             selector: if
             condition: name = (?ix: .* watch .* )
-          then: %label
-          else:
-            - %label (watchmaker)
-            - Watchmaker
+            then: %label
+            else:
+              - %label (watchmaker)
+              - Watchmaker
 
 - condition:
     - craft=dressmaker|tailor
