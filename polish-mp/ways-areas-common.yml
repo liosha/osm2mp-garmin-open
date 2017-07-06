@@ -222,7 +222,7 @@
       level_h: 1
 
 - condition:
-    - boundary = forestry_compartment
+    - boundary = forestry_compartment|forest_compartment
   action:
     - action: write_polygon
       type: 0x1d
