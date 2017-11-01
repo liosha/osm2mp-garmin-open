@@ -188,8 +188,9 @@
 - condition:
     - or:
         - wetland = swamp
-        - wood:density = very_sparse|sparse
+        - wood:density = very_sparse|sparse|very_open
         - wood:flaw = *
+        - scrub = stunted_trees
   action:
     - action: write_polygon
       type: 0x011009
@@ -229,11 +230,11 @@
       level_h: *1
 
 - condition:
-    - scrub:density != very_sparse|sparse
-    - wood:density != very_sparse|sparse
+    - scrub:density != very_sparse|sparse|very_open
+    - wood:density != very_sparse|sparse|very_open
     - or:
-        - wood:age = very_young|young|juvenile
-        - scrub = seedling
+        - wood:age = very_young|young|juvenile|sapling
+        - scrub = seedling|seedling_trees
   action:
     - action: write_polygon
       type: 0x1100f
@@ -322,6 +323,8 @@
             - burnt = *
         - wood:damage = burnt|dead_wood
         - wood:lost = burnt|dead_wood
+        - wood:dead = *
+        - wood:burnt = *
   action:
     - action: write_polygon
       type: 0x01101a
@@ -336,6 +339,7 @@
 
 - condition:
     - or:
+        - wood:windfall = *
         - wood:damage = windfall
         - wood:lost = windfall
   action:
@@ -344,7 +348,7 @@
       level_h: *1
 
 - condition:
-    - wood:density = very_sparse|sparse
+    - wood:density = very_sparse|sparse|very_open
     - wood:flaw = *
   action:
     - action: write_polygon
@@ -352,24 +356,24 @@
       level_h: *1
 
 - condition:
-    - scrub:density = very_sparse|sparse
-    - scrub = seedling
+    - scrub:density = sparse|very_open
+    - scrub = seedling|seedling_trees
   action:
     - action: write_polygon
       type: 0x1101d
       level_h: *1
 
 - condition:
-    - wood:density = very_sparse|sparse
-    - wood:age = very_young|young|juvenile
+    - wood:density = very_sparse|sparse|very_open
+    - wood:age = very_young|young|juvenile|sapling
   action:
     - action: write_polygon
       type: 0x1101d
       level_h: *1
 
 - condition:
-    - wood:density = very_sparse|sparse
-    - wood:age != very_young|young|juvenile
+    - wood:density = very_sparse|sparse|very_open
+    - wood:age != very_young|young|juvenile|sapling
     - wood:flaw != *
   action:
     - action: write_polygon
