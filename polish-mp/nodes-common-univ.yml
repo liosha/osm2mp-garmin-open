@@ -437,3 +437,19 @@
         - %rtsascale
         - %ele
 
+- condition:
+    - natural = volcano
+  action:
+    - action: write_poi
+      type:
+        selector: tag
+        tag: volcano:status
+        _default: 0x661c
+        dormant: 0x661d
+        extinct: 0x661e
+      level_h: 3
+      name:
+        - %label~[0x1f]%ele
+        - %label
+        - ~[0x1f]%ele
+
